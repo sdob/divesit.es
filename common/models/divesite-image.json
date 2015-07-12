@@ -5,7 +5,13 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "isHeaderImage": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],
