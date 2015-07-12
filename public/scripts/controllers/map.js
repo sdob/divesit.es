@@ -24,9 +24,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
 
   function mapZoomChangedEventHandler(map) {
     // Constrain the zoom level
-    if (map.zoom > MAX_ZOOM) {
-      map.setZoom(MAX_ZOOM);
-    } else if (map.zoom < MIN_ZOOM) {
+    if (map.zoom < MIN_ZOOM) {
       map.setZoom(MIN_ZOOM);
     }
   }

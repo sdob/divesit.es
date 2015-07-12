@@ -192,19 +192,6 @@ describe "MapController", ->
 
   describe "$scope.map.events", ->
     describe "zoom_changed handler", ->
-      it "does not allow zoom level greater than 14", ->
-        zoom_changed = $scope.map.events.zoom_changed
-        map =
-          zoom: 10
-          setZoom: (newZoom) ->
-        spyOn map, 'setZoom'
-        zoom_changed map
-        expect map.setZoom
-          .not.toHaveBeenCalled()
-        map.zoom = 16
-        zoom_changed map
-        expect map.setZoom
-          .toHaveBeenCalledWith 14
       it "does not allow zoom level less than 3", ->
         zoom_changed = $scope.map.events.zoom_changed
         map =
