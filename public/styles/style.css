@@ -148,8 +148,7 @@ a.flat-dialog-button.lightbg:active {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   /* Margins, border and padding */
   border-width: 0;
-  /* padding: 16px; */
-  padding: 0;
+  padding: 16px;
   /* Colours */
   background-color: #fff;
   /* Typography */
@@ -162,7 +161,6 @@ a.flat-dialog-button.lightbg:active {
 .modal-content h2 {
   margin: 0;
   font-size: 24px;
-  padding: 16px;
 }
 .modal-content h3 {
   font-size: 16px;
