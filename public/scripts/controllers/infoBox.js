@@ -31,17 +31,21 @@ angular.module('divesitesApp').
 
       }
     },
+    markerClicked: function (event, data) {
+      if (!!$scope.infoBox.site) {
+        $scope.infoBox.site.imgSrc = null;
+      }
+    },
+    siteDeleted: function (event, data) {
+      // After the user deletes a divesite, hide the info box
+      $scope.dismissInfoBox();
+    },
     siteLoaded: function (event, data) {
       $scope.showInfoBox();
       $scope.infoBox.site = data;
       if ($scope.infoBox.site.dives !== undefined) {
         var numDives = $scope.infoBox.site.dives.length;
         $scope.infoBox.site.numDivesString = numDives + " dive" + (numDives === 1 ? "" : "s");
-      }
-    },
-    markerClicked: function (event, data) {
-      if (!!$scope.infoBox.site) {
-        $scope.infoBox.site.imgSrc = null;
       }
     }
   };
@@ -90,6 +94,7 @@ angular.module('divesitesApp').
       site: null
     };
     $scope.$on('event:site-loaded', $scope.events.siteLoaded);
+    $scope.$on('event:site-deleted', $scope.events.siteDeleted);
     $scope.$on('event:marker-clicked', $scope.events.markerClicked);
     $scope.$on('event:dive-created', $scope.events.diveCreated);
   };
