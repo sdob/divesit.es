@@ -698,7 +698,7 @@ div.sign-in-container a {
 .navbar-default > .container-fluid .navbar-brand h1 {
   margin: 0;
   line-height: 48px;
-  font-family: 'Cardo', serif;
+  font-family: 'Libre Baskerville', serif;
 }
 @media (min-width: 768px) {
   .navbar-default > .container-fluid .navbar-right {
