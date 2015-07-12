@@ -84,7 +84,8 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
     // Reload the list of divesites
     $scope.retrieveDivesites();
     // Summon the 'do you want to log a dive?' modal
-    $scope.summonLogDiveOfferModal();
+    // Dummied out for the moment
+    // $scope.summonLogDiveOfferModal();
   };
 
   $scope.summonLogDiveOfferModal = function () {
