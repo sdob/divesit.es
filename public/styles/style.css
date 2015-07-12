@@ -17,6 +17,12 @@
 .lightbg-text-hint {
   color: rgba(0, 0, 0, 0.26);
 }
+.accent-text-primary {
+  color: #e91e63;
+}
+.accent-text-secondary {
+  color: #f48fb1;
+}
 /**
  * A mixin which helps you to add depth to elements according to the Google Material Design spec:
  * http://www.google.com/design/spec/layout/layout-principles.html#layout-principles-dimensionality
@@ -353,8 +359,8 @@ label.control-label.label-right {
   background-color: rgba(0, 0, 0, 0.87);
 }
 .thumbnail-container {
-  min-width: 400px;
-  min-height: 250px;
+  /*min-width: 400px;
+  min-height: 250px;*/
   background-color: rgba(0, 0, 0, 0.2);
   text-align: center;
   position: relative;
