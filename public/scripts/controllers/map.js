@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('divesitesApp').controller('MapController', function ($scope, $rootScope, localStorageService, $http, uiGmapIsReady, Divesite) {
+angular.module('divesitesApp').controller('MapController', function ($scope, $rootScope, localStorageService, $http, uiGmapIsReady, Divesite, $modal) {
 
   /////////////////////////////////////////////////////////////////////////////
   // Constants
@@ -83,6 +83,18 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
     console.log("map controller received new site event");
     // Reload the list of divesites
     $scope.retrieveDivesites();
+    // Summon the 'do you want to log a dive?' modal
+    $scope.summonLogDiveOfferModal();
+  };
+
+  $scope.summonLogDiveOfferModal = function () {
+    $modal.open({
+      templateUrl: 'views/partials/log-dive-offer-modal.html',
+      controller: 'LogDiveOfferModalController',
+      //backdrop: 'static',
+      size: 'sm',
+      scope: $scope
+    });
   };
 
   $scope.retrieveDivesites = function () {
@@ -161,7 +173,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
 
     $scope.events = {
       filterPreferences: $scope.filterPreferences, // fires on 'event:filter-preferences'
-      newSiteCreated: $scope.onNewSiteCreated,
+      siteCreated: $scope.onNewSiteCreated,
       mapIsReady: $scope.retrieveDivesites, // fires on 'event:map-is-ready'
       siteEdited: $scope.retrieveDivesites,
       siteDeleted: $scope.retrieveDivesites
@@ -173,7 +185,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
     // Listen for map-ready events (to load divesites)
     $scope.$on('event:map-is-ready', $scope.events.mapIsReady);
     // Listen for new-site-created events (coming from NewSiteModalController)
-    $scope.$on('event:new-site-created', $scope.events.newSiteCreated);
+    $scope.$on('event:new-site-created', $scope.events.siteCreated);
     // Listen for edit events
     $scope.$on('event:site-edited', $scope.events.siteEdited);
     // Listen for deletion events

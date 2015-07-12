@@ -40,13 +40,21 @@ a.flat-dialog-button {
   }
   &.darkbg {
   }
-  &.lightbg {
-    color: @lightbg-text-primary;
+  color: @lightbg-text-primary;
+  &:hover, &:focus {
+    background-color: rgba(153, 153, 153, 0.2);
+  }
+  &:active {
+    background-color: rgba(153, 153, 153, 0.4);
+  }
+  &.accent {
+    background-color: @pink-500;
+    color: @darkbg-text-primary;
     &:hover, &:focus {
-      background-color: rgba(153, 153, 153, 0.2);
+      background-color: @pink-600;
     }
     &:active {
-      background-color: rgba(153, 153, 153, 0.4);
+      background-color: @pink-700;
     }
   }
 }

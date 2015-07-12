@@ -1,9 +1,11 @@
 angular.module('divesitesApp')
-.controller('NewSiteModalController', function ($scope, $location, $auth, User, LoopBackAuth, $modalInstance, Divesite, uiGmapIsReady, FileUploader, $rootScope, Container) {
+.controller('NewSiteModalController', function ($scope, $location, $auth, User, LoopBackAuth, $modalInstance, Divesite, uiGmapIsReady, FileUploader, $rootScope, Container, $timeout) {
 
   // This is a first-run flag so that we can resize the Google map after the
   // div containing it has loaded.
   $scope.rendered = false;
+  // Flag governing the appearance of the 'loading...' overlay
+  $scope.saving = false;
 
   $scope.uploader = new FileUploader({
     scope: $scope,
@@ -71,6 +73,7 @@ angular.module('divesitesApp')
   }
 
   $scope.submit = function () {
+    $scope.saving = true;
     //console.log("Data to send:");
     // Re-format the loc property so that LoopBack will understand it as a geopoint
     $scope.site.loc = {
@@ -83,7 +86,6 @@ angular.module('divesitesApp')
     .then(
       // Handle success
       function createSuccess(res) {
-        console.log(res);
         // Setting the headers on the uploader itself doesn't work because
         // it's already set them on each item in the queue, so we have to
         // do it ourselves here
@@ -91,9 +93,13 @@ angular.module('divesitesApp')
           $scope.uploader.queue[0].headers.divesite = res.id;
           $scope.uploader.queue[0].upload();
         }
-        // Close the modal and broadcast a new-site event
-        $modalInstance.close();
-        $rootScope.$broadcast('event:new-site-created', res);
+        console.log("huzzah");
+        $timeout(function () {
+          // Close the modal and broadcast a new-site event
+          $modalInstance.close();
+          $rootScope.$broadcast('event:new-site-created', res);
+          $scope.saving = false;
+        }, 500);
       },
       //Handle failure
       function createError(res) {

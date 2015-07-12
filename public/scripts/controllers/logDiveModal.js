@@ -32,6 +32,12 @@ angular.module('divesitesApp')
     mstep: 1
   };
 
+  $scope.cancel = function () {
+    if (confirm("Are you sure you want to cancel logging this dive?")) {
+      $modalInstance.close();
+    }
+  };
+
   $scope.submit = function () {
     // Copy the dive data so we don't clobber the date in the scope
     var data = JSON.parse(JSON.stringify($scope.dive));
