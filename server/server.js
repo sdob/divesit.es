@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 if (process.env.NODE_ENV === 'production') {
   app.use(function (req, res, next) {
     if (req.header('x-forwarded-proto') !== 'https'){
-      return res.redirect(HTTP.MOVED_PERMANENTLY, path.join(app.get('url').replace('http:/', 'https:/'), req.url));
+      return res.redirect(HTTP.MOVED_PERMANENTLY, path.join('https://' + req.get('Host'), req.url));
     }
     next();
   });
