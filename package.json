@@ -4,7 +4,7 @@
   "main": "server/server.js",
   "scripts": {
     "preinstall": "mkdir -p /tmp/storage server/uploads",
-    "postinstall": "bower install && mkdir public/libs/lb-ng && ./regenerate-lbServices.sh",
+    "postinstall": "bower install && mkdir public/libs/lb-ng && ./regenerate-lbServices.sh && grunt less",
     "test": "NODE_ENV='test' grunt test"
   },
   "engines": {
