@@ -79,6 +79,14 @@ angular.module('divesitesApp')
     create: prependSliderTrack
   }
 
+  $scope.summonSignInModal = function () {
+    $modal.open({
+      animation: false,
+      templateUrl: 'views/partials/sign-in-modal.html',
+      controller: 'SignInModalCtrl',
+      size: 'sm'
+    });
+  }
   /////////////////////////////////////////////////////////////////////////////
   // Initialization
   /////////////////////////////////////////////////////////////////////////////

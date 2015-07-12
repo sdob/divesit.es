@@ -4,7 +4,7 @@
   </div>
   <ul class="list-unstyled" id="filterList">
     <li id="filterEntryTypes">
-    <h3>Show entry types</h3>
+    <h3>Access</h3>
     <ul class="list-unstyled">
       <li>
       <input type="checkbox" ng-model="filterPreferences.boatEntry"
@@ -28,7 +28,7 @@
     </li>
     <li id="filterMinimumLevel" class="container-fluid">
     <h3>
-      Site difficulty:
+      Experience Level:
       <span class="site-difficulty">{{ filterPreferences.maximumLevel | stringifyExperienceLevel }}</span>
     </h3>
     <div class="slider-container col-xs-10 col-xs-offset-1">
@@ -59,14 +59,12 @@
     </div>
     </li>
   </ul>
-  <div ng-if="!isAuthenticated()">
-    Sign in to add new dive sites, log dives, and more.
+  <div ng-if="!isAuthenticated()" class="sign-in-container">
+    <h3>Sign in to add new dive sites, log dives, and more.</h3>
+    <p>
+    <a href ng-click="summonSignInModal()" class="raised-button accent">SIGN IN</a>
+    </p>
   </div>
-  <!--
-  <div ng-if="isAuthenticated()">
-    <a href ng-click="summonNewSiteModal()">Add a new site</a>
-  </div>
-  -->
   <a href ng-click="summonNewSiteModal()" class="fab accent" ng-if="isAuthenticated()" tooltip="Add a dive site">
     <span class="fa-stack fa-lg">
       <i class="fa fa-stack-2x fa-circle"></i>

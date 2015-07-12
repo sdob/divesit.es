@@ -1,3 +1,27 @@
+a.raised-button {
+  display: inline-block;
+  min-width: 88px;
+  height: 48px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 36px;
+  text-align: center;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+  color: @lightbg-text-primary;
+  &.accent {
+    background-color: @pink-500;
+    color: @darkbg-text-primary;
+    &:hover {
+      background-color: @pink-600;
+    }
+    &:active {
+      background-color: @pink-700;
+    }
+  }
+}
 a.flat-dialog-button {
   /* Display and dimensions */
   display: inline-block;

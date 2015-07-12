@@ -73,6 +73,30 @@
   color: #ffffff;
   background-color: #c2185b;
 }
+a.raised-button {
+  display: inline-block;
+  min-width: 88px;
+  height: 48px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 36px;
+  text-align: center;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+}
+a.raised-button:hover {
+  text-decoration: none;
+}
+a.raised-button.accent {
+  background-color: #e91e63;
+  color: #ffffff;
+}
+a.raised-button.accent:hover {
+  background-color: #d81b60;
+}
+a.raised-button.accent:active {
+  background-color: #c2185b;
+}
 a.flat-dialog-button {
   /* Display and dimensions */
   display: inline-block;
@@ -161,6 +185,7 @@ a.flat-dialog-button.lightbg:active {
 .modal-content h2 {
   margin: 0;
   font-size: 24px;
+  padding-bottom: 16px;
 }
 .modal-content h3 {
   font-size: 16px;
@@ -562,7 +587,6 @@ label.control-label.label-right {
 .filter-menu .header h2 {
   font-size: 24px;
   margin: 0;
-  font-weight: normal;
 }
 .filter-menu ul {
   margin: 0;
@@ -606,6 +630,12 @@ label.control-label.label-right {
   position: absolute;
   bottom: -24px;
   right: 16px;
+}
+div.sign-in-container {
+  text-align: center;
+}
+div.sign-in-container a {
+  margin-top: 8px;
 }
 .navbar {
   color: #ffffff;
