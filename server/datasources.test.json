@@ -12,7 +12,7 @@
   "s3": {
     "name": "s3",
     "connector": "loopback-component-storage",
-    "root": "server/uploads",
+    "root": "/tmp/test-storage",
     "provider": "filesystem"
   }
 }
