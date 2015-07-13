@@ -14,6 +14,12 @@ angular.module('divesitesApp')
     onSuccessItem: function (item, response, status, headers) {
       $rootScope.$broadcast('event:divesite-image-created', item);
       $modalInstance.close();
+    },
+    onAfterAddingFile: function (item) {
+      // Generate a random filename
+      var fileExtension = item.file.name.split('.').pop();
+      item.file.name = Math.random().toString(36).substring(7) +
+        new Date().getTime() + '.' + fileExtension;
     }
   });
 

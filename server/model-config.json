@@ -41,7 +41,7 @@
     "public": true
   },
   "Container": {
-    "dataSource": "myfile",
+    "dataSource": "s3",
     "public": true
   },
   "Dive": {

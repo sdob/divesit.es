@@ -9,5 +9,10 @@
     "connector": "loopback-component-storage",
     "root": "server/uploads",
     "provider": "filesystem"
+  },
+  "s3": {
+    "name": "s3",
+    "connector": "loopback-component-storage",
+    "provider": "amazon"
   }
 }

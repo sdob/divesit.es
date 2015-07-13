@@ -1,5 +1,5 @@
 angular.module('divesitesApp')
-.controller('NewSiteModalController', function ($scope, $location, $auth, User, LoopBackAuth, $modalInstance, Divesite, uiGmapIsReady, FileUploader, $rootScope, Container, $timeout) {
+.controller('NewSiteModalController', function (cfg, $scope, $location, $auth, User, LoopBackAuth, $modalInstance, Divesite, uiGmapIsReady, FileUploader, $rootScope, Container, $timeout, uploadUtilities) {
 
   // This is a first-run flag so that we can resize the Google map after the
   // div containing it has loaded.
@@ -7,15 +7,19 @@ angular.module('divesitesApp')
   // Flag governing the appearance of the 'loading...' overlay
   $scope.saving = false;
 
+
+  console.log(cfg.S3_BUCKET_URL);
+
   $scope.uploader = new FileUploader({
     scope: $scope,
-    url: '/api/containers/container1/upload',
+    url: cfg.S3_BUCKET_URL,
     headers: {
       "Authorization": LoopBackAuth.accessTokenId
     },
     queueLimit: 1,
-    onAfterAddingFile: function (fileItem) {
-      console.info('onAfterAddingFile', fileItem);
+    onAfterAddingFile: function (item) {
+      item.file.name = uploadUtilities.randomFilename(item);
+      console.log('new name: ' + item.file.name);
     }
   });
 

@@ -28,6 +28,9 @@
       redirectTo: '/'
     });
   })
+  .constant('cfg', {
+    S3_BUCKET_URL: '/api/containers/sdob-bukkit/upload'
+  })
   .config(['satellizer.config', '$authProvider', function (config, $authProvider) {
     config.authHeader = 'Satellizer';
     config.httpInterceptor = false;

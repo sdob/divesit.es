@@ -18,8 +18,8 @@ angular.module('divesitesApp')
       'Authorization': LoopBackAuth.accessTokenId
     },
     queueLimit: 1,
-    onAfterAddingFile: function (fileItem) {
-      console.info('onAfterAddingFile');
+    onAfterAddingFile: function (item) {
+      item.file.name = uploadUtilities.randomFilename(item);
     }
   });
 
