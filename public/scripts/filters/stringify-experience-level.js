@@ -4,7 +4,7 @@ angular.module('divesitesApp')
 .filter('stringifyExperienceLevel', function () {
   return function (level) {
     var levelString;
-    switch (level) {
+    switch ("" + level) {
       case "0":
         levelString = "Beginner";
         break;
