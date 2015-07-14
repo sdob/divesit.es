@@ -1,0 +1,40 @@
+.filter-menu, .info-box, .site-box {
+  position: absolute;
+  /* Hack positioning to tighten up vertical space */
+  h6 {
+    margin: 0;
+    margin-top: 24px;
+  }
+  .mdl-cell {
+    margin-top: 0;
+  }
+}
+.add-site, .filter-menu {
+  top: 64px;
+  left: 32px;
+}
+.edit-site, .info-box {
+  right: 64px;
+  top: 64px;
+}
+.site-box {
+  max-height: ~"calc(100% - 96px)";
+  overflow-y: scroll; /* ugh, but this avoids padding problems */
+  .angular-google-map-container {
+    height: 200px;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+  }
+  .centreMarker {
+    background: url(/img/ic_place_black_18dp.png) no-repeat;
+    height: 34px;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -34px;
+    position: absolute;
+    top: 50%;
+    width: 34px;
+    z-index: 3;
+  }
+}
