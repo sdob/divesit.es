@@ -5,10 +5,10 @@ angular.module('divesitesApp')
   return function (level) {
     var levelString;
     switch (level) {
-      case 0:
+      case "0":
         levelString = "Beginner";
         break;
-      case 1:
+      case "1":
         levelString = "Intermediate";
         break;
       default:
