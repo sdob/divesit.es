@@ -52,6 +52,16 @@
   width: 34px;
   z-index: 3;
 }
+.filter-menu .mdl-card__title {
+  background-color: #3f51b5;
+  color: white;
+}
+.filter-menu .mdl-card__title h2 {
+  font-family: 'Libre Baskerville', serif;
+}
+.filter-menu .mdl-card__title h2 .dot {
+  color: #e91e63;
+}
 .info-box,
 .edit-box {
   position: absolute;
