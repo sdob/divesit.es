@@ -6,6 +6,7 @@
     "google": false,
     "$": false,
     "FileReader": false,
-    "Image": false
+    "Image": false,
+    "componentHandler": false
   }
 }
