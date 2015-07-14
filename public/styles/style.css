@@ -1,6 +1,6 @@
 .add-site-button {
   bottom: 64px;
-  left: 36px;
+  right: 92px;
   position: absolute;
 }
 .filter-menu,
@@ -20,7 +20,10 @@
 .site-box .mdl-cell {
   margin-top: 0;
 }
-.add-site,
+.add-site {
+  top: 64px;
+  right: 64px;
+}
 .filter-menu {
   top: 64px;
   left: 32px;
