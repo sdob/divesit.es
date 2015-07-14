@@ -1,0 +1,97 @@
+.add-site-button {
+  bottom: 64px;
+  left: 36px;
+  position: absolute;
+}
+.filter-menu,
+.info-box,
+.site-box {
+  position: absolute;
+  /* Hack positioning to tighten up vertical space */
+}
+.filter-menu h6,
+.info-box h6,
+.site-box h6 {
+  margin: 0;
+  margin-top: 24px;
+}
+.filter-menu .mdl-cell,
+.info-box .mdl-cell,
+.site-box .mdl-cell {
+  margin-top: 0;
+}
+.add-site,
+.filter-menu {
+  top: 64px;
+  left: 32px;
+}
+.edit-site,
+.info-box {
+  right: 64px;
+  top: 64px;
+}
+.site-box {
+  max-height: calc(100% - 96px);
+  overflow-y: scroll;
+  /* ugh, but this avoids padding problems */
+}
+.site-box .angular-google-map-container {
+  height: 200px;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+}
+.site-box .centreMarker {
+  background: url(/img/ic_place_black_18dp.png) no-repeat;
+  height: 34px;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -34px;
+  position: absolute;
+  top: 50%;
+  width: 34px;
+  z-index: 3;
+}
+.info-box,
+.edit-box {
+  position: absolute;
+  right: 64px;
+  top: 64px;
+}
+.info-box > div > .mdl-card__title,
+.edit-box > div > .mdl-card__title {
+  background-color: #3f51b5;
+  color: #fff;
+  height: 176px;
+}
+.info-box > div > .mdl-card__menu,
+.edit-box > div > .mdl-card__menu {
+  color: #fff;
+}
+.edit-box h2.mdl-card__title-text {
+  /* Align the input text with where it appears in the info box */
+  position: relative;
+  top: 4px;
+}
+.edit-box h2.mdl-card__title-text .mdl-textfield.is-upgraded {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  padding-bottom: 0;
+}
+.edit-box h2.mdl-card__title-text .mdl-textfield.is-upgraded .mdl-textfield__input {
+  font-family: inherit;
+}
+.edit-box h6 {
+  margin-bottom: 0;
+}
+.angular-google-map-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-width: 0;
+  z-index: -1;
+  /* Behind everything */
+}
