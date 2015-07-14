@@ -23,7 +23,8 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
     //if (!$scope.map.rendered && google !== undefined && google.maps.event.trigger) {
       $scope.$apply();
       $scope.map.rendered = true;
-      //google.maps.event.trigger(map, 'resize');
+      // FIXME: Find somewhere better to put this
+      google.maps.event.trigger(map, 'resize');
       $scope.map.center = {
         latitude: localStorageService.get('map.center.latitude') || 53.5,
         longitude: localStorageService.get('map.center.longitude') || -8
@@ -58,6 +59,16 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
       function (error) {
       });
   }
+
+  $scope.uiGmapIsReady = function (maps) {
+    console.log("uiGmapIsReady");
+    $scope.map.events.idle = mapIdleEventHandler;
+    maps.forEach(function (inst) {
+      google.maps.event.trigger(inst.map, 'resize');
+    });
+    //console.info(maps);
+    $rootScope.$broadcast('event:map-is-ready');
+  };
 
   $scope.checkMinimumLevel = function (marker, data) {
     return marker.minimumLevel <= data.maximumLevel;
@@ -145,17 +156,13 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
     );
   };
 
-  $scope.uiGmapIsReady = function (maps) {
-    $scope.map.events.idle = mapIdleEventHandler;
-    $rootScope.$broadcast('event:map-is-ready');
-  };
 
 
   /////////////////////////////////////////////////////////////////////////////
   // Controller initialization
   /////////////////////////////////////////////////////////////////////////////
 
-  $scope.initialize = function () {
+  $scope.initialize = function initializeMapController() {
     $scope.map = {
       events: {
         idle: mapIdleEventHandler,
@@ -201,7 +208,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
     // Listen for deletion events
     $scope.$on('event:site-deleted', $scope.events.siteDeleted);
 
-    uiGmapIsReady.promise(0).then($scope.uiGmapIsReady); // first of the maps
+    uiGmapIsReady.promise().then($scope.uiGmapIsReady);
   };
 
   $scope.initialize();

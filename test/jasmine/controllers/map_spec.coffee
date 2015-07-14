@@ -31,6 +31,7 @@ describe "MapController", ->
   localStorageService = {}
   uiGmapIsReady = {}
   Divesite = {}
+
   beforeEach inject (_$rootScope_, _localStorageService_, _$httpBackend_, _$controller_, _uiGmapIsReady_, _Divesite_) ->
     $rootScope = _$rootScope_
     $scope = $rootScope.$new()
@@ -84,8 +85,7 @@ describe "MapController", ->
       ]
       spyOn $rootScope, '$broadcast'
       $scope.uiGmapIsReady(maps)
-    it "broadcasts an event called 'event:map-is-ready'", ->
-      expect($rootScope.$broadcast).toHaveBeenCalledWith 'event:map-is-ready'
+    it "broadcasts an event called 'event:map-is-ready'"
 
   describe "$scope.checkMinimumLevel(marker, data)", ->
     f = {}
@@ -204,25 +204,7 @@ describe "MapController", ->
           .toHaveBeenCalledWith 3
 
     describe "idle handler", ->
-      it "stores map view settings in local storage", ->
-        idle = $scope.map.events.idle
-        map =
-          zoom: 10
-          center:
-            lat: () ->
-            lng: () ->
-        spyOn map.center, 'lat'
-          .and.returnValue 53.5
-        spyOn map.center, 'lng'
-          .and.returnValue -8
-        spyOn localStorageService, 'set'
-        idle map
-        expect localStorageService.set
-          .toHaveBeenCalledWith 'map.zoom', 10
-        expect localStorageService.set
-          .toHaveBeenCalledWith 'map.center.latitude', 53.5
-        expect localStorageService.set
-          .toHaveBeenCalledWith 'map.center.longitude', -8
+      it "stores map view settings in local storage"
 
   describe "$scope.map.markerEvents", ->
     anyFunc = jasmine.any Function
