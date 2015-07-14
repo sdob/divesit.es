@@ -3,8 +3,8 @@
 <head>
 <title>divesit.es</title>
 <!-- External CSS -->
-<link rel="stylesheet" type="text/css" href='//fonts.googleapis.com/css?family=Roboto:400,700'>
-<link rel="stylesheet" type="text/css" href='//fonts.googleapis.com/css?family=Libre+Baskerville:700'>
+<link rel="stylesheet" href='//fonts.googleapis.com/css?family=Roboto:400,700'>
+<link rel="stylesheet" href='//fonts.googleapis.com/css?family=Libre+Baskerville:700'>
 <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css">
 <link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css">
 <script src="//storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
@@ -13,13 +13,14 @@
 <script src="libs/jquery/dist/jquery.js"></script>
 <script src="libs/jqueryui/jquery-ui.js"></script>
 <!-- CSS -->
-<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
+<!-- <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css"> -->
 <link rel="stylesheet" href="libs/jqueryui/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="styles/style.css">
 </head>
-<body ng-app="divesitesApp" controller="MainController">
-<div ng-view>
+<body ng-app="divesitesApp" ng-controller="MainController">
+<div ng-view class="mdl-layout mdl-js-layout">
 </div>
+
 <!-- Angular dependencies -->
 <script src="libs/angular/angular.js"></script>
 <script src='libs/angular-google-maps/dist/angular-google-maps.js'></script>
@@ -38,18 +39,19 @@
 <script src="scripts/controllers/map.js"></script>
 <script src="scripts/controllers/filterMenu.js"></script>
 <script src="scripts/controllers/infoBox.js"></script>
+<script src="scripts/controllers/editBox.js"></script>
 <script src="scripts/controllers/navTop.js"></script>
-<script src="scripts/controllers/signInModal.js"></script>
-<script src="scripts/controllers/newSiteModal.js"></script>
-<script src="scripts/controllers/editSiteModal.js"></script>
-<script src="scripts/controllers/logDiveModal.js"></script>
-<script src="scripts/controllers/addDivesiteImageModal.js"></script>
-<script src="scripts/controllers/logDiveOfferModal.js"></script>
+<script src="scripts/controllers/addSiteButton.js"></script>
+<script src="scripts/controllers/addSiteBox.js"></script>
 <!-- Directives -->
 <script src="scripts/directives/filter-menu.js"></script>
 <script src="scripts/directives/info-box.js"></script>
+<script src="scripts/directives/edit-box.js"></script>
 <script src="scripts/directives/nav-top.js"></script>
 <script src="scripts/directives/ng-thumb.js"></script>
+<script src="scripts/directives/add-site-button.js"></script>
+<script src="scripts/directives/add-site-box.js"></script>
+<script src="scripts/directives/depth.js"></script>
 <!-- Services -->
 <script src="scripts/services/filterPreferenceRetrieval.js"></script>
 <script src="scripts/services/uploadUtilities.js"></script>
