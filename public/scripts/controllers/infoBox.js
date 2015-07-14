@@ -3,16 +3,18 @@
 angular.module('divesitesApp').
   controller('InfoBoxController', function ($scope, $rootScope, LoopBackAuth, $modal) {
 
-  $scope.showInfoBox = function () {
-    $scope.infoBox.visible = true;
-  };
+  function dismiss() {
+    // Ask MainController to hide the infobox
+    $rootScope.$broadcast('event:info-box-dismissed');
+  }
 
-  $scope.dismissInfoBox = function () {
-    $scope.infoBox.visible = false;
+  $scope.summonEditBox = function () {
+    // Send out a start-editing event
+    $rootScope.$broadcast('event:edit-box-summoned', $scope.site);
   };
 
   $scope.isOwner = function () {
-    return $scope.isAuthenticated() && LoopBackAuth.currentUserId == $scope.infoBox.site.userId;
+    return $scope.isAuthenticated() && LoopBackAuth.currentUserId == $scope.site.userId;
   };
 
   /////////////////////////////////////////////////////////////////////////////
@@ -21,8 +23,8 @@ angular.module('divesitesApp').
   $scope.events = {
     // Handle a newly-logged dive
     diveCreated: function (event, data) {
-      console.log($scope.infoBox.site.id);
-      if ($scope.infoBox.site && data.siteId === $scope.infoBox.site.id) {
+      console.log($scope.site.id);
+      if ($scope.site && data.siteId === $scope.site.id) {
         // The dive has been logged for the site that the info box is
         // currently showing. This should *usually* be the case, since
         // the link to log a dive comes from the info box.
@@ -32,8 +34,8 @@ angular.module('divesitesApp').
       }
     },
     markerClicked: function (event, data) {
-      if (!!$scope.infoBox.site) {
-        $scope.infoBox.site.imgSrc = null;
+      if (!!$scope.site) {
+        $scope.site.imgSrc = null;
       }
     },
     siteDeleted: function (event, data) {
@@ -41,58 +43,22 @@ angular.module('divesitesApp').
       $scope.dismissInfoBox();
     },
     siteLoaded: function (event, data) {
-      $scope.showInfoBox();
-      $scope.infoBox.site = data;
-      if ($scope.infoBox.site.dives !== undefined) {
-        var numDives = $scope.infoBox.site.dives.length;
-        $scope.infoBox.site.numDivesString = numDives + " dive" + (numDives === 1 ? "" : "s");
+      // Only handle the infobox's responsiblities here. Visibility
+      // is controlled by MainController.
+      $scope.site = data;
+      if ($scope.site.dives !== undefined) {
+        var numDives = $scope.site.dives.length;
+        $scope.site.numDivesString = numDives + " dive" + (numDives === 1 ? "" : "s");
       }
     }
   };
 
-  $scope.summonEditSiteModal = function () {
-    $modal.open({
-      animation: false,
-      templateUrl: 'views/partials/edit-site-modal.html',
-      controller: 'EditSiteModalController',
-      backdrop: 'static',
-      size: 'lg',
-      scope: $scope
-    });
-  };
-
-  $scope.summonLogDiveModal = function () {
-    $modal.open({
-      animation: false,
-      templateUrl: 'views/partials/log-dive-modal.html',
-      controller: 'LogDiveModalController',
-      backdrop: 'static',
-      size: 'lg',
-      scope: $scope
-    });
-  };
-
-  $scope.summonAddPhotoModal = function () {
-    $modal.open({
-      animation: false,
-      templateUrl: 'views/partials/add-divesite-image-modal.html',
-      controller: "AddDivesiteImageModalController",
-      backdrop: 'static',
-      size: 'sm',
-      windowClass: 'add-photo-modal',
-      scope: $scope
-    });
-  };
-
-  /////////////////////////////////////////////////////////////////////////////
-  // Listen for $rootScope events
-  /////////////////////////////////////////////////////////////////////////////
-
   $scope.initialize = function () {
     $scope.infoBox = {
-      visible: false,
-      site: null
+      dismiss: dismiss
     };
+    $scope.site = {};
+    // Listen for events
     $scope.$on('event:site-loaded', $scope.events.siteLoaded);
     $scope.$on('event:site-deleted', $scope.events.siteDeleted);
     $scope.$on('event:marker-clicked', $scope.events.markerClicked);

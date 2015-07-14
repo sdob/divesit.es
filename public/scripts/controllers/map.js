@@ -20,6 +20,15 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
       localStorageService.set('map.center.latitude', map.center.lat());
       localStorageService.set('map.center.longitude', map.center.lng());
     });
+    //if (!$scope.map.rendered && google !== undefined && google.maps.event.trigger) {
+      $scope.$apply();
+      $scope.map.rendered = true;
+      //google.maps.event.trigger(map, 'resize');
+      $scope.map.center = {
+        latitude: localStorageService.get('map.center.latitude') || 53.5,
+        longitude: localStorageService.get('map.center.longitude') || -8
+      };
+    //}
   }
 
   function mapZoomChangedEventHandler(map) {
@@ -97,6 +106,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   };
 
   $scope.retrieveDivesites = function () {
+    console.info('Retrieving sites.');
     Divesite.find(
       {},
       function (sites) {
@@ -126,6 +136,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
             }
           }
         });
+        console.info('Loaded ' + $scope.map.markers.length + ' sites.');
         $rootScope.$broadcast('event:divesites-loaded');
       },
       function (errorResponse) {
@@ -135,9 +146,8 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   };
 
   $scope.uiGmapIsReady = function (maps) {
+    $scope.map.events.idle = mapIdleEventHandler;
     $rootScope.$broadcast('event:map-is-ready');
-    // Issue an initial 'center-changed' event;
-    $scope.map.events.center_changed(maps[0].map);
   };
 
 
@@ -150,7 +160,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
       events: {
         idle: mapIdleEventHandler,
         zoom_changed: mapZoomChangedEventHandler,
-        center_changed: centerChangedEventHandler
+        center_changed: centerChangedEventHandler,
       },
       center: {
         latitude: localStorageService.get('map.center.latitude') || 53.5,
@@ -165,7 +175,8 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
       },
       markerEvents: {
         click: markerClickEventHandler // fires on marker click
-      }
+      },
+      rendered: false
     };
     $scope.mapControl = {};
     $scope.markerControl = {};
@@ -190,7 +201,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
     // Listen for deletion events
     $scope.$on('event:site-deleted', $scope.events.siteDeleted);
 
-    uiGmapIsReady.promise().then($scope.uiGmapIsReady);
+    uiGmapIsReady.promise(0).then($scope.uiGmapIsReady); // first of the maps
   };
 
   $scope.initialize();

@@ -5,11 +5,26 @@ angular.module('divesitesApp')
 
   var MAX_DEPTH = 100;
 
+  $scope.hiddenBy = {
+    addSite: false
+  };
+  $scope.checkVisibility = function () {
+    return !$scope.hiddenBy.addSite;
+  }
+
   // Store info about the main map here
   $scope.map = {};
   $scope.eventHandlers = {
     centerChanged: function (e, data) {
       $scope.map = data;
+    },
+    addingStarted: function (e, data) {
+      $scope.hiddenBy.addSite = true;
+      $scope.filterMenu.visible = $scope.checkVisibility();
+    },
+    addingFinished: function (e, data) {
+      $scope.hiddenBy.addSite = false;
+      $scope.filterMenu.visible = $scope.checkVisibility();
     }
   };
 
@@ -92,12 +107,19 @@ angular.module('divesitesApp')
   /////////////////////////////////////////////////////////////////////////////
 
   $scope.initialize = function () {
+    $scope.filterMenu = {
+      visible: $scope.checkVisibility()
+    };
     $scope.filterPreferences = {};
     $scope.retrieveFilterPreferences();
     // Wait for divesites to load before retrieving filter preferences
     $scope.$on('event:divesites-loaded', $scope.updateAndSendFilterPreferences);
     // Listen for changes to the main map's centre and store them
     $scope.$on('event:center_changed', $scope.eventHandlers.centerChanged);
+    // Listen for when the add-site box is summoned in order to hide the filter menu
+    $scope.$on('event:adding-started', $scope.eventHandlers.addingStarted);
+    // Do the same for when the add-site box is dismissed
+    $scope.$on('event:adding-finished', $scope.eventHandlers.addingFinished);
   };
 
   $scope.initialize();
