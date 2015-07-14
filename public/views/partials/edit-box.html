@@ -1,0 +1,70 @@
+<div class="mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text" style="background: url('{{site.imgSrc}}') center cover">
+      <div class="mdl-textfield mdl-js-textfield" style="font-size: inherit">
+        <input class="mdl-textfield__input" type="text" value="{{ site.name }}" style="font-size: inherit">
+      </div>
+    </h2>
+  </div>
+  <div class="mdl-card__menu">
+    <button type="button" ng-click="editBox.cancel()" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+
+  <div class="mdl-card__supporting-text">
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <textarea class="mdl-textfield__input" id="edit-description" rows="4" ng-model="site.description"></textarea>
+      <label class="mdl-textfield__label" for="edit-description">Description</label>
+    </div>
+
+    <h6>Access</h6>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--6-col">
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="edit-shore-entry">
+          <input type="checkbox" id="edit-shore-entry" class="mdl-checkbox__input" ng-checked="{{site.shoreEntry}}" />
+          <span class="mdl-checkbox__label">Shore</span>
+        </label>
+      </div>
+      <div class="mdl-cell mdl-cell--6-col">
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="edit-boat-entry">
+          <input type="checkbox" id="edit-boat-entry" class="mdl-checkbox__input" ng-checked="{{site.boatEntry}}" />
+          <span class="mdl-checkbox__label">Boat</span>
+        </label>
+      </div>
+    </div>
+
+    <h6>Experience level</h6>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="edit-experience-0">
+          <input type="radio" id="edit-experience-0" class="mdl-radio__button" name="experience-level" value="0" ng-model="site.minimumLevel"/>
+          <span class="mdl-radio__label">Beginner</span>
+        </label>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col">
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="edit-experience-1">
+          <input type="radio" id="edit-experience-1" class="mdl-radio__button" name="experience-level" value="1" ng-model="site.minimumLevel"/>
+          <span class="mdl-radio__label">Intermediate</span>
+        </label>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col">
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="edit-experience-2">
+          <input type="radio" id="edit-experience-2" class="mdl-radio__button" name="experience-level" value="2" ng-model="site.minimumLevel"/>
+          <span class="mdl-radio__label">Advanced</span>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mdl-card__actions">
+    <button type="button" ng-click="editBox.cancel()" class="mdl-button mdl-js-button">
+      Cancel
+    </button>
+    <button ng-click="save()" class="mdl-button mdl-js-button">
+      Save
+    </button>
+  </div>
+</div>
