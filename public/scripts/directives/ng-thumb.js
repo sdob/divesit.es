@@ -43,6 +43,8 @@ angular.module('divesitesApp').directive('ngThumb', ['$window', function ($windo
       reader.onload = onLoadFile;
       reader.readAsDataURL(params.file);
 
+      //console.log(canvas.parent().width());
+
       function onLoadFile(event) {
         console.log("onLoadFile");
         var img = new Image();
@@ -53,8 +55,10 @@ angular.module('divesitesApp').directive('ngThumb', ['$window', function ($windo
       function onLoadImage() {
         /* jshint validthis:true */
         console.log("onLoadImage");
-        var width = params.width || this.width / this.height * params.height;
-        var height = params.height || this.height / this.width * params.width;
+        //var width = params.width || this.width / this.height * params.height;
+        var width = canvas.parent().width();
+        //var height = params.height || this.height / this.width * params.width;
+        var height = this.height / this.width * width;
         canvas.attr({width: width, height: height});
         canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
         $('.thumbnail-container').css({'height': height});

@@ -11,6 +11,7 @@ angular.module('divesitesApp')
   function cancelUpload() {
     console.info('cancelling file upload');
     $scope.uploader.queue[0].remove();
+    $scope.siteHasImage = false;
   }
 
   function createUploader() {
@@ -25,6 +26,9 @@ angular.module('divesitesApp')
         item.file.name = uploadUtilities.randomFilename(item);
         console.info('new filename: ' + item.file.name);
         console.info(item.file);
+        $scope.$apply(function () {
+          $scope.siteHasImage = true;
+        });
       },
       onCompleteAll: function () {
         // We only close the box when the file has uploaded successfully
@@ -116,7 +120,8 @@ angular.module('divesitesApp')
   $scope.initialize = function () {
     console.log('Initializing AddSiteBoxController');
     $scope.cancel = cancel;
-    $scope.cancelUpload = cancelUpload;
+    // In the new-site interface, removing the image cancels the upload
+    $scope.removeImage = cancelUpload;
     $scope.map = {
       center: {
         latitude: localStorageService.get('map.center.latitude'),
@@ -133,6 +138,7 @@ angular.module('divesitesApp')
       boatEntry: false,
       shoreEntry: false
     };
+    $scope.siteHasImage = false;
     $scope.title = 'Add a new site';
     $scope.uploader = createUploader();
     $scope.validateEntry = validateEntry;

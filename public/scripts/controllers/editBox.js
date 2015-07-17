@@ -1,6 +1,25 @@
-angular.module('divesitesApp').controller('EditBoxController', function EditBoxController($scope, $location, $auth, User, LoopBackAuth, Divesite, uiGmapIsReady, FileUploader, $rootScope, Container) {
-  console.log('Initializing EditBoxController');
-  console.log($scope.site);
+angular.module('divesitesApp').controller('EditBoxController', function EditBoxController($scope, $location, $auth, User, LoopBackAuth, Divesite, DivesiteImage, uiGmapIsReady, FileUploader, $rootScope, Container) {
+
+  function deleteImage() {
+    console.info("I'm going to delete an image from storage");
+    console.log("image url:");
+    console.log($scope.site.imgSrc);
+    console.log($scope.site.images);
+    DivesiteImage.deleteById({ id: $scope.site.images[0].id })
+    .$promise
+    .then(
+      function deleteSuccess() {
+        console.info('i guess it worked');
+      },
+      function deleteError(res) {
+        console.error('Something went wrong while trying to delete the image');
+        console.error(res);
+      }
+    );
+  }
+
+  console.info('Initializing EditBoxController');
+  console.info($scope.site);
   $scope.rendered = false;
 
   $scope.uploader = new FileUploader({
@@ -15,7 +34,7 @@ angular.module('divesitesApp').controller('EditBoxController', function EditBoxC
     }
   });
 
-  $scope.submit = function () {
+  $scope.save = function () {
     $scope.site.loc = {
       lat: Number($scope.map.center.latitude),
       lng: Number($scope.map.center.longitude)
@@ -27,10 +46,11 @@ angular.module('divesitesApp').controller('EditBoxController', function EditBoxC
       function editSuccess(res) {
         // Close the box and broadcast a site-edited event
         $rootScope.$broadcast('event:site-edited', res);
+        $rootScope.$broadcast('event:edit-box-dismissed', res);
       },
       // Handle failure
       function editError(res) {
-        console.log("Failed to update the site");
+        console.info("Failed to update the site");
       }
     )
   };
@@ -53,7 +73,7 @@ angular.module('divesitesApp').controller('EditBoxController', function EditBoxC
 
   $scope.events = {
     onEditBoxSummoned: function (e, data) {
-      console.log('I strongly suspect I never fire');
+      console.info('I strongly suspect I never fire');
       //$scope.site = data;
       if ($scope.site.images && $scope.site.images[0]) {
         // TODO: load the thumbnail, then let the user delete the image if they
@@ -65,6 +85,7 @@ angular.module('divesitesApp').controller('EditBoxController', function EditBoxC
   $scope.initialize = function () {
     $scope.$on('event:edit-box-summoned', $scope.events.onEditBoxSummoned);
     $scope.cancel = cancel;
+    $scope.removeImage = deleteImage;
     $scope.title = "Edit this site";
     $scope.map = {
       center: {
@@ -88,6 +109,7 @@ angular.module('divesitesApp').controller('EditBoxController', function EditBoxC
         }
       }
     };
+    $scope.siteHasImage = !!$scope.site.imgSrc;
   };
   $scope.initialize();
 });

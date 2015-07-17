@@ -6,8 +6,13 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
     $scope.visibilityControl.infoBox = false;
   }
 
+  function dismissLogDiveBox(e) {
+    $scope.visibilityControl.logDiveBox = false;
+    $scope.visibilityControl.infoBox = true;
+  }
+
   function dismissSignInBox(e) {
-    console.log('MainController::dismissSignInBox');
+    console.info('MainController::dismissSignInBox');
     $scope.visibilityControl.signInBox = false;
     $scope.visibilityControl.filterMenu = true;
   }
@@ -30,10 +35,16 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
 
   function showEditBox(e, data) {
     console.info('MainController: summoning the edit box');
-    console.log(data);
+    console.info(data);
     $scope.site = data;
     $scope.visibilityControl.editBox = true;
     $scope.visibilityControl.infoBox = false;
+  }
+
+  function showLogDiveBox(e, data) {
+    console.info('MainController: summoning the log dive box');
+    $scope.visibilityControl.infoBox = false;
+    $scope.visibilityControl.logDiveBox = true;
   }
 
   function showSignInBox(e, data) {
@@ -46,12 +57,12 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
   $scope.$on('event:adding-started', showAddSiteBox);
 
   $scope.$on('event:adding-finished', function (e) {
-    console.log('MainController received: "' + e.name + '"');
-    console.log(e);
+    console.info('MainController received: "' + e.name + '"');
+    console.info(e);
     $scope.visibilityControl.addSiteBox = false;
     $scope.visibilityControl.addSiteButton = true;
     $scope.visibilityControl.filterMenu = true;
-    console.log($scope.visibilityControl.addSiteBox);
+    console.info($scope.visibilityControl.addSiteBox);
   });
 
   $scope.$on('event:site-loaded', showInfoBox)
@@ -67,6 +78,8 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
   $scope.$on('event:sign-in-cancelled', dismissSignInBox);
   $scope.$on('event:sign-in-initiated', showSignInBox);
   $scope.$on('event:sign-in-successful', dismissSignInBox);
+  $scope.$on('event:log-dive-box-summoned', showLogDiveBox);
+  $scope.$on('event:logging-cancelled', dismissLogDiveBox);
 
   $scope.initialize = function () {
     // Initial visibilities
@@ -75,7 +88,8 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
       addSiteButton: true,
       editBox: false,
       filterMenu: true,
-      infoBox: false
+      infoBox: false,
+      logDiveBox: false
     };
   }
   $scope.initialize();

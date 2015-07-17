@@ -60,6 +60,12 @@ angular.module('divesitesApp').
     $rootScope.$broadcast('event:edit-box-summoned', $scope.site);
   }
 
+  function summonLogDiveBox() {
+    console.info('InfoBoxController: summoning the log dive box');
+    $rootScope.$broadcast('event:log-dive-box-summoned');
+  }
+
+
   $scope.initialize = function initializeInfoBox() {
     $scope.events = {
       // Handle a newly-logged dive
@@ -75,6 +81,7 @@ angular.module('divesitesApp').
     $scope.isOwner = isOwner;
     $scope.site = {};
     $scope.summonEditBox = summonEditBox;
+    $scope.summonLogDiveBox = summonLogDiveBox;
 
     // Listen for events
     $scope.$on('event:site-loaded', $scope.events.siteLoaded);

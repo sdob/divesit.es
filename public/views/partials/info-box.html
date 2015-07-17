@@ -15,7 +15,7 @@
   </div>
 
   <div ng-show="isAuthenticated()" class="mdl-card__actions mdl-card--border">
-    <button type="button" ng-show="isAuthenticated()" id="infobox-log-dive" class="mdl-button mdl-js-button mdl-button--icon">
+    <button ng-click="summonLogDiveBox()" type="button" ng-show="isAuthenticated()" id="infobox-log-dive" class="mdl-button mdl-js-button mdl-button--icon">
       <i class="material-icons">rate_review</i>
     </button>
     <div class="mdl-tooltip" for="infobox-log-dive">
