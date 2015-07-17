@@ -1,5 +1,5 @@
 <div class="mdl-card mdl-shadow--2dp">
-  <form name="siteForm" novalidate ng-submit="siteForm.$valid && addSite.save()">
+  <form name="siteForm" novalidate ng-submit="siteForm.$valid && save()">
 
     <div class="mdl-card__title">
       <h2 class="mdl-card__title-text" style="background: url('{{site.imgSrc}}') center cover">
@@ -100,11 +100,27 @@
       </div>
 
       <h6>Cover photo (optional)</h6>
-      <div class="mdl-grid" style="height: 200px; background-color: rgba(0, 0, 0, 0.12)">
-        <div class="mdl-cell mdl-cell--12-col mdl-cell--middle" style="text-align: center">
-          <a class="mdl-button mdl-js-button mdl-button--icon" ng-click="addSite.upload()">
-          <i class="material-icons">photo_camera</i>
-        </a>
+      <div class="mdl-grid">
+        <div ng-if="!uploader.queue[0]"
+          class="mdl-cell mdl-cell--12-col mdl-cell--middle"
+          style="text-align: center; height: 200px; background-color: rgba(0, 0, 0, 0.12)">
+          <label for="siteForm-upload">
+            <input type="file" style="position: fixed; top: -1000px;" id="siteForm-upload"
+            nv-file-select="" uploader="uploader"
+            />
+            <!-- <a class="mdl-button mdl-js-button mdl-button--icon"> -->
+            <i class="material-icons">photo_camera</i>
+            <!-- </a> -->
+          </label>
+        </div>
+        <div ng-if="uploader.queue[0]" style="position: relative">
+          <div style="position: absolute; top: 16px; right: 16px; color: #fff">
+            <a class="mdl-button mdl-js-button mdl-button--icon" ng-click="cancelUpload()">
+              <i class="material-icons">close</i>
+            </a>
+          </div>
+          <div ng-thumb="{file: uploader.queue[0]._file, height: 200}">
+          </div>
         </div>
       </div>
 

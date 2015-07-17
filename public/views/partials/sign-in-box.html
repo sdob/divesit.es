@@ -1,0 +1,27 @@
+<div class="mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">
+      Sign in
+    </h2>
+  </div>
+  <div class="mdl-card__menu">
+    <button type="button" ng-click="cancel()" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <div class="mdl-grid">
+      <div class="mdl-cel--col-12">
+        Sign in to Divesit.es using your Facebook or Google account.
+      </div>
+      <div class="mdl-cell--col-12" style="text-align: center">
+      <button type="button" class="mdl-button mdl-js-button" ng-click="authenticate('facebook')">
+        Sign in with Facebook
+    </button>
+  </div>
+    <button type="button" class="mdl-button mdl-js-button mdl-cell--col-12" ng-click="authenticate('google')" style="text-align: center">
+      Sign in with Google
+    </button>
+  </div>
+  </div>
+</div>

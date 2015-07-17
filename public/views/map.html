@@ -1,7 +1,6 @@
 <!-- <nav-top></nav-top> -->
-
-
 <main class="mdl-layout__content">
+
 
   <div ng-controller="MapController">
     <ui-gmap-google-map
@@ -23,6 +22,7 @@
 
   </div>
 
+  <sign-in-box ng-if="visibilityControl.signInBox" class="sign-in-box"></sign-in-box>
   <filter-menu ng-show="visibilityControl.filterMenu" class="filter-menu"></filter-menu>
   <info-box ng-show="visibilityControl.infoBox" class="info-box"></info-box>
   <edit-box ng-if="isAuthenticated() && visibilityControl.editBox" class="site-box edit-site"></edit-box>

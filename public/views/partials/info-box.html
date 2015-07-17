@@ -1,6 +1,8 @@
 <div class="mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text" style="background: url('{{site.imgSrc}}') center cover">{{ site.name }}</h2>
+    <h2 class="mdl-card__title-text" style="background: url('{{site.imgSrc}}') center cover">
+      {{ site.name }}
+    </h2>
   </div>
   <div class="mdl-card__menu">
     <button type="button" ng-click="infoBox.dismiss()" class="mdl-button mdl-js-button mdl-button--icon">
@@ -8,16 +10,33 @@
     </button>
   </div>
 
-  <div class="mdl-card__supporting-text">
-    <p>{{ site.description }}</p>
-  </div>
-
-  <div class="mdl-card__actions mdl-card--border">
-    <button ng-click="summonEditBox()" id="infobox-edit-site" class="mdl-button mdl-js-button mdl-button--icon">
+  <div ng-show="isAuthenticated()" class="mdl-card__actions mdl-card--border">
+    <button type="button" ng-show="isAuthenticated()" id="infobox-log-dive" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">rate_review</i>
+    </button>
+    <div class="mdl-tooltip" for="infobox-log-dive">
+      Log
+    </div>
+    <button type="button" ng-show="isOwner()" ng-click="summonEditBox()" id="infobox-edit-site" class="mdl-button mdl-js-button mdl-button--icon">
       <i class="material-icons">edit</i>
     </button>
     <div class="mdl-tooltip" for="infobox-edit-site">
-      Log
+      Edit
     </div>
   </div>
+
+  <div class="mdl-card__supporting-text">
+    <div class="mdl-grid">
+      <div class="mdl-cell--6-col">
+        Level: {{ site.minimumLevel | stringifyExperienceLevel }}
+      </div>
+      <div class="mdl-cell--6-col">
+      </div>
+      <div>
+        Depth: {{ site.depth }} m
+      </div>
+    </div>
+    <p style="border-top: 1px solid rgba(0, 0, 0, .1)">{{ site.description }}</p>
+  </div>
+
 </div>

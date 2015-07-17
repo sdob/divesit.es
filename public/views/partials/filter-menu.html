@@ -1,10 +1,42 @@
-<div class="mdl-card mdl-shadow--2dp" ng-show="filterMenu.visible">
+<div class="mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title">
     <h2 class="mdl-card__title-text">Divesit<span class="dot">.</span>es</h2>
   </div>
-  <div>
+
+  <div class="mdl-card__menu">
+    <button type="button" id="filter-menu-menu" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons" style="color: #fff">more_vert</i>
+    </button>
+    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="filter-menu-menu">
+      <li class="mdl-menu__item"
+      ng-click="signIn()"
+      ng-if="!isAuthenticated()">Sign in</li>
+      <li class="mdl-menu__item"
+      ng-click="signOut()"
+      ng-if="isAuthenticated()">Sign out</li>
+    </ul>
   </div>
+
   <div class="mdl-grid">
+    <h6 class="mdl-cell mdl-cell--12-col">
+      Site access
+    </h6>
+
+    <p class="mdl-cell mdl-cell--6-col">
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="filter-menu-boatEntry">
+      <input class="mdl-checkbox__input" type="checkbox" id="filter-menu-boatEntry" ng-model="filterPreferences.boatEntry"
+      ng-change="updateAndSendFilterPreferences()" >
+      <span class="mdl-checkbox__label">Boat</span>
+    </label>
+    </p>
+
+    <p class="mdl-cell mdl-cell--6-col">
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="filter-menu-shoreEntry">
+      <input class="mdl-checkbox__input" type="checkbox" id="filter-menu-shoreEntry" ng-model="filterPreferences.shoreEntry"
+      ng-change="updateAndSendFilterPreferences()" >
+      <span class="mdl-checkbox__label">Shore</span>
+    </label>
+    </p>
 
     <h6>Maximum experience level required</h6>
     <p class="mdl-cell mdl-cell--8-col mdl-cell--middle">
