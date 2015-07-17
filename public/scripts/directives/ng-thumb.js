@@ -15,12 +15,28 @@ angular.module('divesitesApp').directive('ngThumb', ['$window', function ($windo
     restrict: 'A',
     template: '<canvas/>',
     link: function (scope, element, attributes) {
-      if (!helper.support) return;
+      if (!helper.support) {
+        console.error('not supported');
+        return;
+      }
+      console.info('uploading');
 
       var params = scope.$eval(attributes.ngThumb);
 
-      if (!helper.isFile(params.file)) return;
-      if (!helper.isImage(params.file)) return;
+      console.info('params.file:');
+      console.info(params.file);
+
+      if (!helper.isFile(params.file)) {
+        console.error('not a file');
+        return;
+      }
+      console.info('identified a file');
+
+      if (!helper.isImage(params.file)) {
+        console.error('not an image');
+        return;
+      }
+      console.info('identified an image');
 
       var canvas = element.find('canvas');
       var reader = new FileReader();
