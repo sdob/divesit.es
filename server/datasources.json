@@ -11,8 +11,5 @@
     "provider": "filesystem"
   },
   "s3": {
-    "name": "s3",
-    "connector": "loopback-component-storage",
-    "provider": "amazon"
   }
 }
