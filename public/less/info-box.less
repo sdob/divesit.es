@@ -3,7 +3,6 @@
   right: 64px;
   top: 64px;
   & > div > .mdl-card__title {
-    background-color: @indigo-500;
     color: #fff;
     height: 176px;
   }
@@ -28,5 +27,17 @@
   }
   h6 {
     margin-bottom: 0;
+  }
+}
+.info-box {
+  .mdl-card__title.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: @indigo-500;
+    width: 100%;
+  }
+  .mdl-card__title.background {
   }
 }

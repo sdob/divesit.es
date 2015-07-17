@@ -80,7 +80,6 @@
 }
 .info-box > div > .mdl-card__title,
 .edit-box > div > .mdl-card__title {
-  background-color: #3f51b5;
   color: #fff;
   height: 176px;
 }
@@ -105,6 +104,14 @@
 .edit-box h6 {
   margin-bottom: 0;
 }
+.info-box .mdl-card__title.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #3f51b5;
+  width: 100%;
+}
 .angular-google-map-container {
   position: absolute;
   height: 100%;
@@ -112,8 +119,6 @@
   top: 0;
   left: 0;
   border-width: 0;
-  z-index: -1;
-  /* Behind everything */
 }
 .modal-view-container {
   position: fixed;

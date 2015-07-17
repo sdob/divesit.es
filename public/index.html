@@ -16,10 +16,6 @@
 <!-- <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css"> -->
 <link rel="stylesheet" href="libs/jqueryui/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="styles/style.css">
-</head>
-<body ng-app="divesitesApp" ng-controller="MainController">
-<div ng-view class="mdl-layout mdl-js-layout">
-</div>
 
 <!-- Angular dependencies -->
 <script src="libs/angular/angular.js"></script>
@@ -63,5 +59,17 @@
 <!-- Other deps -->
 <script src="libs/lodash/lodash.js"></script>
 <script src="libs/moment/moment.js"></script>
+</head>
+
+<body ng-app="divesitesApp" ng-controller="MainController">
+<div ng-view>
+ </div>
+
+<!--
+<body ng-app="divesitesApp" ng-controller="MainController">
+<div ng-view class="mdl-layout mdl-js-layout">
+</div>
+-->
+
 </body>
 </html>

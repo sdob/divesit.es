@@ -48,6 +48,12 @@ angular.module('divesitesApp').
       var numDives = $scope.site.dives.length;
       $scope.site.numDivesString = numDives + " dive" + (numDives === 1 ? "" : "s");
     }
+    if ($scope.site.imgSrc) {
+      // We can't triply nest quotes in CSS/HTML so we need to build the CSS url() here
+      $scope.site.background = 'url("' + $scope.site.imgSrc + '") center / cover';
+      console.log($scope.site.background);
+    }
+    console.log($scope.site.imgSrc);
   }
 
   function summonEditBox() {
