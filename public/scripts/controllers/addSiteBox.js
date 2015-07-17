@@ -25,6 +25,21 @@ angular.module('divesitesApp')
         item.file.name = uploadUtilities.randomFilename(item);
         console.info('new filename: ' + item.file.name);
         console.info(item.file);
+      },
+      onCompleteAll: function () {
+        // We only close the box when the file has uploaded successfully
+        console.info("successfully uploaded file");
+        $timeout(function () {
+          $rootScope.$broadcast('event:new-site-created', res);
+          $rootScope.$broadcast('event:adding-finished', $scope.site);
+        }, 500);
+      },
+      onErrorItem: function (item, response, status, headers) {
+        console.error('problem with upload:');
+        console.error(item);
+        console.error(response);
+        console.error(status);
+        console.error(headers);
       }
     });
   }
@@ -46,18 +61,28 @@ angular.module('divesitesApp')
   }
 
   function save() {
+    // Re-format the loc property so that LoopBack will understand it to
+    // be a geopoint
+    $scope.site.loc = {
+      lat: Number($scope.map.center.latitude),
+      lng: Number($scope.map.center.longitude)
+    };
     console.info('data to save:');
     console.info($scope.site);
     // Save the new site
-    if (false) Divesite.create($scope.site)
-      .$promise
+    Divesite.create($scope.site)
+    .$promise
     .then(
       function createSuccess(res) {
         console.info("Saved the site.");
-        $timeout(function () {
-          $rootScope.$broadcast('event:new-site-created', res);
-          $rootScope.$broadcast('event:adding-finished', $scope.site);
-        });
+        console.info("Saving the image...");
+        if ($scope.uploader.queue[0]) {
+          // Upload the image
+          $scope.uploader.queue[0].headers.divesite = res.id;
+          return $scope.uploader.queue[0].upload();
+        }
+        $rootScope.$broadcast('event:new-site-created', res);
+        $rootScope.$broadcast('event:adding-finished', $scope.site);
       },
       function createError(res) {
         console.error("Failed to save the new site.");
@@ -110,9 +135,9 @@ angular.module('divesitesApp')
     };
     $scope.title = 'Add a new site';
     $scope.uploader = createUploader();
-      $scope.validateEntry = validateEntry;
-      $scope.validateExperienceLevel = validateExperienceLevel;
-      $scope.validateDepth = validateDepth;
+    $scope.validateEntry = validateEntry;
+    $scope.validateExperienceLevel = validateExperienceLevel;
+    $scope.validateDepth = validateDepth;
 
     console.info($scope.map.center);
 
