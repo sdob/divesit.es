@@ -6,7 +6,7 @@ angular.module('divesitesApp').directive('addSiteBox', function () {
     restrict: 'E',
     controller: 'AddSiteBoxController',
     link: function (scope, elem, attrs, ctrl) {
-      console.log("Cloning EditBoxController");
+      console.info("Cloning EditBoxController");
       angular.element(elem).ready(function () {
         // Hacky way to set the initial 'checked' value on the checkboxes before
         // MDL has its wicked way with them
