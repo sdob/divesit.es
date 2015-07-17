@@ -63,11 +63,20 @@ angular.module('divesitesApp')
     $scope.filterPreferences.depthRange = filterPreferenceRetrievalService.depthRange(lsKeys);
     // Minimum level
     $scope.filterPreferences.maximumLevel = filterPreferenceRetrievalService.maximumLevel(lsKeys);
+    // force MDL to upgrade the components
+    //componentHandler.upgradeAllRegistered();
+    console.info('filter preferences loaded:');
+    console.info($scope.filterPreferences);
   };
 
   // Check whether the user is logged in
   $scope.isAuthenticated = function () {
     return User.isAuthenticated();
+  };
+
+  $scope.updateMdlSliders = function () {
+    console.log('FilterMenuController::updateMdlSliders()');
+    //console.log(MaterialSlider);
   };
 
   /////////////////////////////////////////////////////////////////////////////
@@ -79,6 +88,7 @@ angular.module('divesitesApp')
     $scope.signIn = signIn;
     $scope.signOut = signOut;
     $scope.retrieveFilterPreferences();
+    //$scope.updateMdlSliders();
     // Wait for divesites to load before retrieving filter preferences
     $scope.$on('event:divesites-loaded', $scope.updateAndSendFilterPreferences);
     // Listen for changes to the main map's centre and store them

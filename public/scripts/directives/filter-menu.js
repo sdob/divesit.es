@@ -8,7 +8,7 @@ angular.module('divesitesApp').directive('filterMenu', function () {
     link: function (scope, elem, attrs, ctrl) {
       angular.element(elem).ready(function () {
         // Let MDL get funky
-        componentHandler.upgradeAllRegistered();
+        //componentHandler.upgradeAllRegistered();
       });
     }
   }
