@@ -100,26 +100,28 @@
       </div>
 
       <h6>Cover photo (optional)</h6>
-      <div class="mdl-grid">
+      <div class="mdl-grid" style="height: 200px">
         <div ng-if="!uploader.queue[0]"
           class="mdl-cell mdl-cell--12-col mdl-cell--middle"
-          style="text-align: center; height: 200px; background-color: rgba(0, 0, 0, 0.12)">
+          style="text-align: center"
+          >
           <label for="siteForm-upload">
-            <input type="file" style="position: fixed; top: -1000px;" id="siteForm-upload"
+            <input type="file" style="position: fixed; visibility: hidden;" id="siteForm-upload"
             nv-file-select="" uploader="uploader"
             />
-            <!-- <a class="mdl-button mdl-js-button mdl-button--icon"> -->
-            <i class="material-icons">photo_camera</i>
-            <!-- </a> -->
+            <div class="mdl-button mdl-button--icon">
+              <i class="material-icons">photo_camera</i>
+            </div>
           </label>
         </div>
-        <div ng-if="uploader.queue[0]" style="position: relative">
+
+        <div ng-if="uploader.queue[0]" style="position: relative; text-align: center">
           <div style="position: absolute; top: 16px; right: 16px; color: #fff">
             <a class="mdl-button mdl-js-button mdl-button--icon" ng-click="cancelUpload()">
               <i class="material-icons">close</i>
             </a>
           </div>
-          <div ng-thumb="{file: uploader.queue[0]._file, height: 200}">
+          <div ng-if="uploader.queue[0]" ng-thumb="{file: uploader.queue[0]._file, height: 200}">
           </div>
         </div>
       </div>
