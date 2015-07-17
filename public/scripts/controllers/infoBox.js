@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('divesitesApp').
-  controller('InfoBoxController', function ($scope, $rootScope, LoopBackAuth, $modal) {
+  controller('InfoBoxController', function ($scope, $rootScope, LoopBackAuth, User) {
 
   function dismiss() {
     // Ask MainController to hide the infobox
@@ -13,9 +13,13 @@ angular.module('divesitesApp').
     $rootScope.$broadcast('event:edit-box-summoned', $scope.site);
   };
 
-  $scope.isOwner = function () {
+  $scope.isOwner = function isOwner() {
     return $scope.isAuthenticated() && LoopBackAuth.currentUserId == $scope.site.userId;
   };
+
+  $scope.isAuthenticated = function isAuthenticated() {
+    return User.isAuthenticated();
+  }
 
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////

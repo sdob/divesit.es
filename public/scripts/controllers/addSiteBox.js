@@ -8,6 +8,11 @@ angular.module('divesitesApp')
     }
   }
 
+  function cancelUpload() {
+    console.info('cancelling file upload');
+    $scope.uploader.queue[0].remove();
+  }
+
   function createUploader() {
     return new FileUploader({
       scope: $scope,
@@ -19,6 +24,7 @@ angular.module('divesitesApp')
       onAfterAddingFile: function (item) {
         item.file.name = uploadUtilities.randomFilename(item);
         console.info('new filename: ' + item.file.name);
+        console.info(item.file);
       }
     });
   }
@@ -85,6 +91,7 @@ angular.module('divesitesApp')
   $scope.initialize = function () {
     console.log('Initializing AddSiteBoxController');
     $scope.cancel = cancel;
+    $scope.cancelUpload = cancelUpload;
     $scope.map = {
       center: {
         latitude: localStorageService.get('map.center.latitude'),

@@ -2,6 +2,16 @@
 
 angular.module('divesitesApp').controller('MainController', function ($scope, User) {
 
+  function dismissInfoBox(e) {
+    $scope.visibilityControl.infoBox = false;
+  }
+
+  function dismissSignInBox(e) {
+    console.log('MainController::dismissSignInBox');
+    $scope.visibilityControl.signInBox = false;
+    $scope.visibilityControl.filterMenu = true;
+  }
+
   function isAuthenticated() {
     return User.isAuthenticated();
   }
@@ -9,6 +19,13 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
   function showInfoBox(e) {
     $scope.visibilityControl.editBox = false;
     $scope.visibilityControl.infoBox = true;
+  }
+
+  function showAddSiteBox(e, data) {
+    $scope.visibilityControl.addSiteBox = true;
+    $scope.visibilityControl.addSiteButton = false;
+    $scope.visibilityControl.filterMenu = false;
+    $scope.visibilityControl.infoBox = false;
   }
 
   function showEditBox(e, data) {
@@ -19,13 +36,14 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
     $scope.visibilityControl.infoBox = false;
   }
 
-  // Set up the mutually exclusive visibilities for the various UI bits
-  $scope.$on('event:adding-started', function () {
-    // mutually exclusive visibilities
-    $scope.visibilityControl.addSiteBox = true;
-    $scope.visibilityControl.addSiteButton = false;
+  function showSignInBox(e, data) {
+    console.info('MainController::showSignInBox');
+    $scope.visibilityControl.signInBox = true;
     $scope.visibilityControl.filterMenu = false;
-  });
+  }
+
+  // Set up the mutually exclusive visibilities for the various UI bits
+  $scope.$on('event:adding-started', showAddSiteBox);
 
   $scope.$on('event:adding-finished', function (e) {
     console.log('MainController received: "' + e.name + '"');
@@ -43,12 +61,12 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
     $scope.visibilityControl.infoBox = true;
   });
 
-  $scope.$on('event:info-box-dismissed', function (e) {
-    $scope.visibilityControl.infoBox = false;
-  });
-
   $scope.$on('event:edit-box-dismissed', showInfoBox);
   $scope.$on('event:edit-box-summoned', showEditBox);
+  $scope.$on('event:info-box-dismissed', dismissInfoBox);
+  $scope.$on('event:sign-in-cancelled', dismissSignInBox);
+  $scope.$on('event:sign-in-initiated', showSignInBox);
+  $scope.$on('event:sign-in-successful', dismissSignInBox);
 
   $scope.initialize = function () {
     // Initial visibilities
