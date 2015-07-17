@@ -1,5 +1,6 @@
 .filter-menu, .info-box, .log-dive-box, .site-box, .sign-in-box {
   position: absolute;
+  top: 32px;
   /* Hack positioning to tighten up vertical space */
   h6 {
     margin: 0;
@@ -8,27 +9,38 @@
   .mdl-cell {
     margin-top: 0;
   }
+  /* media queries for small screens */
+  @media screen and (max-width: 759px) {
+    top: 0;
+  }
 }
 .add-site {
-  /*
-  top: 64px;
-  right: 64px;
-  */
 }
 .info-box {
   right: 64px;
-  top: 64px;
+  @media screen and (max-width: 759px) {
+  }
 }
 .filter-menu {
-  top: 64px;
   left: 32px;
+  @media screen and (max-width: 759px) {
+    width: 100%;
+    left: 0px;
+    & > .mdl-card {
+      border-radius: 0;
+      width: 100%;
+      min-height: 0; /* no min-height */
+      display: inherit;
+      .filter-menu-body.collapsed {
+        display: none;
+      }
+    }
+  }
 }
 .log-dive-box {
   right: 64px;
-  top: 64px;
 }
 .sign-in-box {
-  top: 64px;
   left: 32px;
 }
 .site-box {

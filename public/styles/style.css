@@ -3,13 +3,21 @@
   right: 92px;
   position: absolute;
 }
+@media screen and (max-width: 759px) {
+  .add-site-button {
+    bottom: 16px;
+    right: 16px;
+  }
+}
 .filter-menu,
 .info-box,
 .log-dive-box,
 .site-box,
 .sign-in-box {
   position: absolute;
+  top: 32px;
   /* Hack positioning to tighten up vertical space */
+  /* media queries for small screens */
 }
 .filter-menu h6,
 .info-box h6,
@@ -26,26 +34,41 @@
 .sign-in-box .mdl-cell {
   margin-top: 0;
 }
-.add-site {
-  /*
-  top: 64px;
-  right: 64px;
-  */
+@media screen and (max-width: 759px) {
+  .filter-menu,
+  .info-box,
+  .log-dive-box,
+  .site-box,
+  .sign-in-box {
+    top: 0;
+  }
 }
 .info-box {
   right: 64px;
-  top: 64px;
 }
 .filter-menu {
-  top: 64px;
   left: 32px;
+}
+@media screen and (max-width: 759px) {
+  .filter-menu {
+    width: 100%;
+    left: 0px;
+  }
+  .filter-menu > .mdl-card {
+    border-radius: 0;
+    width: 100%;
+    min-height: 0;
+    /* no min-height */
+    display: inherit;
+  }
+  .filter-menu > .mdl-card .filter-menu-body.collapsed {
+    display: none;
+  }
 }
 .log-dive-box {
   right: 64px;
-  top: 64px;
 }
 .sign-in-box {
-  top: 64px;
   left: 32px;
 }
 .site-box {

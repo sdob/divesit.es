@@ -4,9 +4,11 @@
   </div>
 
   <div class="mdl-card__menu">
-    <button type="button" id="filter-menu-menu" class="mdl-button mdl-js-button mdl-button--icon">
+    <button type="button" id="filter-menu-menu" ng-click="toggleMenu()"
+      class="mdl-button mdl-js-button mdl-button--icon">
       <i class="material-icons" style="color: #fff">more_vert</i>
     </button>
+    <!--
     <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="filter-menu-menu">
       <li class="mdl-menu__item"
       ng-click="signIn()"
@@ -15,9 +17,10 @@
       ng-click="signOut()"
       ng-if="isAuthenticated()">Sign out</li>
     </ul>
+    -->
   </div>
 
-  <div class="mdl-grid">
+  <div class="mdl-grid filter-menu-body collapsed">
     <h6 class="mdl-cell mdl-cell--12-col">
       Site access
     </h6>
@@ -38,7 +41,7 @@
     </label>
     </p>
 
-    <h6>Maximum experience level required</h6>
+    <h6 class="mdl-cell mdl-cell--12-col">Maximum experience level required</h6>
     <p class="mdl-cell mdl-cell--8-col mdl-cell--middle">
     <input type="range" class="mdl-slider mdl-js-slider" min="0" max="2"
     ng-change="updateAndSendFilterPreferences()"
@@ -48,7 +51,7 @@
     {{ filterPreferences.maximumLevel | stringifyExperienceLevel }}
     </p>
 
-    <h6>Maximum depth</h6>
+    <h6 class="mdl-cell mdl-cell--12-col">Maximum depth</h6>
     <p class="mdl-cell mdl-cell--8-col mdl-cell--middle">
     <input type="range" class="mdl-slider mdl-js-slider"
     ng-change="updateAndSendFilterPreferences()"
@@ -57,7 +60,7 @@
     {{ filterPreferences.depthRange[1] }} m
     </p>
 
-    <h6>Minimum depth</h6>
+    <h6 class="mdl-cell mdl-cell--12-col">Minimum depth</h6>
     <p class="mdl-cell mdl-cell--8-col mdl-cell--middle">
     <input type="range" class="mdl-slider mdl-js-slider"
     ng-change="updateAndSendFilterPreferences()"
@@ -65,77 +68,23 @@
     <p class="mdl-cell mdl-cell--4-col mdl-cell--middle" style="text-align: right">
     {{ filterPreferences.depthRange[0] }} m
     </p>
+
+    <div class="mdl-cell mdl-cell--12-col mdl-cell--middle" style="text-align: center">
+      <button 
+        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+      ng-if="!isAuthenticated()"
+      ng-click="signIn()"
+      type="button">
+      Sign in
+      </button>
+      <button 
+        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+      ng-if="isAuthenticated()"
+      ng-click="signOut()"
+      type="button">
+      Sign out
+      </button>
+    </div>
+
   </div>
 </div>
-<!--
-  <ul>
-    <li id="filterEntryTypes">
-    <h3>Access</h3>
-    <ul>
-      <li>
-      <input type="checkbox" ng-model="filterPreferences.boatEntry"
-      ng-change="updateAndSendFilterPreferences()" >
-      <label>
-        <span>
-          Boat
-        </span>
-      </label>
-      </li>
-      <li>
-      <input type="checkbox" ng-model="filterPreferences.shoreEntry"
-      ng-change="updateAndSendFilterPreferences()">
-      <label>
-        <span>
-          Shore
-        </span>
-      </label>
-      </li>
-    </ul>
-    </li>
-    <li id="filterMinimumLevel">
-    <h3>
-      Experience Level:
-      <span>{{ filterPreferences.maximumLevel | stringifyExperienceLevel }}</span>
-    </h3>
-    <div>
-      <div
-        ui-slider="maximumLevelSlider"
-        id="maximumLevelSlider"
-        min="0" max="2"
-        step="1"
-        tick="1"
-        ng-change="updateAndSendFilterPreferences()"
-        ng-model="filterPreferences.maximumLevel">
-      </div>
-    </div>
-    </li>
-    <li>
-    <h3>Depth range</h3>
-    <div>
-      <div>{{ filterPreferences.depthRange[0]  }}</div>
-      <div>
-        <div ui-slider="depthRangeSlider"
-          id="depthRangeSlider"
-          min="0" max="100"
-          ng-change="updateAndSendFilterPreferences()"
-          ng-model="filterPreferences.depthRange">
-        </div>
-      </div>
-      <div>{{ filterPreferences.depthRange[1]  }}</div>
-    </div>
-    </li>
-  </ul>
-  <div ng-if="!isAuthenticated()">
-    <h3>Sign in to add new dive sites, log dives, and more.</h3>
-    <p>
-    <a href ng-click="summonSignInModal()">SIGN IN</a>
-    </p>
-  </div>
-  <a href ng-click="summonNewSiteModal()">
-    <span>
-      <i></i>
-      <i></i>
-    </span>
-  </a>
-</div>
--->

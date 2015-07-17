@@ -24,6 +24,12 @@ angular.module('divesitesApp')
     });
   }
 
+  function toggleMenu() {
+    var menuBody = angular.element('.filter-menu-body')[0];
+    console.info(menuBody);
+    $('.filter-menu-body').toggleClass('collapsed');
+  }
+
   var MAX_DEPTH = 100;
 
   // Store info about the main map here
@@ -87,6 +93,7 @@ angular.module('divesitesApp')
     $scope.filterPreferences = {};
     $scope.signIn = signIn;
     $scope.signOut = signOut;
+    $scope.toggleMenu = toggleMenu;
     $scope.retrieveFilterPreferences();
     //$scope.updateMdlSliders();
     // Wait for divesites to load before retrieving filter preferences
