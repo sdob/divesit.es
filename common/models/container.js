@@ -10,6 +10,10 @@ module.exports = function(Container) {
     next();
   });
 
+  Container.beforeRemote('**', function (ctx, instance, next) {
+    console.log('Container.' + ctx.methodString);
+  });
+
   Container.afterRemote('upload', function (ctx, instance, next) {
     // Retrieve the container and filename from the instance
     var container = instance.result.files.file[0].container;
@@ -39,4 +43,5 @@ module.exports = function(Container) {
       }
     });
   });
+
 };
