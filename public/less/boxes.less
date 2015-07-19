@@ -1,6 +1,11 @@
 .filter-menu, .info-box, .log-dive-box, .site-box, .sign-in-box {
   position: absolute;
   top: 32px;
+  /* media queries for small screens */
+  @media screen and (max-width: 759px) {
+    top: 0;
+  }
+  
   /* Hack positioning to tighten up vertical space */
   h6 {
     margin: 0;
@@ -9,20 +14,32 @@
   .mdl-cell {
     margin-top: 0;
   }
-  /* media queries for small screens */
-  @media screen and (max-width: 759px) {
-    top: 0;
+  .mdl-cell {
+    .mdl-textfield {
+      width: 100%; // override mdl-textfield fixed width in mdl CSS
+    }
   }
 }
 .add-site {
 }
 .info-box {
-  right: 64px;
+  max-height: ~"calc(100% - 64px)";
+  overflow-y: auto;
+  overflow-x: hidden;
+  .mdl-card__actions.mdl-card--border {
+    border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+  }
+  .site-description {
+    padding: 8px;
+    border-top: solid 1px rgba(0, 0, 0, 0.12);
+    border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+  }
   @media screen and (max-width: 759px) {
   }
 }
 .filter-menu {
   left: 32px;
+  /* Settings for small devices */
   @media screen and (max-width: 759px) {
     width: 100%;
     left: 0px;
@@ -37,7 +54,7 @@
     }
   }
 }
-.log-dive-box {
+.info-box {
   right: 64px;
 }
 .sign-in-box {
