@@ -1,0 +1,36 @@
+<table>
+  <tbody>
+  <tr style="text-align: center">
+    <td><a ng-click="incrementHours()" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">expand_less</i>
+    </a></td>
+    <td>&nbsp;</td>
+    <td><a ng-click="incrementMinutes()" class="mdl-button mdl-js-button mdl-button--icon">
+        <span class="material-icons">expand_less</span>
+    </a></td>
+    <td ng-show="showMeridian"></td>
+  </tr>
+  <tr>
+    <td class="form-group" ng-class="{'has-error': invalidHours}">
+      <input style="width:50px; text-align: center;" type="text" ng-model="hours" ng-change="updateHours()" class="mdl-textfield__input" ng-readonly="readonlyInput" maxlength="2">
+    </td>
+    <td>:</td>
+    <td class="form-group" ng-class="{'has-error': invalidMinutes}">
+      <input style="width:50px; text-align: center;" type="text" ng-model="minutes" ng-change="updateMinutes()" class="mdl-textfield__input" ng-readonly="readonlyInput" maxlength="2">
+    </td>
+    <td ng-show="showMeridian"><button type="button" class="btn btn-default text-center" ng-click="toggleMeridian()">{{meridian}}</button></td>
+  </tr>
+  <tr style="text-align: center">
+    <td><a ng-click="decrementHours()" class="mdl-button mdl-js-button mdl-button--icon">
+        <span class="material-icons">expand_more</span>
+    </a></td>
+    <td>&nbsp;</td>
+    <td><a ng-click="decrementMinutes()" class="mdl-button mdl-js-button mdl-button--icon">
+        <span class="material-icons">expand_more</span>
+    </a></td>
+    <td ng-show="showMeridian"></td>
+  </tr>
+  </tbody>
+</table>
+");
+}]);
