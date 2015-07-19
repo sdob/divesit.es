@@ -10,4 +10,10 @@ module.exports = function(DivesiteImage) {
       done();
     });
   });
+
+
+  DivesiteImage.beforeRemote('**', function (ctx, inst, next) {
+    console.log('DivesiteImage.' + ctx.methodString);
+    next();
+  });
 };
