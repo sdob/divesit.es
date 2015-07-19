@@ -3,6 +3,11 @@
 angular.module('divesitesApp')
 .controller('FilterMenuController', function ($auth, $location, $rootScope, $scope, localStorageService, filterPreferenceRetrievalService, LoopBackAuth, User) {
 
+  function collapseFilterMenu() {
+    console.info('collapza');
+    $rootScope.$broadcast('event:filter-menu-collapsed');
+  }
+
   function signIn() {
     $rootScope.$broadcast('event:sign-in-initiated');
   }
@@ -26,8 +31,8 @@ angular.module('divesitesApp')
 
   function toggleMenu() {
     var menuBody = angular.element('.filter-menu-body')[0];
-    console.info(menuBody);
-    $('.filter-menu-body').toggleClass('collapsed');
+    //console.info(menuBody);
+    $('.filter-menu').toggleClass('collapsed');
   }
 
   var MAX_DEPTH = 100;
@@ -100,6 +105,8 @@ angular.module('divesitesApp')
     $scope.$on('event:divesites-loaded', $scope.updateAndSendFilterPreferences);
     // Listen for changes to the main map's centre and store them
     $scope.$on('event:center_changed', $scope.eventHandlers.centerChanged);
+    // Listen for a request to collapse
+    $scope.$on('event:filter-menu-collapsed', $scope.toggleMenu);
   };
 
   $scope.initialize();

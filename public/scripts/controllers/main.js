@@ -1,6 +1,14 @@
 'use strict';
 
-angular.module('divesitesApp').controller('MainController', function ($scope, User) {
+angular.module('divesitesApp').controller('MainController', function ($rootScope, $scope, User) {
+
+  function collapseFilterMenu(event) {
+    console.info('mainCollapza');
+    console.info($(event.target).hasClass('filter-menu'));
+    if ($(event.target).hasClass('filter-menu')) {
+      $rootScope.$broadcast('event:filter-menu-collapsed');
+    }
+  }
 
   function dismissInfoBox(e) {
     $scope.visibilityControl.infoBox = false;
@@ -92,6 +100,7 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
       infoBox: false,
       logDiveBox: false
     };
+    $scope.collapseFilterMenu = collapseFilterMenu;
   }
   $scope.initialize();
 });
