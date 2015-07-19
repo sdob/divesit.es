@@ -12,6 +12,7 @@ module.exports = function(Container) {
 
   Container.beforeRemote('**', function (ctx, instance, next) {
     console.log('Container.' + ctx.methodString);
+    next();
   });
 
   Container.afterRemote('upload', function (ctx, instance, next) {
