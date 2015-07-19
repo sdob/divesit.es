@@ -11,5 +11,6 @@
     "provider": "filesystem"
   },
   "s3": {
+    "name": "s3"
   }
 }

@@ -8,7 +8,7 @@ module.exports = {
   "s3": {
     "name": "s3",
     "connector": "loopback-component-storage",
-    "root": "/tmp/test-storage",
+    "root": "server/uploads",
     "provider": "filesystem"
   }
   /*
