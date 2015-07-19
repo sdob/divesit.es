@@ -80,6 +80,7 @@ angular.module('divesitesApp').controller('MainController', function ($scope, Us
   $scope.$on('event:sign-in-successful', dismissSignInBox);
   $scope.$on('event:log-dive-box-summoned', showLogDiveBox);
   $scope.$on('event:logging-cancelled', dismissLogDiveBox);
+  $scope.$on('event:dive-created', dismissLogDiveBox);
 
   $scope.initialize = function () {
     // Initial visibilities
