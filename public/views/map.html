@@ -21,11 +21,11 @@
 
   </div>
 
-  <sign-in-box ng-if="visibilityControl.signInBox" class="sign-in-box"></sign-in-box>o
+  <sign-in-box ng-if="visibilityControl.signInBox" class="sign-in-box"></sign-in-box>
   <filter-menu ng-show="visibilityControl.filterMenu" class="filter-menu"></filter-menu>
-  <info-box ng-show="visibilityControl.infoBox" class="info-box"></info-box>
+  <info-box ng-show="visibilityControl.infoBox" class="info-box mdl-card mdl-shadow--2dp"></info-box>
   <edit-box ng-if="isAuthenticated() && visibilityControl.editBox" class="site-box edit-site"></edit-box>
   <add-site-button ng-show="isAuthenticated() && visibilityControl.addSiteButton" class="add-site-button"></add-site-button>
   <add-site-box ng-if="isAuthenticated() && visibilityControl.addSiteBox" class="site-box add-site"></add-site-box>
-  <log-dive-box ng-if="isAuthenticated() && visibilityControl.logDiveBox" class="log-dive-box"></log-dive-box>
+  <log-dive-box ng-if="isAuthenticated() && visibilityControl.logDiveBox" class="log-dive-box site-box"></log-dive-box>
 </div>

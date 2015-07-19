@@ -1,4 +1,4 @@
-<div class="mdl-card mdl-shadow--2dp">
+<div>
   <div class="mdl-card__title background site-has-image" ng-if="site.background" style="background: {{site.background}}">
   </div>
   <div class="mdl-card__title background site-no-image" ng-if="!site.background">
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div class="mdl-card__supporting-text">
+  <div class="mdl-card__supporting-text mdl-card--border">
     <div class="mdl-grid">
       <div class="mdl-cell--6-col">
         Level: {{ site.minimumLevel | stringifyExperienceLevel }}
@@ -40,7 +40,29 @@
         Depth: {{ site.depth }} m
       </div>
     </div>
-    <p style="border-top: 1px solid rgba(0, 0, 0, .1)">{{ site.description }}</p>
+    <div class="site-description" ng-if="site.description">
+      <h6>Description</h6>
+      <p>{{ site.description }}</p>
+      <div style="text-align: right" ng-if="site.user">
+        – {{ site.user.displayName }}
+      </div>
+    </div>
+    <div class="site-dives" ng-if="site.dives">
+      <h6>Dives</h6>
+      <div>
+        Divesit.es users have dived here {{ site.dives.length }} times.
+      </div>
+      <div class="mdl-grid" ng-repeat="dive in site.dives" style="border-top: solid 1px rgba(0, 0, 0, 0.12)">
+        <div class="mdl-cell mdl-cell--12-col"> {{ dive.user.displayName }} </div>
+        <div class="mdl-cell mdl-cell--6-col"> {{ dive.date | date }} </div>
+        <div class="mdl-cell mdl-cell--6-col"> {{ dive.date | date:'HH:mm' }} </div>
+        <div class="mdl-cell mdl-cell--6-col"> {{ dive.maxDepth }} m </div>
+        <div class="mdl-cell mdl-cell--6-col"> {{ dive.duration }} min. </div>
+        <div class="mdl-cell mdl-cell--12-col" ng-if="dive.comment">
+          {{ dive.comment }}
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>

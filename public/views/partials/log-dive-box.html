@@ -1,51 +1,115 @@
 <div class="mdl-card mdl-shadow--2dp">
-  <form name="logDiveForm" novalidate ng-submit="save()">
+  <form name="logDiveForm" novalidate ng-submit="logDiveForm.$valid && save()">
 
-    <div class="mdl-card__title">
-      <h2 class="mdl-card__title-text">
-        Log a dive at {{ site.name }}
-      </h2>
+    <div class="mdl-card__title"><h2 class="mdl-card__title-text">Log a dive at {{ site.name }}</h2></div>
+
+    <div class="mdl-card__menu">
+      <button type="button" ng-click="cancel($event)" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">close</i>
+      </button>
     </div>
+
+
     <div class="mdl-grid">
-    </div>
 
-    <div class="mdl-card__supporting-text">
+
+      <div class="mdl-cell mdl-cell--6-col">
+        <h6>Date</h6>
+        <div id="logDive-datepicker-container">
+          <input type="text" class="mdl-textfield__input" datepicker-popup="{{datepicker.format}}"
+          ng-model="dive.date" is-open="datepicker.opened"
+          datepicker-options="datepicker.options" max-date="datepicker.maxDate"
+          show-weeks="false" close-on-date-selection="false"
+          ng-change="onDateChange($event)" ng-focus="datepicker.onInputFocus($event)" >
+        </div>
+
         <h6>Time in</h6>
-      <div class="mdl-grid" id="logDive-timepicker-container">
-        <timepicker ng-model="dive.time" show-meridian="false">
+        <timepicker ng-model="dive.time" ng-required="true" show-meridian="false">
         </timepicker>
-      </div>
+        <h6>Duration (min.)</h6>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input
+            ng-model="dive.duration"
+            class="mdl-textfield__input"
+            type="text"
+            name="duration"
+            pattern="[0-9]*"
+            id="logDive-duration">
+          </div>
+          <div class="mdl-textfield__error"
+            ng-style="{'visibility': logDiveForm.duration.$error && (logDiveForm.$submitted || logDiveForm.duration.$dirty) ? 'visible' : 'hidden'}"
+            >
+            <div ng-show="logDiveForm.duration.$error.required">
+              Required.
+            </div>
+          </div>
+        </div>
 
-      <h6>Duration (min.)</h6>
-      <div class="mdl-textfield mdl-js-textfield">
-        <input ng-model="dive.duration"
-        class="mdl-textfield__input"
-        type="text"
-        id="logDive-duration">
-      </div>
+        <h6>Max depth</h6>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input
+            depth
+            ng-model="dive.maxDepth"
+            ng-required="true"
+            class="mdl-textfield__input"
+            name="maxDepth"
+            type="text" id="logDive-maxDepth" pattern="[0-9]{1,2}(\.[0-9]+)?" />
 
-      <h6>Maximum depth (m)</h6>
-      <div class="mdl-textfield mdl-js-textfield">
-        <input depth ng-model="site.maxDepth" class="mdl-textfield__input"
-        name="maxDepth"
-        type="text" id="logDive-maxDepth" pattern="[0-9]{1,2}(\.[0-9]+)?" />
+            <div class="mdl-textfield__error"
+              ng-style="{'visibility': logDiveForm.maxDepth.$error && (logDiveForm.$submitted || logDiveForm.maxDepth.$dirty) ? 'visible' : 'hidden'}"
+              >
+              <div ng-show="logDiveForm.maxDepth.$error.required">
+                Required.
+              </div>
+              <div ng-show="logDiveForm.maxDepth.$error.depth">
+                Must be between 0 and 100.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- end of LH column on larger devices -->
+
+
+      <div class="mdl-cell mdl-cell--6-col">
+        <h6>Average depth (optional)</h6>
+        <input depth ng-model="dive.averageDepth" class="mdl-textfield__input"
+        name="averageDepth"
+        type="text" id="logDive-averageDepth" pattern="[0-9]{1,2}(\.[0-9]+)?" />
         <div class="mdl-textfield__error"
-          ng-style="{'visibility': logDiveForm.maxDepth.$error.depth && (logDiveForm.$submitted || logDiveForm.depth.$dirty) ? 'visible' : 'hidden'}"
+          ng-style="{'visibility': logDiveForm.averageDepth.$error.depth && (logDiveForm.$submitted || logDiveForm.averageDepth.$dirty) ? 'visible' : 'hidden'}"
           >
-          Depth must be a number between 0 and 100 metres.
+          <div ng-show="logDiveForm.averageDepth.$error.depth">
+            Must be between 0 and 100.
+          </div>
+        </div>
+      </div> <!-- end of RH column on larger devices -->
+
+      <!-- Comment on bottom -->
+      <div class="mdl-cell mdl-cell--12-col">
+        <h6>Comment (optional)</h6>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield" style="width: 100%";>
+          <textarea class="mdl-textfield__input" id="addSite-description" ng-model="dive.comment" rows="3"></textarea>
         </div>
       </div>
 
-    </div>
-  </div>
 
-  <div class="mdl-card__actions">
-    <button type="button" ng-click="cancel()" class="mdl-button mdl-js-button">
-      Cancel
-    </button>
-    <button ng-click="cancel()" class="mdl-button mdl-js-button">
-      Save
-    </button>
-  </div>
-</form>
+      <!-- card actions -->
+      <div class="mdl-card__actions" style="text-align: right">
+        <button type="button" ng-click="cancel()" class="mdl-button mdl-js-button">
+          Cancel
+        </button>
+        <input type="submit" class="mdl-button mdl-js-button" value="Save" ng-click="logga()">
+        <!--
+        <button ng-click="save()" class="mdl-button mdl-js-button">
+          Save
+        </button>
+        -->
+      </div>
+    </div>
+
+  </form>
 </div>
