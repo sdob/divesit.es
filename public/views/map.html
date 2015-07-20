@@ -1,31 +1,25 @@
+
 <main class="mdl-layout__content">
 
-  <div ng-controller="MapController">
-    <ui-gmap-google-map
-    id="gmap-mapper"
-    control="mapControl"
-    events="map.events"
-    options="map.options"
-    center="map.center"
-    zoom="map.zoom">
-    <ui-gmap-markers
-    control="markerControl"
-    models="map.markers"
-    events="map.markerEvents"
-    options="'options'"
-    coords="'loc'"
-    icon="'icon'"
-    >
-    </ui-gmap-markers>
-    </ui-gmap-google-map>
+<div ng-controller="MapController">
+  <ui-gmap-google-map
+  id="gmap-mapper"
+  control="mapControl"
+  events="map.events"
+  options="map.options"
+  center="map.center"
+  zoom="map.zoom">
+  <ui-gmap-markers
+  control="markerControl"
+  models="map.markers"
+  events="map.markerEvents"
+  options="'options'"
+  coords="'loc'"
+  icon="'icon'"
+  >
+  </ui-gmap-markers>
+  </ui-gmap-google-map>
 
-  </div>
-
-  <sign-in-box ng-if="visibilityControl.signInBox" class="sign-in-box"></sign-in-box>
-  <filter-menu ng-show="visibilityControl.filterMenu" class="filter-menu collapsed" ng-click="collapseFilterMenu($event)"></filter-menu>
-  <info-box ng-show="visibilityControl.infoBox" class="info-box mdl-card mdl-shadow--2dp"></info-box>
-  <edit-box ng-if="isAuthenticated() && visibilityControl.editBox" class="site-box edit-site"></edit-box>
-  <add-site-button ng-show="isAuthenticated() && visibilityControl.addSiteButton" class="add-site-button"></add-site-button>
-  <add-site-box ng-if="isAuthenticated() && visibilityControl.addSiteBox" class="site-box add-site"></add-site-box>
-  <log-dive-box ng-if="isAuthenticated() && visibilityControl.logDiveBox" class="log-dive-box site-box"></log-dive-box>
 </div>
+
+</main>

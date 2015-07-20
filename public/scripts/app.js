@@ -14,11 +14,19 @@
   ])
   .config(function ($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
 
-    $urlRouterProvider.otherwise('/map');
+    $urlRouterProvider.otherwise('/');
     $stateProvider
-    .state('map', {
-      url: '/map',
-      templateUrl: 'views/map.html'
+    .state('main', {
+      url: '/',
+      views: {
+        drawer: {
+          templateUrl: 'views/filter-menu.html',
+          controller: 'FilterMenuController'
+        },
+        main: {
+          templateUrl: 'views/map.html'
+        }
+      }
     })
     .state('addSite', {
       url: '/add-site',
