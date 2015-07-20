@@ -112,4 +112,38 @@ angular.module('divesitesApp').controller('EditBoxController', function EditBoxC
     $scope.siteHasImage = !!$scope.site.imgSrc;
   };
   $scope.initialize();
+})
+.directive('editBox', function () {
+  return {
+    templateUrl: 'views/partials/site-box.html',
+    restrict: 'E',
+    controller: 'EditBoxController',
+    link: function (scope, elem, attrs, ctrl) {
+      console.log("Cloning EditBoxController");
+      angular.element(elem).ready(function () {
+        // Hacky way to set the initial 'checked' value on the checkboxes before
+        // MDL has its wicked way with them
+        $('#boat-entry').prop('checked', scope.site.boatEntry);
+        $('#shore-entry').prop('checked', scope.site.shoreEntry);
+        // Do the same with the minimumLevel radio button
+        console.log($('#site-experience-' + scope.site.minimumLevel));
+        $('#site-experience-' + scope.site.minimumLevel).prop('checked', true);
+        // Now let MDL get funky
+        componentHandler.upgradeAllRegistered();
+      });
+    }
+  }
+})
+.directive('filterMenu', function () {
+  return {
+    templateUrl: 'views/partials/filter-menu.html',
+    restrict: 'E',
+    controller: 'FilterMenuController',
+    link: function (scope, elem, attrs, ctrl) {
+      angular.element(elem).ready(function () {
+        // Let MDL get funky
+        //componentHandler.upgradeAllRegistered();
+      });
+    }
+  }
 });
