@@ -59,11 +59,12 @@ angular.module('divesitesApp').
   }
 
   function summonEditBox() {
-    $rootScope.$broadcast('event:edit-box-summoned', $scope.site);
+    console.info('InfoBoxController.summonEditBox()');
+    //$rootScope.$broadcast('event:edit-box-summoned', $scope.site);
   }
 
   function summonLogDiveBox() {
-    console.info('InfoBoxController: summoning the log dive box');
+    console.info('InfoBoxController.summonLogDiveBox()');
     $rootScope.$broadcast('event:log-dive-box-summoned');
   }
 
@@ -83,15 +84,8 @@ angular.module('divesitesApp').
   };
   $scope.isAuthenticated = isAuthenticated
   $scope.isOwner = isOwner;
-  //$scope.site = {};
   $scope.summonEditBox = summonEditBox;
   $scope.summonLogDiveBox = summonLogDiveBox;
-
-  // Listen for events
-  //$scope.$on('event:site-loaded', $scope.events.siteLoaded);
-  //$scope.$on('event:site-deleted', $scope.events.siteDeleted);
-  //$scope.$on('event:marker-clicked', $scope.events.markerClicked);
-  //$scope.$on('event:dive-created', $scope.events.diveCreated);
 
 })
 .directive('infoBox', function () {
@@ -100,10 +94,8 @@ angular.module('divesitesApp').
     restrict: 'E',
     controller: 'InfoBoxController',
     link: function (scope, elem, attrs, ctrl) {
-      console.info('Cloning infoBox directive');
-      console.info(scope);
       angular.element(elem).ready(function () {
-        // Let MDL get funky
+        // Upgrade MDL components
         componentHandler.upgradeAllRegistered();
       });
     }
