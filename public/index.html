@@ -44,7 +44,7 @@
 <script src="scripts/components/navTop.js"></script>
 <script src="scripts/components/signInBox.js"></script>
 <!-- Controllers -->
-<script src="scripts/controllers/main.js"></script>
+<!-- <script src="scripts/controllers/main.js"></script> -->
 <script src="scripts/controllers/map.js"></script>
 <!-- Directives -->
 <script src="scripts/directives/ng-thumb.js"></script>
@@ -59,11 +59,29 @@
 <!-- <script src="templates.js"></script> -->
 </head>
 
-<body ng-app="divesitesApp" ng-controller="MainController">
+<body ng-app="divesitesApp">
 
-<div ui-view></div>
-<a ui-sref="state1"></a>
-<a ui-sref="state2"></a>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title ds-branding">
+        Divesit<span class="ds-branding--dot">.</span>es
+      </span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <!-- <a class="mdl-navigation__link" href>Link</a>
+        <a class="mdl-navigation__link" href>Link</a>
+        -->
+        <a class="mdl-navigation__link" href>Sign in</a>
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer" ui-view="drawer"></div>
+
+  <div ui-view="main"></div>
+  <a ui-sref="state1"></a>
+  <a ui-sref="state2"></a>
+</div>
 
 </body>
 </html>
