@@ -16,10 +16,3 @@ describe "InfoBoxController", ->
       $rootScope: $rootScope
       localStorageService: localStorageService
     }
-
-  describe "$scope.initialize()", ->
-    beforeEach ->
-      spyOn $scope, '$on'
-      $scope.initialize()
-    it "listens for 'event:site-loaded' events", ->
-      expect($scope.$on).toHaveBeenCalledWith 'event:site-loaded', $scope.events.siteLoaded

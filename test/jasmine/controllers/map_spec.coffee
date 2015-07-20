@@ -48,18 +48,6 @@ describe "MapController", ->
       localStorageService: localStorageService
     }
     uiGmapIsReady = _uiGmapIsReady_
-  describe "$scope.initialize()", ->
-    beforeEach ->
-      spyOn uiGmapIsReady, 'promise'
-        .and.callThrough()
-      spyOn $scope, '$on'
-      $scope.initialize()
-    it "calls uiGmapIsReady.promise)", ->
-      expect(uiGmapIsReady.promise).toHaveBeenCalled()
-    it "registers an event listener for 'event:filter-preferences'", ->
-      expect($scope.$on).toHaveBeenCalledWith 'event:filter-preferences', $scope.events.filterPreferences
-    it "registers an event listener for 'event:map-is-ready'", ->
-      expect($scope.$on).toHaveBeenCalledWith 'event:map-is-ready', $scope.events.mapIsReady
 
   describe "$scope.filterPreferences", ->
     beforeEach ->
