@@ -163,6 +163,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   /////////////////////////////////////////////////////////////////////////////
 
   $scope.initialize = function initializeMapController() {
+    console.info('MapController.initialize()');
     $scope.map = {
       events: {
         idle: mapIdleEventHandler,
