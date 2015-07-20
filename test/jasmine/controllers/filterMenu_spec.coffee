@@ -17,16 +17,6 @@ describe "FilterMenuController", ->
       localStorageService: localStorageService
     }
 
-  describe "$scope.initialize", ->
-    beforeEach ->
-      spyOn $scope, '$on'
-      spyOn $scope, 'retrieveFilterPreferences'
-      $scope.initialize()
-    it "retrieves filter preferences from local storage", ->
-      expect($scope.retrieveFilterPreferences).toHaveBeenCalled()
-    it "listens for 'event:divesites-loaded' events", ->
-      expect($scope.$on).toHaveBeenCalledWith 'event:divesites-loaded', $scope.updateAndSendFilterPreferences
-
   describe "$scope.storeFilterPreferences", ->
     $scope.filterPreferences = {}
     beforeEach ->
