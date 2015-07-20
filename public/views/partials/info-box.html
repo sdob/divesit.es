@@ -52,13 +52,18 @@
       <div>
         Divesit.es users have dived here {{ site.dives.length }} times.
       </div>
-      <div class="mdl-grid" ng-repeat="dive in site.dives" style="border-top: solid 1px rgba(0, 0, 0, 0.12)">
-        <div class="mdl-cell mdl-cell--12-col"> {{ dive.user.displayName }} </div>
-        <div class="mdl-cell mdl-cell--6-col"> {{ dive.date | date }} </div>
-        <div class="mdl-cell mdl-cell--6-col"> {{ dive.date | date:'HH:mm' }} </div>
-        <div class="mdl-cell mdl-cell--6-col"> {{ dive.maxDepth }} m </div>
-        <div class="mdl-cell mdl-cell--6-col"> {{ dive.duration }} min. </div>
-        <div class="mdl-cell mdl-cell--12-col" ng-if="dive.comment">
+      <div class="dive-grid" ng-repeat="dive in site.dives" style="border-top: solid 1px rgba(0, 0, 0, 0.12)">
+        <div class="clearfix">
+          <div class="dive-grid-image">
+          </div>
+          <div class="dive-grid-details">
+            <div class="dive-grid-user"> {{ dive.user.displayName }} </div>
+            <div class="dive-grid-date"> {{ dive.date | date }} at {{ dive.date | date:'HH:mm' }} </div>
+            <span class="dive-grid-depth"><i class="fa fa-long-arrow-down"></i> {{ dive.maxDepth }} m </span>
+            <span class="dive-grid-duration"><i class="fa fa-clock-o"></i> {{ dive.duration }} min. </span>
+          </div>
+        </div>
+        <div class="dive-grid-comment" ng-show="{{dive.comment}}">
           {{ dive.comment }}
         </div>
       </div>
