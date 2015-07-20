@@ -23,6 +23,7 @@ module.exports = function(config) {
       'public/libs/angular-resource/angular-resource.js',
       {pattern: 'public/libs/angular-google-maps/dist/*.js', included: true},
       'public/libs/angular-local-storage/dist/angular-local-storage.js',
+      'public/libs/angular-ui-router/release/angular-ui-router.js',
       'public/libs/angular-ui-slider/src/slider.js',
       'public/libs/underscore/underscore.js',
       'public/libs/angular-bootstrap/ui-bootstrap-tpls.js',

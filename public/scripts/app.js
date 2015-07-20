@@ -7,11 +7,23 @@
     'LocalStorageModule',
     'satellizer',
     'ui.bootstrap',
+    'ui.router',
     'ui.slider',
     'uiGmapgoogle-maps',
     'angularFileUpload'
   ])
-  .config(function ($routeProvider, uiGmapGoogleMapApiProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
+
+    $urlRouterProvider.otherwise('/map');
+    $stateProvider
+    .state('map', {
+      url: '/map',
+      templateUrl: 'views/map.html'
+    })
+    .state('addSite', {
+      url: '/add-site',
+      templateUrl: 'views/partials/add-site.html'
+    });
 
     uiGmapGoogleMapApiProvider.configure({
       //    key: 'your api key',
@@ -19,14 +31,6 @@
       libraries: 'weather,geometry,visualization'
     });
 
-    $routeProvider
-    .when('/', {
-      templateUrl: 'views/map.html'
-      //controller: 'MapController'
-    })
-    .otherwise({
-      redirectTo: '/'
-    });
   })
   .constant('cfg', {
     S3_BUCKET_URL: '/api/Containers/sdob-bukkit/upload'
