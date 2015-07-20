@@ -28,6 +28,17 @@
         }
       }
     })
+    .state('add', {
+      url: '/add',
+      views: {
+        drawer: {
+          templateUrl: 'views/add-menu.html'
+        },
+        main: {
+          templateUrl: 'views/add-site.html'
+        }
+      }
+    })
     .state('addSite', {
       url: '/add-site',
       templateUrl: 'views/partials/add-site.html'

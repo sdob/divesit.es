@@ -9,9 +9,15 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   var MIN_ZOOM = 3;
   var MAX_ZOOM = 14;
 
+  var rendered = false;
+
   /////////////////////////////////////////////////////////////////////////////
   // Function defs
   /////////////////////////////////////////////////////////////////////////////
+
+  function dismissInfoBox() {
+    $scope.infoBoxIsVisible = false;
+  }
 
   function mapIdleEventHandler(map) {
     // On idle, put recent map view settings into local storage
@@ -21,15 +27,16 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
       localStorageService.set('map.center.longitude', map.center.lng());
     });
     //if (!$scope.map.rendered && google !== undefined && google.maps.event.trigger) {
-      $scope.$apply();
-      $scope.map.rendered = true;
-      // FIXME: Find somewhere better to put this
-      google.maps.event.trigger(map, 'resize');
-      $scope.map.center = {
-        latitude: localStorageService.get('map.center.latitude') || 53.5,
-        longitude: localStorageService.get('map.center.longitude') || -8
-      };
-    //}
+    $scope.$apply();
+    if (!rendered) {
+    rendered = true;
+    // FIXME: Find somewhere better to put this
+    google.maps.event.trigger(map, 'resize');
+    $scope.map.center = {
+      latitude: localStorageService.get('map.center.latitude') || 53.5,
+      longitude: localStorageService.get('map.center.longitude') || -8
+    };
+    }
   }
 
   function mapZoomChangedEventHandler(map) {
@@ -45,18 +52,22 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   }
 
   function markerClickEventHandler(marker, event, model, args) {
-    $rootScope.$broadcast("event:marker-clicked");
+    console.info('MapController: markerClickEventHandler()');
+    //$rootScope.$broadcast("event:marker-clicked");
     var id = model.id;
     Divesite.findById(
       {id: id},
-      function (site) {
+      function findSuccess(site) {
         site.imgSrc = undefined;
         if (site.images && site.images[0]) {
           site.imgSrc = site.images[0].url;
         }
-        $rootScope.$broadcast("event:site-loaded", site);
+        // Put the site data into scope
+        $scope.site = site;
+        $scope.infoBoxIsVisible = true;
+        //$rootScope.$broadcast("event:site-loaded", site);
       },
-      function (error) {
+      function findError(error) {
       });
   }
 
@@ -162,55 +173,54 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   // Controller initialization
   /////////////////////////////////////////////////////////////////////////////
 
-  $scope.initialize = function initializeMapController() {
-    console.info('MapController.initialize()');
-    $scope.map = {
-      events: {
-        idle: mapIdleEventHandler,
-        zoom_changed: mapZoomChangedEventHandler,
-        center_changed: centerChangedEventHandler,
-      },
-      center: {
-        latitude: localStorageService.get('map.center.latitude') || 53.5,
-        longitude: localStorageService.get('map.center.longitude') || -8
-      },
-      zoom: localStorageService.get('map.zoom') || 7,
-      markers: [],
-      options: {
-        scrollwheel: true,
-        disableDefaultUI: true,
-        mapTypeId: 'roadmap'
-      },
-      markerEvents: {
-        click: markerClickEventHandler // fires on marker click
-      },
-      rendered: false
-    };
-    $scope.mapControl = {};
-    $scope.markerControl = {};
+  console.info('MapController.initialize()');
+  $scope.dismissInfoBox = dismissInfoBox;
+  $scope.infoBoxIsVisible = false;
+  $scope.map = {
+    events: {
+      idle: mapIdleEventHandler,
+      zoom_changed: mapZoomChangedEventHandler,
+      center_changed: centerChangedEventHandler,
+    },
+    center: {
+      latitude: localStorageService.get('map.center.latitude') || 53.5,
+      longitude: localStorageService.get('map.center.longitude') || -8
+    },
+    zoom: localStorageService.get('map.zoom') || 7,
+    markers: [],
+    options: {
+      scrollwheel: true,
+      disableDefaultUI: true,
+      mapTypeId: 'roadmap'
+    },
+    markerEvents: {
+      click: markerClickEventHandler // fires on marker click
+    },
+    rendered: false
+  };
+  $scope.mapControl = {};
+  $scope.markerControl = {};
 
-    $scope.events = {
-      filterPreferences: $scope.filterPreferences, // fires on 'event:filter-preferences'
-      siteCreated: $scope.onNewSiteCreated,
-      mapIsReady: $scope.retrieveDivesites, // fires on 'event:map-is-ready'
-      siteEdited: $scope.retrieveDivesites,
-      siteDeleted: $scope.retrieveDivesites
-    };
-
-
-    // Listen for filter events
-    $scope.$on('event:filter-preferences', $scope.events.filterPreferences);
-    // Listen for map-ready events (to load divesites)
-    $scope.$on('event:map-is-ready', $scope.events.mapIsReady);
-    // Listen for new-site-created events (coming from NewSiteModalController)
-    $scope.$on('event:new-site-created', $scope.events.siteCreated);
-    // Listen for edit events
-    $scope.$on('event:site-edited', $scope.events.siteEdited);
-    // Listen for deletion events
-    $scope.$on('event:site-deleted', $scope.events.siteDeleted);
-
-    uiGmapIsReady.promise().then($scope.uiGmapIsReady);
+  $scope.events = {
+    filterPreferences: $scope.filterPreferences, // fires on 'event:filter-preferences'
+    siteCreated: $scope.onNewSiteCreated,
+    mapIsReady: $scope.retrieveDivesites, // fires on 'event:map-is-ready'
+    siteEdited: $scope.retrieveDivesites,
+    siteDeleted: $scope.retrieveDivesites
   };
 
-  $scope.initialize();
+
+  // Listen for filter events
+  $scope.$on('event:filter-preferences', $scope.events.filterPreferences);
+  // Listen for map-ready events (to load divesites)
+  $scope.$on('event:map-is-ready', $scope.events.mapIsReady);
+  // Listen for new-site-created events (coming from NewSiteModalController)
+  $scope.$on('event:new-site-created', $scope.events.siteCreated);
+  // Listen for edit events
+  $scope.$on('event:site-edited', $scope.events.siteEdited);
+  // Listen for deletion events
+  $scope.$on('event:site-deleted', $scope.events.siteDeleted);
+
+  uiGmapIsReady.promise().then($scope.uiGmapIsReady);
+
 });

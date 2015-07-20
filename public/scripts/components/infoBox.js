@@ -3,9 +3,11 @@
 angular.module('divesitesApp').
   controller('InfoBoxController', function InfoBoxController($scope, $rootScope, LoopBackAuth, User) {
 
+
   function dismiss() {
     // Ask MainController to hide the infobox
-    $rootScope.$broadcast('event:info-box-dismissed');
+    //$rootScope.$broadcast('event:info-box-dismissed');
+    $scope.$parent.dismissInfoBox();
   }
 
   function isAuthenticated() {
@@ -41,7 +43,7 @@ angular.module('divesitesApp').
   function onSiteLoaded(event, data) {
     // Only handle the infobox's responsiblities here. Visibility
     // is controlled by MainController.
-    $scope.site = data;
+    //$scope.site = data;
     console.info("InfoBoxController.onSiteLoaded");
     console.info($scope.site);
     if ($scope.site.dives !== undefined) {
@@ -65,32 +67,31 @@ angular.module('divesitesApp').
     $rootScope.$broadcast('event:log-dive-box-summoned');
   }
 
+  /////////////////////////////////////////////////////////////////////////////
+  // Initialization
+  /////////////////////////////////////////////////////////////////////////////
 
-  $scope.initialize = function initializeInfoBox() {
-    $scope.events = {
-      // Handle a newly-logged dive
-      diveCreated: onDiveCreated,
-      markerClicked: onMarkerClicked,
-      siteDeleted: onSiteDeleted,
-      siteLoaded: onSiteLoaded
-    };
-    $scope.infoBox = {
-      dismiss: dismiss
-    };
-    $scope.isAuthenticated = isAuthenticated
-    $scope.isOwner = isOwner;
-    $scope.site = {};
-    $scope.summonEditBox = summonEditBox;
-    $scope.summonLogDiveBox = summonLogDiveBox;
+  console.info('InfoBoxController:initializing');
 
-    // Listen for events
-    $scope.$on('event:site-loaded', $scope.events.siteLoaded);
-    $scope.$on('event:site-deleted', $scope.events.siteDeleted);
-    $scope.$on('event:marker-clicked', $scope.events.markerClicked);
-    $scope.$on('event:dive-created', $scope.events.diveCreated);
+  $scope.dismiss = dismiss;
+  $scope.events = {
+    // Handle a newly-logged dive
+    diveCreated: onDiveCreated,
+    markerClicked: onMarkerClicked,
+    siteDeleted: onSiteDeleted,
+    siteLoaded: onSiteLoaded
   };
+  $scope.isAuthenticated = isAuthenticated
+  $scope.isOwner = isOwner;
+  //$scope.site = {};
+  $scope.summonEditBox = summonEditBox;
+  $scope.summonLogDiveBox = summonLogDiveBox;
 
-  $scope.initialize();
+  // Listen for events
+  //$scope.$on('event:site-loaded', $scope.events.siteLoaded);
+  //$scope.$on('event:site-deleted', $scope.events.siteDeleted);
+  //$scope.$on('event:marker-clicked', $scope.events.markerClicked);
+  //$scope.$on('event:dive-created', $scope.events.diveCreated);
 
 })
 .directive('infoBox', function () {
@@ -99,6 +100,8 @@ angular.module('divesitesApp').
     restrict: 'E',
     controller: 'InfoBoxController',
     link: function (scope, elem, attrs, ctrl) {
+      console.info('Cloning infoBox directive');
+      console.info(scope);
       angular.element(elem).ready(function () {
         // Let MDL get funky
         componentHandler.upgradeAllRegistered();
