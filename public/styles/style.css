@@ -1,187 +1,8 @@
-.add-site-button {
-  bottom: 64px;
-  right: 92px;
-  position: absolute;
-}
-@media screen and (max-width: 759px) {
-  .add-site-button {
-    bottom: 16px;
-    right: 16px;
-  }
-}
-.filter-menu,
-.info-box,
-.log-dive-box,
-.site-box,
-.sign-in-box {
-  position: absolute;
-  top: 32px;
-  /* media queries for small screens */
-  /* Hack positioning to tighten up vertical space */
-}
-@media screen and (max-width: 759px) {
-  .filter-menu,
-  .info-box,
-  .log-dive-box,
-  .site-box,
-  .sign-in-box {
-    top: 0;
-  }
-}
-.filter-menu h6,
-.info-box h6,
-.log-dive-box h6,
-.site-box h6,
-.sign-in-box h6 {
-  margin: 0;
-  margin-top: 24px;
-}
-.filter-menu .mdl-cell,
-.info-box .mdl-cell,
-.log-dive-box .mdl-cell,
-.site-box .mdl-cell,
-.sign-in-box .mdl-cell {
-  margin-top: 0;
-}
-.filter-menu .mdl-cell .mdl-textfield,
-.info-box .mdl-cell .mdl-textfield,
-.log-dive-box .mdl-cell .mdl-textfield,
-.site-box .mdl-cell .mdl-textfield,
-.sign-in-box .mdl-cell .mdl-textfield {
-  width: 100%;
-}
-.info-box {
-  max-height: calc(100% - 64px);
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-.info-box .mdl-card__actions.mdl-card--border {
-  border-bottom: solid 1px rgba(0, 0, 0, 0.12);
-}
-.info-box .site-description {
-  padding: 8px;
-  border-top: solid 1px rgba(0, 0, 0, 0.12);
-  border-bottom: solid 1px rgba(0, 0, 0, 0.12);
-}
-@media screen and (max-width: 759px) {
-  .info-box {
-    max-height: 100%;
-    width: 100%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-}
-.filter-menu {
-  left: 32px;
-  /* Settings for small devices */
-}
-@media screen and (max-width: 759px) {
-  .filter-menu {
-    width: 100%;
-    height: 100%;
-    left: 0px;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  .filter-menu.collapsed {
-    height: auto;
-  }
-  .filter-menu.collapsed .filter-menu-body {
-    display: none;
-  }
-  .filter-menu > .mdl-card {
-    border-radius: 0;
-    width: 100%;
-    min-height: 0;
-    /* no min-height */
-    display: inherit;
-  }
-  .filter-menu > .mdl-card .filter-menu-body.collapsed {
-    display: none;
-  }
-}
-.info-box {
-  right: 64px;
-}
-.sign-in-box {
-  left: 32px;
-}
-.site-box {
-  overflow-y: auto;
-  /* ugh, but this avoids padding problems */
-  width: 100%;
-  height: 100%;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-.site-box .mdl-card {
-  width: 100%;
-  max-height: 100%;
-  max-width: 980px;
-  overflow: auto;
-  margin-left: auto;
-  margin-right: auto;
-}
-.site-box .angular-google-map-container {
-  height: 200px;
-  position: relative;
-  width: 100%;
-  z-index: 0;
-}
-.site-box .centreMarker {
-  background: url(/img/ic_place_black_18dp.png) no-repeat;
-  height: 34px;
-  left: 50%;
-  margin-left: -10px;
-  margin-top: -34px;
-  position: absolute;
-  top: 50%;
-  width: 34px;
-  z-index: 3;
-}
-.filter-menu .mdl-card__title {
-  background-color: #3f51b5;
-  color: white;
-}
-.filter-menu .mdl-card__title h2 {
+.ds-branding {
   font-family: 'Libre Baskerville', serif;
 }
-.filter-menu .mdl-card__title h2 .dot {
+.ds-branding--dot {
   color: #e91e63;
-}
-.info-box > div > .mdl-card__title,
-.edit-box > div > .mdl-card__title {
-  color: #fff;
-  height: 176px;
-}
-.info-box > div > .mdl-card__menu,
-.edit-box > div > .mdl-card__menu {
-  color: #fff;
-}
-.edit-box h2.mdl-card__title-text {
-  /* Align the input text with where it appears in the info box */
-  position: relative;
-  top: 4px;
-}
-.edit-box h2.mdl-card__title-text .mdl-textfield.is-upgraded {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  padding-bottom: 0;
-}
-.edit-box h2.mdl-card__title-text .mdl-textfield.is-upgraded .mdl-textfield__input {
-  font-family: inherit;
-}
-.edit-box h6 {
-  margin-bottom: 0;
-}
-.info-box .mdl-card__title.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  background-color: #3f51b5;
-  width: 100%;
 }
 .angular-google-map-container {
   position: absolute;
@@ -191,101 +12,24 @@
   left: 0;
   border-width: 0;
 }
-.modal-view-container {
-  position: fixed;
-  top: 0;
-  left: 0;
+.mdl-layout__drawer .mdl-navigation {
+  padding-top: 0;
 }
-.view {
-  will-change: transform;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transition: -webkit-transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+.navigation-section {
+  padding: 16px 40px;
+  border-top: solid 1px rgba(0, 0, 0, 0.2);
 }
-.modal.view {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  transform: scale(1.15);
-  transition: transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946), opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  pointer-events: none;
-  opacity: 0;
-  will-change: transform, opacity;
+.navigation-section-header {
+  font-size: 18px;
+  margin: 0;
 }
-.modal.view.visible {
-  pointer-events: auto;
-  opacity: 1;
-  transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946), opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  transform: scale(1);
-}
-.modal.view:after {
-  position: fixed;
-  background: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  display: block;
-  content: '';
-}
-#logDive-timepicker-container > table {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-#logDive-datepicker-container > ul {
-  left: 0 !important;
-  top: 0 !important;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 1000;
-  float: left;
-  padding: 5px 0;
-  margin: 2px 0 0;
-  list-style: none;
-  background-color: #fff;
-  border: none;
-}
-#logDive-datepicker-container > ul *:focus,
-#logDive-datepicker-container > ul *:hover {
-  outline: none !important;
-}
-#logDive-datepicker-container > ul li:focus {
-  outline: none !important;
-}
-#logDive-datepicker-container > ul:focus {
-  outline: none !important;
-}
-#logDive-datepicker-container > ul table {
-  border: none;
-  width: 100%;
-  /*
-    button {
-    min-width: 0;
-    width: 100%;
-    }
-    thead {
-    text-align: center;
-    color: rgba(0, 0, 0, 0.26);
-    }
-    button.btn-success {
-    position: absolute;
-    top: 0;
-    right: 0;
-    }
-     */
-}
-#logDive-datepicker-container > ul table:focus {
-  outline: none !important;
-}
-#logDive-datepicker-container > ul table tbody .mdl-button {
-  min-width: 0;
-  width: 100%;
-}
+/*
+@import 'add-site-button';
+@import 'boxes';
+@import 'filter-menu';
+@import 'info-box';
+@import 'map';
+@import 'modal';
+@import 'timepicker';
+@import 'datepicker';
+*/
