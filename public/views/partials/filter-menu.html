@@ -1,90 +1,71 @@
-<div class="mdl-card mdl-shadow--2dp">
-  <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">Divesit<span class="dot">.</span>es</h2>
-  </div>
-
-  <div class="mdl-card__menu">
-    <button type="button" id="filter-menu-menu" ng-click="toggleMenu()"
-      class="mdl-button mdl-js-button mdl-button--icon">
-      <i class="material-icons" style="color: #fff">more_vert</i>
-    </button>
-    <!--
-    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="filter-menu-menu">
-      <li class="mdl-menu__item"
-      ng-click="signIn()"
-      ng-if="!isAuthenticated()">Sign in</li>
-      <li class="mdl-menu__item"
-      ng-click="signOut()"
-      ng-if="isAuthenticated()">Sign out</li>
-    </ul>
-    -->
-  </div>
-
-  <div class="mdl-grid filter-menu-body">
-    <h6 class="mdl-cell mdl-cell--12-col">
-      Site access
-    </h6>
-
-    <p class="mdl-cell mdl-cell--6-col">
-    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="filter-menu-boatEntry">
-      <input class="mdl-checkbox__input" type="checkbox" id="filter-menu-boatEntry" ng-model="filterPreferences.boatEntry"
-      ng-change="updateAndSendFilterPreferences()" >
-      <span class="mdl-checkbox__label">Boat</span>
-    </label>
-    </p>
-
-    <p class="mdl-cell mdl-cell--6-col">
-    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="filter-menu-shoreEntry">
-      <input class="mdl-checkbox__input" type="checkbox" id="filter-menu-shoreEntry" ng-model="filterPreferences.shoreEntry"
-      ng-change="updateAndSendFilterPreferences()" >
-      <span class="mdl-checkbox__label">Shore</span>
-    </label>
-    </p>
-
-    <h6 class="mdl-cell mdl-cell--12-col">Maximum experience level required</h6>
-    <p class="mdl-cell mdl-cell--8-col mdl-cell--middle">
-    <input type="range" class="mdl-slider mdl-js-slider" min="0" max="2"
-    ng-change="updateAndSendFilterPreferences()"
-    ng-model="filterPreferences.maximumLevel">
-    </p>
-    <p class="mdl-cell mdl-cell--4-col mdl-cell--middle" style="text-align: right">
-    {{ filterPreferences.maximumLevel | stringifyExperienceLevel }}
-    </p>
-
-    <h6 class="mdl-cell mdl-cell--12-col">Maximum depth</h6>
-    <p class="mdl-cell mdl-cell--8-col mdl-cell--middle">
-    <input type="range" class="mdl-slider mdl-js-slider"
-    ng-change="updateAndSendFilterPreferences()"
-    min="0" max="100" step="5" ng-model="filterPreferences.depthRange[1]">
-    <p class="mdl-cell mdl-cell--4-col mdl-cell--middle" style="text-align: right">
-    {{ filterPreferences.depthRange[1] }} m
-    </p>
-
-    <h6 class="mdl-cell mdl-cell--12-col">Minimum depth</h6>
-    <p class="mdl-cell mdl-cell--8-col mdl-cell--middle">
-    <input type="range" class="mdl-slider mdl-js-slider"
-    ng-change="updateAndSendFilterPreferences()"
-    min="0" max="100" step="5" ng-model="filterPreferences.depthRange[0]">
-    <p class="mdl-cell mdl-cell--4-col mdl-cell--middle" style="text-align: right">
-    {{ filterPreferences.depthRange[0] }} m
-    </p>
-
-    <div class="mdl-cell mdl-cell--12-col mdl-cell--middle" style="text-align: center">
-      <button 
-        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-      ng-if="!isAuthenticated()"
-      ng-click="signIn()"
-      type="button">
-      Sign in
-      </button>
-      <button 
-        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-      ng-if="isAuthenticated()"
-      ng-click="signOut()"
-      type="button">
-      Sign out
-      </button>
+<span class="mdl-layout-title">
+  Filter sites
+</span>
+<nav class="mdl-navigation">
+  <div class="navigation-section">
+    <h2 class="navigation-section-header">Access</h2>
+    <div>
+      <label class="mdl-checkbox mdl-js-checkbox" for="filter-boat-entry">
+        <input class="mdl-checkbox__input" type="checkbox" id="filter-boat-entry"
+        ng-model="filterPreferences.boatEntry"
+        ng-change="updateAndSendFilterPreferences()"
+        >
+        <span class="mdl-checkbox__label">Boat</span>
+      </label>
     </div>
-
+    <div>
+      <label class="mdl-checkbox mdl-js-checkbox" for="filter-shore-entry">
+        <input class="mdl-checkbox__input" type="checkbox" id="filter-shore-entry"
+        ng-model="filterPreferences.shoreEntry"
+        ng-change="updateAndSendFilterPreferences()"
+        >
+        <span class="mdl-checkbox__label">Shore</span>
+      </label>
+    </div>
   </div>
-</div>
+  <div class="navigation-section">
+    <div>
+      <h2 class="navigation-section-header">Experience level</h2>
+      <label class="mdl-radio mdl-js-radio" for="filter-experience-0">
+        <input name="filter-experience" type="radio" class="mdl-radio__button" id="filter-experience-0"
+        value="0"
+        ng-model="filterPreferences.maximumLevel"
+        ng-change="updateAndSendFilterPreferences()"
+        >
+        <span class="mdl-radio__label">Beginner</span>
+      </label>
+    </div>
+    <div>
+      <label class="mdl-radio mdl-js-radio" for="filter-experience-1">
+        <input name="filter-experience" type="radio" class="mdl-radio__button" id="filter-experience-1"
+        value="1"
+        ng-model="filterPreferences.maximumLevel"
+        ng-change="updateAndSendFilterPreferences()"
+        >
+        <span class="mdl-radio__label">Intermediate</span>
+      </label>
+    </div>
+    <div>
+      <label class="mdl-radio mdl-js-radio" for="filter-experience-2">
+        <input name="filter-experience" type="radio" class="mdl-radio__button" id="filter-experience-2"
+        value="2"
+        ng-model="filterPreferences.maximumLevel"
+        ng-change="updateAndSendFilterPreferences()"
+        >
+        <span class="mdl-radio__label">Advanced</span>
+      </label>
+    </div>
+  </div>
+  <div class="navigation-section">
+    <h2 class="navigation-section-header">Maximum depth</h2>
+    <div class="filter-depth-slider">
+      <input type="range" class="mdl-slider mdl-js-slider" min="0" max="100" step="5"
+      ng-model="filterPreferences.depthRange[1]"
+      ng-change="updateAndSendFilterPreferences()"
+      >
+    </div>
+    <div class="filter-depth-value" >
+      {{ filterPreferences.depthRange[1] }} m
+    </div>
+  </div>
+</nav>

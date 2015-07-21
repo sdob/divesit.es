@@ -16,12 +16,19 @@
   padding-top: 0;
 }
 .navigation-section {
-  padding: 16px 40px;
+  padding: 16px 20px;
   border-top: solid 1px rgba(0, 0, 0, 0.2);
 }
 .navigation-section-header {
   font-size: 18px;
   margin: 0;
+}
+.filter-depth-slider {
+  float: left;
+  width: calc(100% - 3em);
+}
+.filter-depth-value {
+  text-align: right;
 }
 .info-box {
   position: absolute;
@@ -151,6 +158,8 @@
   overflow-y: hidden;
   overflow-x: hidden;
   background-color: rgba(0, 0, 0, 0.26);
+  /* XXX: dev purposes only! */
+  background: url('http://lorempixel.com/54/54/');
 }
 .dive-grid-details {
   float: left;
