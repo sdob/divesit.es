@@ -11,21 +11,19 @@
 <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- CSS -->
-<!-- <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css"> -->
-<link rel="stylesheet" href="libs/jqueryui/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="libs/jqueryui/themes/base/jquery-ui.min.css">
 <link rel="stylesheet" href="styles/style.css">
 
 <!-- JS -->
 <!-- External stuff -->
-<script src="libs/jquery/dist/jquery.js"></script>
-<script src="libs/jqueryui/jquery-ui.js"></script>
+<script src="libs/jquery/dist/jquery.min.js"></script>
+<script src="libs/jqueryui/jquery-ui.min.js"></script>
 <script src="libs/angular/angular.js"></script>
 <script src='libs/angular-google-maps/dist/angular-google-maps.js'></script>
-<script src="libs/angular-route/angular-route.js"></script>
-<script src="libs/angular-resource/angular-resource.js"></script>
-<script src="libs/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="libs/angular-route/angular-route.min.js"></script>
+<script src="libs/angular-resource/angular-resource.min.js"></script>
+<script src="libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
 <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="libs/angular-ui-slider/src/slider.js"></script>
 <script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
 <script src="libs/lb-ng/lb-services.js"></script>
 <script src="libs/angular-file-upload/angular-file-upload.js"></script>
@@ -44,6 +42,7 @@
 <script src="scripts/components/navTop.js"></script>
 <script src="scripts/components/signInBox.js"></script>
 <!-- Controllers -->
+<!-- <script src="scripts/controllers/auth.js"></script> -->
 <!-- <script src="scripts/controllers/main.js"></script> -->
 <script src="scripts/controllers/map.js"></script>
 <!-- Directives -->
@@ -64,9 +63,9 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title ds-branding">
-        Divesit<span class="ds-branding--dot">.</span>es
-      </span>
+      <span class="mdl-layout-title">
+      <a class="mdl-button mdl-js-button ds-branding" href="/">Divesit<span class="ds-branding--dot">.</span>es</a>
+    </span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <!-- <a class="mdl-navigation__link" href>Link</a>
