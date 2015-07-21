@@ -26,17 +26,16 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
       localStorageService.set('map.center.latitude', map.center.lat());
       localStorageService.set('map.center.longitude', map.center.lng());
     });
-    //if (!$scope.map.rendered && google !== undefined && google.maps.event.trigger) {
-    $scope.$apply();
-    if (!rendered) {
-    rendered = true;
-    // FIXME: Find somewhere better to put this
+    // FIXME: Find somewhere better to put this. Currently it fires on *every*
+    // idle event, which is not what we want --- it's got to be terrible for
+    // performance.
+    // TODO: Run this when the DOM is ready
     google.maps.event.trigger(map, 'resize');
     $scope.map.center = {
       latitude: localStorageService.get('map.center.latitude') || 53.5,
       longitude: localStorageService.get('map.center.longitude') || -8
     };
-    }
+    //}
   }
 
   function mapZoomChangedEventHandler(map) {
