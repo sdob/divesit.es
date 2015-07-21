@@ -8,7 +8,6 @@
     'satellizer',
     'ui.bootstrap',
     'ui.router',
-    'ui.slider',
     'uiGmapgoogle-maps',
     'angularFileUpload'
   ])
@@ -16,11 +15,12 @@
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
+    // The main view state, showing the map, filter menu, and dismissible info box
     .state('main', {
       url: '/',
       views: {
         drawer: {
-          templateUrl: 'views/filter-menu.html',
+          templateUrl: 'views/partials/filter-menu.html',
           controller: 'FilterMenuController'
         },
         main: {
@@ -28,20 +28,18 @@
         }
       }
     })
+    // The 'add a new site' view state
     .state('add', {
       url: '/add',
       views: {
-        drawer: {
+        /*drawer: {
           templateUrl: 'views/add-menu.html'
-        },
+        },*/
         main: {
-          templateUrl: 'views/add-site.html'
+          templateUrl: 'views/add-site.html',
+          controller: 'AddSiteBoxController'
         }
       }
-    })
-    .state('addSite', {
-      url: '/add-site',
-      templateUrl: 'views/partials/add-site.html'
     });
 
     uiGmapGoogleMapApiProvider.configure({

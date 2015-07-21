@@ -1,0 +1,72 @@
+// Speed with which modal slides down
+@modal-slide-down-speed: "0.1s";
+
+.modal-open {
+  overflow: hidden;
+}
+
+// Container
+.modal {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+
+  outline: 0;
+
+  &.fade .modal-dialog {
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+    //transform: translate(0, -25%); // needs autoprefix?
+    //transition: transform ~"@{modal-slide-down-speed} ease-out";
+  }
+  &.in .modal-dialog {
+    //transform: translate(0, 0);
+    opacity: 1;
+    transition: opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+  }
+}
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modal-dialog {
+  margin: 30px auto;
+}
+
+// Modal background
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000;
+  &.fade {
+    opacity: 0;
+  }
+  &.in {
+    opacity: 0.5;
+  }
+}
+
+// Actual modal
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 0;
+  background-clip: padding-box;
+  outline: 0;
+}
+
+.modal-sm { width: 300px; }
+.modal-lg { width: 900px; }

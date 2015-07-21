@@ -1,0 +1,9 @@
+<div class="mdl-navigation mdl-layout--large-screen-only">
+  <!-- <a class="mdl-navigation__link" href>Sign in</a> -->
+  <button ng-show="isAuthenticated()" id="sign-in-menu-button" class="mdl-button mdl-js-button">Sign out</button>
+  <button ng-show="!isAuthenticated()" id="sign-in-menu-button" class="mdl-button mdl-js-button">Sign in</button>
+  <ul for="sign-in-menu-button" class="mdl-menu mdl-menu-bottom-right mdl-js-menu">
+    <li class="mdl-menu__item" ng-click="authenticate('facebook')">Facebook</li>
+    <li class="mdl-menu__item" ng-click="authenticate('google')">Google</li>
+  </ul>
+</div>

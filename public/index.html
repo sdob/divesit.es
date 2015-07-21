@@ -42,7 +42,7 @@
 <script src="scripts/components/navTop.js"></script>
 <script src="scripts/components/signInBox.js"></script>
 <!-- Controllers -->
-<!-- <script src="scripts/controllers/auth.js"></script> -->
+<script src="scripts/controllers/auth.js"></script>
 <!-- <script src="scripts/controllers/main.js"></script> -->
 <script src="scripts/controllers/map.js"></script>
 <!-- Directives -->
@@ -67,11 +67,9 @@
       <a class="mdl-button mdl-js-button ds-branding" href="/">Divesit<span class="ds-branding--dot">.</span>es</a>
     </span>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <!-- <a class="mdl-navigation__link" href>Link</a>
-        <a class="mdl-navigation__link" href>Link</a>
-        -->
-        <a class="mdl-navigation__link" href>Sign in</a>
+      <nav class="mdl-navigation mdl-layout--large-screen-only" ng-controller="AuthController">
+        <a ng-show="!isAuthenticated()" class="mdl-navigation__link" ng-click="summonAuthenticationDialog()" href>Sign in</a>
+        <a ng-show="isAuthenticated()" class="mdl-navigation__link" ng-click="signOut()" href>Sign out</a>
       </nav>
     </div>
   </header>
