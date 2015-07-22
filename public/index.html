@@ -14,48 +14,6 @@
 <link rel="stylesheet" href="libs/jqueryui/themes/base/jquery-ui.min.css">
 <link rel="stylesheet" href="styles/style.css">
 
-<!-- JS -->
-<!-- External stuff -->
-<script src="libs/jquery/dist/jquery.min.js"></script>
-<script src="libs/jqueryui/jquery-ui.min.js"></script>
-<script src="libs/angular/angular.js"></script>
-<script src='libs/angular-google-maps/dist/angular-google-maps.js'></script>
-<script src="libs/angular-route/angular-route.min.js"></script>
-<script src="libs/angular-resource/angular-resource.min.js"></script>
-<script src="libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
-<script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
-<script src="libs/lb-ng/lb-services.js"></script>
-<script src="libs/angular-file-upload/angular-file-upload.js"></script>
-<script src="libs/satellizer/satellizer.js"></script>
-<script src="libs/lodash/lodash.js"></script>
-<script src="libs/moment/moment.js"></script>
-<!-- Main app -->
-<script src="scripts/app.js"></script>
-<!-- Components -->
-<script src="scripts/components/logDiveBox.js"></script>
-<script src="scripts/components/addSiteBox.js"></script>
-<script src="scripts/components/addSiteButton.js"></script>
-<script src="scripts/components/editBox.js"></script>
-<script src="scripts/components/filterMenu.js"></script>
-<script src="scripts/components/infoBox.js"></script>
-<script src="scripts/components/navTop.js"></script>
-<script src="scripts/components/signInBox.js"></script>
-<!-- Controllers -->
-<script src="scripts/controllers/auth.js"></script>
-<!-- <script src="scripts/controllers/main.js"></script> -->
-<script src="scripts/controllers/map.js"></script>
-<!-- Directives -->
-<script src="scripts/directives/ng-thumb.js"></script>
-<script src="scripts/directives/depth.js"></script>
-<!-- Services -->
-<script src="scripts/services/filterPreferenceRetrieval.js"></script>
-<script src="scripts/services/uploadUtilities.js"></script>
-<!-- Filters -->
-<script src="scripts/filters/truncate-coordinate.js"></script>
-<script src="scripts/filters/stringify-experience-level.js"></script>
-<!-- Template overrides -->
-<!-- <script src="templates.js"></script> -->
 </head>
 
 <body ng-app="divesitesApp">
@@ -80,5 +38,46 @@
   <a ui-sref="state2"></a>
 </div>
 
+
+<!-- Bower deps -->
+<script src="libs/jquery/dist/jquery.min.js"></script>
+<script src="libs/jqueryui/jquery-ui.min.js"></script>
+<script src="libs/angular/angular.js"></script>
+<script src='libs/angular-google-maps/dist/angular-google-maps.js'></script>
+<script src="libs/angular-route/angular-route.min.js"></script>
+<script src="libs/angular-resource/angular-resource.min.js"></script>
+<script src="libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
+<script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="libs/lb-ng/lb-services.js"></script>
+<script src="libs/angular-file-upload/angular-file-upload.js"></script>
+<script src="libs/satellizer/satellizer.js"></script>
+<script src="libs/lodash/lodash.js"></script>
+<script src="libs/moment/moment.js"></script>
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<!-- Components -->
+<script src="scripts/components/logDiveBox.js"></script>
+<script src="scripts/components/addSiteBox.js"></script>
+<script src="scripts/components/addSiteButton.js"></script>
+<script src="scripts/components/editBox.js"></script>
+<script src="scripts/components/filterMenu.js"></script>
+<script src="scripts/components/infoBox.js"></script>
+<script src="scripts/components/navTop.js"></script>
+<script src="scripts/components/signInBox.js"></script>
+<!-- Controllers -->
+<script src="scripts/controllers/auth.js"></script>
+<script src="scripts/controllers/map.js"></script>
+<!-- Directives -->
+<script src="scripts/directives/ng-thumb.js"></script>
+<script src="scripts/directives/depth.js"></script>
+<!-- Services -->
+<script src="scripts/services/filterPreferenceRetrieval.js"></script>
+<script src="scripts/services/uploadUtilities.js"></script>
+<!-- Filters -->
+<script src="scripts/filters/truncate-coordinate.js"></script>
+<script src="scripts/filters/stringify-experience-level.js"></script>
+<!-- endbuild -->
 </body>
 </html>
