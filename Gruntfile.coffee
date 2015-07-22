@@ -121,6 +121,8 @@ module.exports = (grunt) ->
 
     # Copy files over to the dist/ directory
     copy:
+      options:
+        mode: true # keep execution permissions
       dist:
         files: [
           '<%= cfg.dist %>/package.json': 'package.json'
