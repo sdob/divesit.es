@@ -56,7 +56,7 @@ module.exports = (grunt) ->
           require: 'coffee-script/register'
           clearRequireCache: true
           timeout: 5000
-        src: ['test/mocha/images/*.coffee']
+        src: ['test/mocha/**/*.coffee']
 
 
     # Mocha test + coverage
