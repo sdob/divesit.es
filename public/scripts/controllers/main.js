@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 angular.module('divesitesApp').controller('MainController', function ($rootScope, $scope, User) {
@@ -103,4 +104,4 @@ angular.module('divesitesApp').controller('MainController', function ($rootScope
     $scope.collapseFilterMenu = collapseFilterMenu;
   }
   $scope.initialize();
-});
+})}());

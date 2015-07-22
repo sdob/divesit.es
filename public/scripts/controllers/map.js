@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 angular.module('divesitesApp').controller('MapController', function ($scope, $rootScope, localStorageService, $http, uiGmapIsReady, Divesite, $modal) {
@@ -222,4 +223,4 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
 
   uiGmapIsReady.promise().then($scope.uiGmapIsReady);
 
-});
+})}());

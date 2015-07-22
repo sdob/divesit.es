@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 angular.module('divesitesApp')
 .controller('AuthController', function ($auth, $location, $modal, $scope, localStorage, LoopBackAuth, User) {
@@ -66,4 +67,5 @@ angular.module('divesitesApp')
       size: 'sm'
     });
   };
-});
+})
+}());

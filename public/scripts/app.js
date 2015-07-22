@@ -62,4 +62,4 @@
       clientId: '930190391486-hd4l5c4uatuur1kf4foa43noibtm9r02.apps.googleusercontent.com'
     });
   }]);
-})();
+}());

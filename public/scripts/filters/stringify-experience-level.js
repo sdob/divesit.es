@@ -1,20 +1,22 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('divesitesApp')
-.filter('stringifyExperienceLevel', function () {
-  return function (level) {
-    var levelString;
-    switch ("" + level) {
-      case "0":
-        levelString = "Beginner";
+  angular.module('divesitesApp')
+  .filter('stringifyExperienceLevel', function () {
+    return function (level) {
+      var levelString;
+      switch ("" + level) {
+        case "0":
+          levelString = "Beginner";
         break;
-      case "1":
-        levelString = "Intermediate";
+        case "1":
+          levelString = "Intermediate";
         break;
-      default:
-        levelString = "Advanced";
+        default:
+          levelString = "Advanced";
         break;
-    }
-    return levelString;
-  };
-});
+      }
+      return levelString;
+    };
+  })
+}());
