@@ -17,11 +17,12 @@ module.exports = (grunt) ->
       options:
         dir: '<%= cfg.dist %>'
         commit: true
+        push: true
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
       heroku:
         options:
           remote: 'https://git.heroku.com/quiet-garden-6841.git'
-          remoteBranch: 'master'
+          branch: 'master'
 
     # Check JS style
     jshint:
