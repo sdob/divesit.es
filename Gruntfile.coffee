@@ -126,6 +126,7 @@ module.exports = (grunt) ->
         files: [
           '<%= cfg.dist %>/package.json': 'package.json'
           '<%= cfg.dist %>/bower.json': 'bower.json'
+          '<%= cfg.dist %>/regenerate-lbServices.sh': 'regenerate-lbServices.sh'
           {
             expand: true
             dot: true
