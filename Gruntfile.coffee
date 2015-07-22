@@ -22,7 +22,7 @@ module.exports = (grunt) ->
       heroku:
         options:
           remote: 'https://git.heroku.com/quiet-garden-6841.git'
-          remoteBranch: 'master'
+          branch: 'master'
 
     # Check JS style
     jshint:
