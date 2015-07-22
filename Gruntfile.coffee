@@ -15,7 +15,7 @@ module.exports = (grunt) ->
 
     buildcontrol:
       options:
-        dir: '<%= cfg.dist'
+        dir: '<%= cfg.dist %>'
         commit: true
         push: 'true'
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
@@ -101,10 +101,12 @@ module.exports = (grunt) ->
               css: ['cssmin']
             post: {}
 
+
     # usemin
     usemin:
       html: ['<%= cfg.dist %>/{,*/}*.html']
       css: ['<%= cfg.dist %>/styles/{,*/}*.css']
+
 
     # Try to make the Angular code for minification
     # by using long-form dependency injection
@@ -132,6 +134,7 @@ module.exports = (grunt) ->
             src: [
               '*.html'
               'views/{,*/}*.html'
+              'template/{,*/}*.html'
               'img/*'
             ]
           }
@@ -168,11 +171,9 @@ module.exports = (grunt) ->
         files: [{
           expand: true
           cwd: '<%= cfg.dist %>/<%= cfg.public %>'
-          src: ['index.html']
+          src: ['index.html'] # holy shit, htmlmin is slow
           dest: '<%= cfg.dist %>/<%= cfg.public %>'
         }]
-
-
 
 
   grunt.loadNpmTasks 'grunt-env'
