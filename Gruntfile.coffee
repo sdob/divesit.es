@@ -22,6 +22,10 @@ module.exports = (grunt) ->
         options:
           remote: 'https://git.heroku.com/quiet-garden-6841.git'
           remoteBranch: 'master'
+      openshift:
+        options:
+          remote: 'ssh://55b0ec15500446e1cf000060@divesites-sdob.rhcloud.com/~/git/divesites.git/'
+          remoteBranch: 'master'
 
     # Check JS style
     jshint:
@@ -159,6 +163,7 @@ module.exports = (grunt) ->
         cwd: '<%= cfg.public %>/styles'
         dest: '.tmp/styles/'
         src: '{,*/}*.css'
+
 
     # Minify HTML
     htmlmin:
