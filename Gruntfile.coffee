@@ -24,7 +24,7 @@ module.exports = (grunt) ->
           remoteBranch: 'master'
       openshift:
         options:
-          remote: 'ssh://55b0ec15500446e1cf000060@divesites-sdob.rhcloud.com/~/git/divesites.git/'
+          remote: 'https://divesites-sdob.rhcloud.com/~/git/divesites.git/'
           remoteBranch: 'master'
 
     # Check JS style
