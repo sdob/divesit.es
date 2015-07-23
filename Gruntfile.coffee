@@ -125,12 +125,22 @@ module.exports = (grunt) ->
     # Copy files over to the dist/ directory
     copy:
       options:
+<<<<<<< HEAD
         mode: true
+=======
+        mode: true # keep execution permissions
+>>>>>>> dist
       dist:
         files: [
+          # Rather than checking in our dependencies, we'll let the build
+          # process worry about it
           '<%= cfg.dist %>/package.json': 'package.json'
           '<%= cfg.dist %>/bower.json': 'bower.json'
+          # This script is called by the npm post-install hook and generates
+          # the LoopBack Angular SDK for our app
           '<%= cfg.dist %>/regenerate-lbServices.sh': 'regenerate-lbServices.sh'
+          # Heroku Procfile
+          '<%= cfg.dist %>/Procfile': 'Procfile'
           {
             expand: true
             dot: true
