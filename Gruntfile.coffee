@@ -132,6 +132,7 @@ module.exports = (grunt) ->
           # process worry about it
           '<%= cfg.dist %>/package.json': 'package.json'
           '<%= cfg.dist %>/bower.json': 'bower.json'
+          '<%= cfg.dist %>/.bowerrc': '.bowerrc'
           # This script is called by the npm post-install hook and generates
           # the LoopBack Angular SDK for our app
           '<%= cfg.dist %>/regenerate-lbServices.sh': 'regenerate-lbServices.sh'
