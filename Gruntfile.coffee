@@ -120,6 +120,8 @@ module.exports = (grunt) ->
 
     # Copy files over to the dist/ directory
     copy:
+      options:
+        mode: true
       dist:
         files: [
           '<%= cfg.dist %>/package.json': 'package.json'
