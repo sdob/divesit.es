@@ -63,7 +63,7 @@
             <span class="dive-grid-duration"><i class="fa fa-clock-o"></i> {{ dive.duration }} min. </span>
           </div>
         </div>
-        <div class="dive-grid-comment" ng-show="{{dive.comment}}">
+        <div class="dive-grid-comment" ng-show="!!dive.comment">
           {{ dive.comment }}
         </div>
       </div>
