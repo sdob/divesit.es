@@ -16,6 +16,7 @@ module.exports = (grunt) ->
     buildcontrol:
       options:
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+        commit: true
       heroku:
         options:
           remote: 'https://git.heroku.com/quiet-garden-6841.git'
