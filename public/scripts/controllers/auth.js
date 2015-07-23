@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 angular.module('divesitesApp')
-.controller('AuthController', function ($auth, $location, $modal, $scope, localStorage, LoopBackAuth, User) {
+.controller('AuthController', function ($auth, $location, $modal, $scope, LoopBackAuth, User) {
   console.info('AuthController initializing');
   console.info(localStorage);
   var modalInstance;
