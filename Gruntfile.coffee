@@ -125,11 +125,7 @@ module.exports = (grunt) ->
     # Copy files over to the dist/ directory
     copy:
       options:
-<<<<<<< HEAD
-        mode: true
-=======
         mode: true # keep execution permissions
->>>>>>> dist
       dist:
         files: [
           # Rather than checking in our dependencies, we'll let the build
