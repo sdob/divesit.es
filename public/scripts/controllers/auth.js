@@ -15,6 +15,7 @@ angular.module('divesitesApp')
       var accessToken = response.data;
       LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
       LoopBackAuth.rememberMe = true;
+      LoopBackAuth.save();
       // Close the modal instance
       modalInstance.close();
       return response.resource;
