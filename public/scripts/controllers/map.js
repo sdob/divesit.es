@@ -1,7 +1,8 @@
 (function () {
 'use strict';
 
-angular.module('divesitesApp').controller('MapController', function ($scope, $rootScope, localStorageService, $http, uiGmapIsReady, Divesite, $modal) {
+angular.module('divesitesApp').controller('MapController', function ($document, $scope, $rootScope, localStorageService, $http, uiGmapIsReady, Divesite, $modal) {
+
 
   /////////////////////////////////////////////////////////////////////////////
   // Constants
@@ -31,7 +32,7 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
     // idle event, which is not what we want --- it's got to be terrible for
     // performance.
     // TODO: Run this when the DOM is ready
-    google.maps.event.trigger(map, 'resize');
+    //google.maps.event.trigger(map, 'resize');
     $scope.map.center = {
       latitude: localStorageService.get('map.center.latitude') || 53.5,
       longitude: localStorageService.get('map.center.longitude') || -8
@@ -52,7 +53,6 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   }
 
   function markerClickEventHandler(marker, event, model, args) {
-    console.info('MapController: markerClickEventHandler()');
     //$rootScope.$broadcast("event:marker-clicked");
     var id = model.id;
     Divesite.findById(
@@ -72,13 +72,12 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   }
 
   $scope.uiGmapIsReady = function (maps) {
-    console.log("uiGmapIsReady");
     $scope.map.events.idle = mapIdleEventHandler;
     maps.forEach(function (inst) {
-      google.maps.event.trigger(inst.map, 'resize');
+      //google.maps.event.trigger(inst.map, 'resize');
     });
-    //console.info(maps);
     $rootScope.$broadcast('event:map-is-ready');
+    console.info('MapController.uiGmapIsReady()');
   };
 
   $scope.checkMinimumLevel = function (marker, data) {
@@ -128,7 +127,6 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
   };
 
   $scope.retrieveDivesites = function () {
-    console.info('Retrieving sites.');
     Divesite.find(
       {},
       function (sites) {
@@ -158,7 +156,6 @@ angular.module('divesitesApp').controller('MapController', function ($scope, $ro
             }
           }
         });
-        console.info('Loaded ' + $scope.map.markers.length + ' sites.');
         $rootScope.$broadcast('event:divesites-loaded');
       },
       function (errorResponse) {
