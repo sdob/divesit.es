@@ -24,12 +24,11 @@ module.exports = function(config) {
       {pattern: 'public/libs/angular-google-maps/dist/*.js', included: true},
       'public/libs/angular-local-storage/dist/angular-local-storage.js',
       'public/libs/angular-ui-router/release/angular-ui-router.js',
-      'public/libs/angular-ui-slider/src/slider.js',
       'public/libs/underscore/underscore.js',
       'public/libs/angular-bootstrap/ui-bootstrap-tpls.js',
       'public/libs/lb-ng/lb-services.js',
       'public/libs/satellizer/satellizer.js',
-      'public/libs/angular-file-upload/angular-file-upload.js',
+      'public/libs/angular-file-upload/dist/angular-file-upload.js',
       {pattern: 'public/scripts/**/*.js', included: true},
       {pattern: 'public/scripts/*.js', included: true},
       'test/jasmine/**/*.coffee'
