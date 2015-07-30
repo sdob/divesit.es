@@ -14,23 +14,15 @@
     </button>
   </div>
 
-  <div ng-show="isAuthenticated()" class="mdl-card__actions mdl-card--border">
-    <button ng-click="summonLogDiveBox()" type="button" ng-show="isAuthenticated()" id="infobox-log-dive" class="mdl-button mdl-js-button mdl-button--icon">
-      <i class="material-icons">rate_review</i>
-    </button>
-    <div class="mdl-tooltip" for="infobox-log-dive">
-      Log
-    </div>
-    <button type="button" ng-show="isOwner()" ng-click="summonEditBox()" id="infobox-edit-site" class="mdl-button mdl-js-button mdl-button--icon">
-      <i class="material-icons">edit</i>
-    </button>
-    <div class="mdl-tooltip" for="infobox-edit-site">
-      Edit
-    </div>
-  </div>
 
   <div class="mdl-card__supporting-text mdl-card--border">
-    <div class="mdl-grid">
+    <div ng-if="isOwner()">
+      <p>You created this site, so you can edit its details.</p>
+      <div style="text-align: right">
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary">Edit details</button>
+      </div>
+    </div>
+    <div class="mdl-grid mdl-site-details">
       <div class="mdl-cell--6-col">
         Level: {{ site.minimumLevel | stringifyExperienceLevel }}
       </div>
@@ -41,16 +33,22 @@
       </div>
     </div>
     <div class="site-description" ng-if="site.description">
-      <h6>Description</h6>
+      <h6 class="site-description-title">Description</h6>
       <p>{{ site.description }}</p>
       <div style="text-align: right" ng-if="site.user">
         – {{ site.user.displayName }}
       </div>
     </div>
     <div class="site-dives" ng-if="site.dives">
-      <h6>Dives</h6>
+      <h6 class="site-dives-title">Dives</h6>
       <div>
         Divesit.es users have dived here {{ site.dives.length }} times.
+      </div>
+      <button ng-click="summonLogDiveBox()" type="button" ng-show="isAuthenticated()" id="infobox-log-dive" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">rate_review</i>
+      </button>
+      <div class="mdl-tooltip" for="infobox-log-dive">
+        Log
       </div>
       <div class="dive-grid" ng-repeat="dive in site.dives" style="border-top: solid 1px rgba(0, 0, 0, 0.12)">
         <div class="clearfix">
