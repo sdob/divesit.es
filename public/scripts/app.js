@@ -59,7 +59,8 @@
       clientId: '1542355859342321'
     });
     $authProvider.google({
-      clientId: '930190391486-hd4l5c4uatuur1kf4foa43noibtm9r02.apps.googleusercontent.com'
+      clientId: '930190391486-hd4l5c4uatuur1kf4foa43noibtm9r02.apps.googleusercontent.com',
+      scope: ['https://www.googleapis.com/auth/plus.login', 'email']
     });
   }]);
 }());
