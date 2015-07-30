@@ -14,3 +14,5 @@ keys.js
 providers.json
 # disty stuff
 dist
+# Keep compiled CSS out of version control
+public/styles/
