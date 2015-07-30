@@ -27,7 +27,7 @@
     "loopback-component-storage": "^1.5.0",
     "loopback-connector-mongodb": "^1.11.0",
     "loopback-datasource-juggler": "^2.29.2",
-    "loopback-satellizer": "^0.1.0",
+    "loopback-satellizer": "git://github.com/sdob/loopback-satellizer.git#master",
     "loopback-sdk-angular-cli": "^1.1.4",
     "moment": "^2.10.2",
     "morgan": "~1.5.1",
