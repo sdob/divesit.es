@@ -28,7 +28,7 @@ module.exports = function(config) {
       'public/libs/angular-bootstrap/ui-bootstrap-tpls.js',
       'public/libs/lb-ng/lb-services.js',
       'public/libs/satellizer/satellizer.js',
-      'public/libs/angular-file-upload/dist/angular-file-upload.js',
+      'public/libs/angular-file-upload/dist/angular-file-upload.min.js',
       {pattern: 'public/scripts/**/*.js', included: true},
       {pattern: 'public/scripts/*.js', included: true},
       'test/jasmine/**/*.coffee'
