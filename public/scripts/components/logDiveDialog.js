@@ -1,6 +1,6 @@
 (function () {
   angular.module('divesitesApp')
-  .controller('LogDiveDialogController', function LogDiveDialogController($rootScope, $scope, Divesite) {
+  .controller('LogDiveDialogController', function LogDiveDialogController($modalInstance, $rootScope, $scope, Divesite) {
 
     function cancel() {
       $rootScope.$broadcast('event:logging-cancelled');
@@ -65,6 +65,7 @@
           function createSuccess(res) {
             console.info("Created a dive!");
             console.info(res);
+            $modalInstance.close();
             $rootScope.$broadcast('event:dive-created', res);
           },
           function createError(err) {
