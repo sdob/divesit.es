@@ -1,6 +1,6 @@
 (function () {
   angular.module('divesitesApp')
-  .controller('LogDiveBoxController', function LogDiveBoxController($rootScope, $scope, Divesite) {
+  .controller('LogDiveDialogController', function LogDiveDialogController($rootScope, $scope, Divesite) {
 
     function cancel() {
       $rootScope.$broadcast('event:logging-cancelled');
@@ -28,7 +28,7 @@
 
     function openDatepicker(event) {
       // Open the datepicker
-      console.info('LogDiveBoxController.open()');
+      console.info('LogDiveDialogController.open()');
       // prevent default and stop propagation (otherwise it
       // won't summon the datepicker; no idea why atm)
       event.preventDefault();
@@ -75,7 +75,7 @@
       }
     }
 
-    $scope.initialize = function initializeLogDiveBoxController() {
+    $scope.initialize = function initializeLogDiveDialogController() {
       $scope.cancel = cancel;
       $scope.datepicker = {
         format: 'dd MMMM yyyy',
@@ -93,52 +93,11 @@
       };
       $scope.onDateChange = onDateChange;
       $scope.save = save;
-      console.info('LogDiveBoxController: initializing');
+      console.info('LogDiveDialogController: initializing');
       //console.info("datepicker.opened? " + $scope.datepicker.opened);
     }
     $scope.initialize();
 
-  })
-  .directive('logDiveBox', function LogDiveBoxDirective() {
-
-    return {
-      templateUrl: 'views/partials/log-dive-box.html',
-      restrict: 'E',
-      controller: 'LogDiveBoxController',
-      link: function link(scope, elem, attrs, ctrl) {
-        //console.log("Cloning LogDiveBoxController");
-        angular.element(elem).ready(function () {
-
-          // Materialize the datepicker
-
-          // We need to hack the time picker a bit to make it nice and Materially
-
-          var container = $('#logDive-datepicker-container');
-          // Change the 'done' button to a Material icon button 
-          //console.info(container.find('.btn-success'))//.removeClass('btn btn-sm btn-success pull-right')
-          //.addClass('mdl-button mdl-js-button mdl-button--icon').html('<i class="material-icons">close</i>');
-
-          //datePickerContainer.find('table 
-
-          // Handle timepicker up/down buttons
-          //$('#logDive-timepicker-container .glyphicon.glyphicon-chevron-up').addClass('material-icons').html('expand_less');
-          //$('#logDive-timepicker-container .glyphicon.glyphicon-chevron-down').addClass('material-icons').html('expand_more');
-          //$('#logDive-timepicker-container .glyphicon-chevron-up, .glyphicon-chevron-down').parent().addClass('mdl-button mdl-js-button mdl-button--icon');
-
-
-          // Materialize timepicker input fields
-          //['hours', 'minutes'].forEach (function (model) {
-          //$('[ng-model="' + model + '"]').removeClass('form-control text-center').addClass('mdl-textfield mdl-js-textfield');
-          //});
-          //$('[ng-model="hours"], [ng-model="minutes"]').removeClass('form-control text-center').addClass('mdl-textfield mdl-js-textfield').css('text-align', 'center');
-
-          // Handle timepicker textfields
-          //$('[ng-model=hours]').addClass('mdl-textfield mdl-js-textfield');
-          // Now let MDL get funky
-          componentHandler.upgradeAllRegistered();
-        });
-      }
-    }
   })
   .filter('extractFromTitleString', function () {
     return function (titleString, part) {

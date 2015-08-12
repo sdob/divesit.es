@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('divesitesApp').
-    controller('InfoBoxController', function InfoBoxController($scope, $rootScope, LoopBackAuth, User) {
+    controller('InfoBoxController', function InfoBoxController($modal, $scope, $rootScope, LoopBackAuth, User) {
 
 
     function dismiss() {
@@ -64,8 +64,14 @@
       //$rootScope.$broadcast('event:edit-box-summoned', $scope.site);
     }
 
-    function summonLogDiveBox() {
-      console.info('InfoBoxController.summonLogDiveBox()');
+    function summonLogDiveDialog() {
+      console.info('InfoBoxController.summonLogDiveDialog()');
+      $modal.open({
+        templateUrl: 'views/partials/log-dive-dialog.html',
+        controller: 'LogDiveDialogController',
+        scope: $scope, // inherit from this scope
+        size: 'lg'
+      });
       $rootScope.$broadcast('event:log-dive-box-summoned');
     }
 
@@ -86,7 +92,7 @@
     $scope.isAuthenticated = isAuthenticated
     $scope.isOwner = isOwner;
     $scope.summonEditBox = summonEditBox;
-    $scope.summonLogDiveBox = summonLogDiveBox;
+    $scope.summonLogDiveDialog = summonLogDiveDialog;
 
   })
   .directive('infoBox', function () {

@@ -1,23 +1,35 @@
 (function () {
 'use strict';
 angular.module('divesitesApp')
-.controller('AuthController', function ($auth, $location, $modal, $scope, LoopBackAuth, User) {
+.controller('AuthController', function ($auth, $http, $location, $modal, $rootScope, $scope, localStorageService, LoopBackAuth, User) {
   console.info('AuthController initializing');
-  console.info(localStorage);
   var modalInstance;
-  $scope.authenticate = function (provider) {
+
+  // Retrieve the user data from localStorage if available
+  $rootScope.user = localStorageService.get('user') || {};
+
+  $scope.authenticate = function authenticate(provider) {
     console.info('AuthController.authenticate(\'' + provider + '\')');
     // TODO: change the modal's appearance to show the user that we're
     // logging them in
     $auth
     .authenticate(provider)
     .then(function authenticateSuccess(response) {
+      console.info('auth response');
+      console.info(response);
       var accessToken = response.data;
       LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
       LoopBackAuth.rememberMe = true;
       LoopBackAuth.save();
       // Close the modal instance
       modalInstance.close();
+      // Retrieve a User instance from the db, put it into localStorage,
+      // and set $rootScope.user
+      User.findById({id: accessToken.userId}).$promise
+      .then(function retrieveUserSuccess(response) {
+        localStorageService.set('user', response);
+        $rootScope.user = response;
+      });
       return response.resource;
     })
     .catch(function authenticateError(response) {
@@ -31,7 +43,7 @@ angular.module('divesitesApp')
     return User.isAuthenticated();
   }
 
-  $scope.signOut = function () {
+  $scope.signOut = function signOut() {
     // Tell the server that we're logging the user out
     console.info('AuthController.signOut()');
     User
@@ -59,7 +71,7 @@ angular.module('divesitesApp')
     });
   }
 
-  $scope.summonAuthenticationDialog = function () {
+  $scope.summonAuthenticationDialog = function summonAuthenticationDialog() {
     // Bring up the authentication modal
     console.info('AuthController.summonAuthenticationDialog()');
     modalInstance = $modal.open({
