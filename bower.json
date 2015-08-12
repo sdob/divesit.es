@@ -16,7 +16,7 @@
     "angular-local-storage": "~0.1.5",
     "jqueryui": "~1.11.4",
     "angular-resource": "latest",
-    "angular-file-upload": "~1.2.0",
+    "angular-file-upload": "~2.0.0",
     "moment": "~2.10.3",
     "angular-ui-router": "~0.2.15"
   },
