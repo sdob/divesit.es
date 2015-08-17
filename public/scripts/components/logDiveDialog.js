@@ -2,8 +2,9 @@
   angular.module('divesitesApp')
   .controller('LogDiveDialogController', function LogDiveDialogController($modalInstance, $rootScope, $scope, Divesite) {
 
-    function cancel() {
+    function cancel($event) {
       $rootScope.$broadcast('event:logging-cancelled');
+      $modalInstance.close();
     }
 
     function onDateChange(event) {

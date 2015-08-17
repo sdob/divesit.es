@@ -1,28 +1,41 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only" ng-controller="AuthController">
+        <a ng-show="!isAuthenticated()" class="mdl-navigation__link" ng-click="summonAuthenticationDialog()" href>Sign in</a>
+        <a ng-show="isAuthenticated()" class="mdl-navigation__link" ng-click="signOut()" href>Sign out</a>
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer" filter-menu></div>
+  <main class="mdl-layout__content">
 
-<main class="mdl-layout__content">
-
-<div ng-controller="MapController">
-  <ui-gmap-google-map
-  id="gmap-mapper"
-  control="mapControl"
-  events="map.events"
-  options="map.options"
-  center="map.center"
-  zoom="map.zoom">
-  <ui-gmap-markers
-  control="markerControl"
-  models="map.markers"
-  events="map.markerEvents"
-  options="'options'"
-  coords="'loc'"
-  icon="'icon'"
-  >
-  </ui-gmap-markers>
-  </ui-gmap-google-map>
+  <div ng-controller="MapController">
+    <ui-gmap-google-map
+    id="gmap-mapper"
+    control="mapControl"
+    events="map.events"
+    options="map.options"
+    center="map.center"
+    zoom="map.zoom">
+    <ui-gmap-markers
+    control="markerControl"
+    models="map.markers"
+    events="map.markerEvents"
+    options="'options'"
+    coords="'loc'"
+    icon="'icon'"
+    >
+    </ui-gmap-markers>
+    </ui-gmap-google-map>
 
 
-<info-box class="info-box mdl-card mdl-shadow--2dp" ng-if="infoBoxIsVisible" ng-controller="InfoBoxController">
-</info-box>
+    <info-box class="info-box mdl-card mdl-shadow--2dp" ng-if="infoBoxIsVisible" ng-controller="InfoBoxController">
+    </info-box>
+  </div>
+
+  <add-site-button></add-site-button>
+
+  </main>
 </div>
-
-</main>

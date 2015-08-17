@@ -19,10 +19,6 @@
     .state('main', {
       url: '/',
       views: {
-        drawer: {
-          templateUrl: 'views/partials/filter-menu.html',
-          controller: 'FilterMenuController'
-        },
         main: {
           templateUrl: 'views/map.html'
         }
@@ -32,12 +28,9 @@
     .state('add', {
       url: '/add',
       views: {
-        /*drawer: {
-          templateUrl: 'views/add-menu.html'
-        },*/
         main: {
           templateUrl: 'views/add-site.html',
-          controller: 'AddSiteBoxController'
+          controller: 'AddSiteController'
         }
       }
     });

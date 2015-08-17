@@ -1,24 +1,22 @@
 (function () {
   'use strict';
   angular.module('divesitesApp')
-  .controller('AddSiteButtonController', function ($scope, $rootScope, User) {
-    $scope.summonAddSiteBox = function () {
-      $rootScope.$broadcast('event:adding-started');
-    };
+  .controller('AddSiteButtonController', function ($location, $modal, $scope, $rootScope, User) {
     $scope.isAuthenticated = function () {
       return User.isAuthenticated();
     }
+    $scope.summonAddSiteDialog = function () {
+      /*
+      console.info('AddSiteButtonController.summonAddSiteDialog()');
+      //$rootScope.$broadcast('event:adding-started');
+      $modal.open({
+        templateUrl: 'views/partials/site-box.html',
+        controller: 'AddSiteDialogController',
+        scope: $scope, // inherit from this scope
+        size: 'lg'
+      });
+     */
+    $location.path('/add');
+    };
   })
-  .directive('addSiteButton', function () {
-    return {
-      templateUrl: 'views/partials/add-site-button.html',
-      restrict: 'E',
-      controller: 'AddSiteButtonController',
-      link: function (scope, elem, attrs, ctrl) {
-        angular.element(elem).ready(function () {
-          // Let MDL get funky
-          componentHandler.upgradeAllRegistered();
-        });
-      }
-    }
-  })}());
+  }());

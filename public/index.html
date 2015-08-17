@@ -7,8 +7,8 @@
 <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto:400,700'>
 <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Libre+Baskerville:700'>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css">
-<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css">
-<script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- CSS -->
 <link rel="stylesheet" href="libs/jqueryui/themes/base/jquery-ui.min.css">
@@ -20,25 +20,7 @@
 
 <body ng-app="divesitesApp">
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">
-      <a class="mdl-button mdl-js-button ds-branding" href="#/">Divesit<span class="ds-branding--dot">.</span>es</a>
-    </span>
-      <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only" ng-controller="AuthController">
-        <a ng-show="!isAuthenticated()" class="mdl-navigation__link" ng-click="summonAuthenticationDialog()" href>Sign in</a>
-        <a ng-show="isAuthenticated()" class="mdl-navigation__link" ng-click="signOut()" href>Sign out</a>
-      </nav>
-    </div>
-  </header>
-  <div class="mdl-layout__drawer" ui-view="drawer"></div>
-
   <div ui-view="main"></div>
-  <a ui-sref="state1"></a>
-  <a ui-sref="state2"></a>
-</div>
 
 
 <!-- Bower deps -->
@@ -61,7 +43,6 @@
 <script src="scripts/app.js"></script>
 <!-- Components -->
 <script src="scripts/components/logDiveDialog.js"></script>
-<script src="scripts/components/addSiteBox.js"></script>
 <script src="scripts/components/addSiteButton.js"></script>
 <script src="scripts/components/editBox.js"></script>
 <script src="scripts/components/filterMenu.js"></script>
@@ -71,9 +52,13 @@
 <!-- Controllers -->
 <script src="scripts/controllers/auth.js"></script>
 <script src="scripts/controllers/map.js"></script>
+<script src="scripts/controllers/addSite.js"></script>
 <!-- Directives -->
 <script src="scripts/directives/ng-thumb.js"></script>
 <script src="scripts/directives/depth.js"></script>
+<script src="scripts/directives/add-site-dialog.js"></script>
+<script src="scripts/directives/add-site-button.js"></script>
+<script src="scripts/directives/filter-menu.js"></script>
 <!-- Services -->
 <script src="scripts/services/filterPreferenceRetrieval.js"></script>
 <script src="scripts/services/uploadUtilities.js"></script>

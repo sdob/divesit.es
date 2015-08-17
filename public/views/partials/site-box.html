@@ -1,4 +1,4 @@
-<div class="mdl-card mdl-shadow--2dp">
+<div class="add-site" add-site-dialog>
   <form name="siteForm" novalidate ng-submit="siteForm.$valid && save()">
 
     <div class="mdl-card__title">
@@ -12,7 +12,6 @@
         <i class="material-icons">close</i>
       </button>
     </div>
-
 
     <div class="mdl-grid">
 
@@ -34,7 +33,6 @@
           <div class="mdl-cell mdl-cell--12-col">
             <h6>Access</h6>
           </div>
-
 
           <div class="mdl-cell mdl-cell--6-col">
             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="shore-entry"
@@ -113,7 +111,7 @@
           <div class="mdl-cell mdl-cell--12-col">
             <h6>Cover photo (optional)</h6>
           </div>
-          <div class="mdl-cell mdl-cell--12-col" style="height: 200px; overflow: hidden;">
+          <div class="mdl-cell mdl-cell--12-col" style="height: 200px; border: solid 1px rgba(0, 0, 0, 0.24)">
             <div class="mdl-grid" style="height: 100%">
               <div ng-if="!siteHasImage"
                 class="mdl-cell mdl-cell--12-col mdl-cell--middle"

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   angular.module('divesitesApp')
-  .controller('AddSiteBoxController', function ($rootScope, $scope, cfg, localStorageService, uploadUtilities, Divesite, FileUploader, LoopBackAuth) {
+  .controller('AddSiteController', function ($rootScope, $scope, cfg, localStorageService, uploadUtilities, Divesite, FileUploader, LoopBackAuth) {
 
     function cancel(e) {
       // FIXME: I've dummied out the confirm for development
@@ -120,7 +120,7 @@
     });
 
     $scope.initialize = function () {
-      console.log('Initializing AddSiteBoxController');
+      console.log('Initializing AddSiteDialogController');
       $scope.cancel = cancel;
       // In the new-site interface, removing the image cancels the upload
       $scope.removeImage = cancelUpload;
@@ -154,25 +154,4 @@
 
     }
     $scope.initialize();
-  })
-  .directive('addSiteBox', function () {
-    return {
-      templateUrl: 'views/partials/site-box.html',
-      restrict: 'E',
-      controller: 'AddSiteBoxController',
-      link: function (scope, elem, attrs, ctrl) {
-        console.info("Cloning EditBoxController");
-        angular.element(elem).ready(function () {
-          // Hacky way to set the initial 'checked' value on the checkboxes before
-          // MDL has its wicked way with them
-          $('#boat-entry').prop('checked', scope.site.boatEntry);
-          $('#shore-entry').prop('checked', scope.site.shoreEntry);
-          // Do the same with the minimumLevel radio button
-          console.log($('#site-experience-' + scope.site.minimumLevel));
-          $('#site-experience-' + scope.site.minimumLevel).prop('checked', true);
-          // Now let MDL get funky
-          componentHandler.upgradeAllRegistered();
-        });
-      }
-    };
   })}());

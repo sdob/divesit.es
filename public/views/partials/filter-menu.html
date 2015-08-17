@@ -1,5 +1,5 @@
 <span class="mdl-layout-title">
-  Filter sites
+  <span class="ds-branding">Divesit<span class="ds-branding--dot">.</span>es</span>
 </span>
 <nav class="mdl-navigation">
   <div class="navigation-section">
@@ -62,6 +62,7 @@
       <input type="range" class="mdl-slider mdl-js-slider" min="0" max="100" step="5"
       ng-model="filterPreferences.depthRange[1]"
       ng-change="updateAndSendFilterPreferences()"
+      id="filter-maxDepth"
       >
     </div>
     <div class="filter-depth-value" >
