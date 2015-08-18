@@ -53,13 +53,14 @@
     function mapIdle(map) {
       // FIXME: this probably shouldn't run *every* time the map idles, but it appears
       // to fix the stupid angular-google-maps bug.
+      /*
       if (google) {
         google.maps.event.trigger(map, 'resize');
       }
+     */
       if (!$scope.rendered) {
         $scope.$apply(function () {
-          $('<div/>').addClass('centreMarker').appendTo(map.getDiv());
-          console.info('unrendered');
+          $('<div/>').addClass('centre-marker').appendTo(map.getDiv());
           $scope.rendered = true;
           $scope.zoom = localStorageService.get('map.zoom');
         });
@@ -67,6 +68,7 @@
     }
 
     function save() {
+      console.info($scope.siteForm);
       // Re-format the loc property so that LoopBack will understand it to
       // be a geopoint
       $scope.site.loc = {
@@ -81,14 +83,14 @@
       .then(
         function createSuccess(res) {
           console.info("Saved the site.");
-          console.info("Saving the image...");
+          $rootScope.$broadcast('event:new-site-created', res);
+          $rootScope.$broadcast('event:adding-finished', $scope.site);
           if ($scope.uploader.queue[0]) {
+            console.info("Saving the image...");
             // Upload the image
             $scope.uploader.queue[0].headers.divesite = res.id;
             return $scope.uploader.queue[0].upload();
           }
-          $rootScope.$broadcast('event:new-site-created', res);
-          $rootScope.$broadcast('event:adding-finished', $scope.site);
         },
         function createError(res) {
           console.error("Failed to save the new site.");
@@ -120,7 +122,7 @@
     });
 
     $scope.initialize = function () {
-      console.log('Initializing AddSiteDialogController');
+      console.log('AddSiteController.initialize()');
       $scope.cancel = cancel;
       // In the new-site interface, removing the image cancels the upload
       $scope.removeImage = cancelUpload;
@@ -138,7 +140,8 @@
       $scope.save = save;
       $scope.site = {
         boatEntry: false,
-        shoreEntry: false
+        shoreEntry: false,
+        depth: 100
       };
       $scope.siteHasImage = false;
       $scope.title = 'Add a new site';
@@ -147,7 +150,7 @@
       $scope.validateExperienceLevel = validateExperienceLevel;
       $scope.validateDepth = validateDepth;
 
-      console.info($scope.map.center);
+      console.info($scope.uploader);
 
       /* Remove the 'is-invalid' classes from the form elements */
       //$('#addSite-name-container').removeClass('is-invalid');

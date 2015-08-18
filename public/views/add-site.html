@@ -1,175 +1,182 @@
-<main class="mdl-layout__content">
-<div class="add-site">
-  <form name="siteForm" novalidate ng-submit="siteForm.$valid && save()">
-
-    <div class="mdl-card__title">
-      <h2 class="mdl-card__title-text">
-        {{ title }}
-      </h2>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" material-component>
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <div class="mdl-layout-spacer">
+        <nav class="mdl-navigation mdl-layout--large-screen-only" ng-controller="AuthController">
+          <a ng-show="!isAuthenticated()" class="mdl-navigation__link" ng-click="summonAuthenticationDialog()" href>Sign in</a>
+          <a ng-show="isAuthenticated()" class="mdl-navigation__link" ng-click="signOut()" href>Sign out</a>
+        </nav>
+      </div>
     </div>
+  </header>
 
-    <div class="mdl-card__menu">
-      <button type="button" ng-click="cancel($event)" class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">close</i>
-      </button>
-    </div>
+  <main class="mdl-layout__content">
+  <div class="add-site" add-site>
+    <form name="siteForm" novalidate ng-submit="siteForm.$valid && save()">
+      <div class="mdl-card__title"><h2 class="mdl-card__title-text">{{ title }}</h2></div>
 
+      <div class="mdl-grid">
 
-    <div class="mdl-grid">
-
-      <div class="mdl-cell mdl-cell--6-col">
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--12-col">
-            <h6>Site name</h6>
-          </div>
-
-          <div class="mdl-cell mdl-cell--12-col">
-            <div id="addSite-name-container" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="font-size: inherit"
-              ng-class="siteForm.$submitted && siteForm.siteName.$error.required ? 'is-invalid' : ''"
+        <div class="mdl-cell mdl-cell--6-col">
+          <h3 class="add-site__input-header">Site name</h3>
+          <div
+            id="addSite-name-container"
+            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+            ng-class="{'has-error': siteForm.siteName.$error.required && (siteForm.$submitted || siteForm.siteName.$dirty)}"
+            style="width: 100%">
+            <input name="siteName" class="mdl-textfield__input" ng-required="true" ng-model="site.name"
+            style="font-size: inherit">
+            <div class="mdl-textfield__error"
+              style="position: relative"
               >
-              <input name="siteName" ng-required="true" class="mdl-textfield__input" type="text" ng-model="site.name" style="font-size: inherit" id="addSite-name">
-              <span class="mdl-textfield__error">Needs a name</span>
+              Site needs a name.
             </div>
           </div>
 
-          <div class="mdl-cell mdl-cell--12-col">
-            <h6>Access</h6>
-          </div>
-
-
-          <div class="mdl-cell mdl-cell--6-col">
-            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="shore-entry"
-              ng-class="siteForm.entry.$error.required && (siteForm.$submitted || siteForm.entry.$dirty) ? 'is-invalid' : ''">
-              <input name="entry" ng-required="addSite.validateEntry()" type="checkbox"
-              id="shore-entry" ng-model="site.shoreEntry" class="mdl-checkbox__input" ng-checked="site.shoreEntry" />
-              <span class="mdl-checkbox__label">Shore</span>
-            </label>
-          </div>
-
-          <div class="mdl-cell mdl-cell--6-col">
-            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="boat-entry">
-              <input name="entry" ng-required="addSite.validateEntry()" type="checkbox" id="boat-entry"
-              class="mdl-checkbox__input" ng-model="site.boatEntry" />
-              <span class="mdl-checkbox__label">Boat</span>
-            </label>
-          </div>
-
-          <div class="mdl-cell mdl-cell--12-col">
-            <div class="mdl-textfield__error" style="position: relative"
-              ng-style="{'visibility': siteForm.entry.$error.required && (siteForm.$submitted || siteForm.entry.$dirty) ? 'visible' : 'hidden'}">
-              One of these must be checked.
+          <h3 class="add-site__input-header">Maximum depth</h3>
+          <div id="addSite-depth-container"
+            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+            style="width: 100%"
+            ng-class="{'has-error': siteForm.depth.$error && (siteForm.$submitted || siteForm.depth.$dirty)}">
+            <div style="float: left; width: calc(100% - 4em); margin-left: -26px">
+              <input type="range" class="mdl-slider mdl-js-slider" min="0" max="100" step="1"
+              ng-model="site.depth"
+              ng-change="shout()"
+              id="add-site-depth-slider"
+              >
+            </div>
+            <div style="text-align: right; font-family: Roboto;">
+              {{ site.depth }} m
+            </div>
+            <div class="mdl-textfield__error" style="position: relative">
+              Depth must be between 0 and 100 m.
             </div>
           </div>
 
-          <div class="mdl-cell mdl-cell--12-col">
-            <h6>Experience level</h6>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="site-experience-0">
-              <input ng-required="addSite.validateExperienceLevel()" type="radio" id="site-experience-0" class="mdl-radio__button" name="experienceLevel" value="0" ng-model="site.minimumLevel"/>
-              <span class="mdl-radio__label">Beginner</span>
-            </label>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="site-experience-1">
-              <input ng-required="addSite.validateExperienceLevel()" type="radio" id="site-experience-1" class="mdl-radio__button" name="experienceLevel" value="1" ng-model="site.minimumLevel"/>
-              <span class="mdl-radio__label">Intermediate</span>
-            </label>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="site-experience-2">
-              <input ng-required="addSite.validateExperienceLevel()" type="radio" id="site-experience-2" class="mdl-radio__button" name="experienceLevel" value="2" ng-model="site.minimumLevel"/>
-              <span class="mdl-radio__label">Advanced</span>
-            </label>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <h6>Maximum depth (metres)</h6>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <div class="mdl-textfield mdl-js-textfield">
-              <input depth ng-model="site.depth" name="depth" class="mdl-textfield__input" type="text" id="addSite-depth" pattern="[0-9]{1,2}(\.[0-9]+)?" />
-              <div class="mdl-textfield__error"
-                ng-style="{'visibility': siteForm.depth.$error.depth && (siteForm.$submitted || siteForm.depth.$dirty) ? 'visible' : 'hidden'}"
-                >
-                Depth must be a number between 0 and 100 metres.
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div> <!-- end of LH column on large devices -->
-
-      <div class="mdl-cell mdl-cell--6-col">
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--12-col">
-            <h6>Location</h6>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
+          <h3 class="add-site__input-header">Location</h3>
+          <div>
             <ui-gmap-google-map
             center="map.center"
             zoom="map.zoom"
             events="map.events"></ui-gmap-google-map>
           </div>
-
-          <div class="mdl-cell mdl-cell--12-col">
-            <h6>Cover photo (optional)</h6>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col" style="height: 200px; overflow: hidden;">
-            <div class="mdl-grid" style="height: 100%">
-              <div ng-if="!siteHasImage"
-                class="mdl-cell mdl-cell--12-col mdl-cell--middle"
-                style="text-align: center"
-                >
-                <label for="siteForm-upload">
-                  <input type="file" style="position: fixed; visibility: hidden;" id="siteForm-upload"
-                  nv-file-select="" uploader="uploader"
-                  />
-                  <div class="mdl-button mdl-js-button mdl-button--icon">
-                    <i class="material-icons">photo_camera</i>
-                  </div>
-                </label>
-              </div>
-
-              <div ng-if="siteHasImage" style="position: relative; text-align: center; background-color: #000"
-                class="mdl-cell mdl-cell--12-col" 
-                >
-                <div style="position: absolute; top: 16px; right: 16px; color: #fff">
-                  <a class="mdl-button mdl-js-button mdl-button--icon" ng-click="removeImage()">
-                    <i class="material-icons">close</i>
-                  </a>
-                </div>
-                <!-- for adding a new site -->
-                <div ng-if="uploader.queue[0]" ng-thumb="{file: uploader.queue[0]._file, height: 200}">
-                </div>
-                <!-- for editing -->
-                <div ng-if="site.imgSrc">
-                  <img ng-src="{{site.imgSrc}}" style="height: 200px">
-                </div>
-              </div>
+          <div class="mdl-grid mdl-grid--no-padding">
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
+              {{ map.center.longitude }} E
+            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
+              {{ map.center.latitude }} N
             </div>
           </div>
 
+
+        </div> <!-- end of LH column on large devices -->
+
+        <div class="mdl-cell mdl-cell--6-col">
+
+
+          <h3 class="add-site__input-header">Experience level</h3>
+          <div class="mdl-grid mdl-grid--no-padding"
+            ng-class="{'has-error': siteForm.experienceLevel.$error.required && (siteForm.$submitted || siteForm.experienceLevel.$dirty)}">
+            <label class="mdl-cell mdl-cell--no-margin mdl-cell--4-col mdl-cell--6-col-tablet mdl-radio mdl-js-radio mdl-js-ripple-effect"
+              for="site-experience-0">
+              <input ng-required="validateExperienceLevel()" type="radio" id="site-experience-0" class="mdl-radio__button" name="experienceLevel" value="0" ng-model="site.minimumLevel"/>
+              <span class="mdl-radio__label">Beginner</span>
+            </label>
+            <label for="site-experience-1"
+              class="mdl-cell mdl-cell--no-margin mdl-cell--4-col mdl-cell--6-col-tablet mdl-radio mdl-js-radio mdl-js-ripple-effect">
+              <input ng-required="validateExperienceLevel()" type="radio" id="site-experience-1" class="mdl-radio__button" name="experienceLevel" value="1" ng-model="site.minimumLevel"/>
+              <span class="mdl-radio__label">Intermediate</span>
+            </label>
+            <label for="site-experience-2"
+              class="mdl-cell mdl-cell--no-margin mdl-cell--4-col mdl-cell--6-col-tablet mdl-radio mdl-js-radio mdl-js-ripple-effect">
+              <input ng-required="validateExperienceLevel()" type="radio" id="site-experience-2" class="mdl-radio__button" name="experienceLevel" value="2" ng-model="site.minimumLevel"/>
+              <span class="mdl-radio__label">Advanced</span>
+            </label>
+            <div class="mdl-textfield__error" style="position: relative">
+              Select an experience level.
+            </div>
+          </div>
+
+          <h3 class="add-site__input-header">Access</h3>
+          <div class="mdl-grid mdl-grid--no-padding"
+            ng-class="{'has-error': siteForm.entry.$error.required && (siteForm.$submitted || siteForm.entry.$dirty)}"
+            >
+            <label class="mdl-cell mdl-cell--no-margin mdl-cell--6-col mdl-cell--4-col-tablet mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="shore-entry">
+              <input type="checkbox" name="entry"
+              id="shore-entry"
+              class="mdl-checkbox__input"
+              ng-checked="site.shoreEntry"
+              ng-required="validateEntry()"
+              ng-model="site.shoreEntry" />
+              <span class="mdl-checkbox__label">Shore</span>
+            </label>
+
+            <label class="mdl-cell mdl-cell--no-margin mdl-cell--6-col mdl-cell-5-col-tablet mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="boat-entry">
+              <input type="checkbox" name="entry"
+              id="boat-entry"
+              class="mdl-checkbox__input"
+              ng-checked="site.boatEntry"
+              ng-required="validateEntry()"
+              ng-model="site.boatEntry" />
+              <span class="mdl-checkbox__label">Boat</span>
+            </label>
+            <div class="mdl-textfield__error" style="position: relative"
+              ng-style="{'visibility': siteForm.entry.$error.required && (siteForm.$submitted || siteForm.entry.$dirty) ? 'visible': 'hidden'}">
+              At least one of these must be checked.
+            </div>
+          </div>
+
+          <h3 class="add-site__input-header">Cover photo (optional)</h3>
+          <div class="mdl-grid mdl-grid--no-padding"
+            style="height: 298px; border: solid 1px rgba(0, 0, 0, 0.24)">
+            <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--middle"
+              style="text-align: center"
+              ng-if="!siteHasImage">
+              <label for="siteForm-upload">
+                <input
+                id="siteForm-upload"
+                type="file" style="position: fixed; visibility: hidden"
+                nv-file-select="" uploader="uploader"
+                />
+                <div class="mdl-button mdl-js-button mdl-button--icon">
+                  <i class="material-icons">photo_camera</i>
+                </div>
+              </label>
+            </div>
+            <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--middle"
+              style="position: relative; overflow: hidden"
+              ng-if="siteHasImage">
+              <div style="position: absolute; top: 16px; right: 16px; color: #fff; background-color: rgba(0, 0, 0, 0.3); border-radius: 50%;">
+                <a class="mdl-button mdl-js-button mdl-button--icon" ng-click="removeImage()">
+                  <i class="material-icons">close</i>
+                </a>
+              </div>
+              <div ng-if="uploader.queue[0]" ng-thumb="{file: uploader.queue[0]._file, height: 300}">
+              </div>
+            </div>
+          </div>
+        </div> <!-- end of RH column on large devices -->
+
+        <div class="mdl-cell mdl-cell--12-col">
+          <h3 class="add-site__input-header">Comment (optional)</h3>
+          <div class="mdl-textfield mdl-js-textifled" style="width: 100%">
+            <textarea class="mdl-textfield__input" id="addSite-description" ng-model"site.description" rows="4"></textarea>
+          </div>
         </div>
-      </div> <!-- end of RH column on large devices -->
 
-      <div class="mdl-cell mdl-cell--12-col">
-        <h6>Description (optional)</h6>
-      </div>
-      <div class="mdl-cell mdl-cell--12-col">
-        <div class="mdl-textfield mdl-js-textfield" style="width: 100%";>
-          <textarea class="mdl-textfield__input" id="addSite-description" ng-model="site.description" rows="4"></textarea>
-        </div>
       </div>
 
-    </div> <!-- end of main form grid -->
+      <div class="mdl-card__actions">
+        <button type="button" class="mdl-button mdl-js-button" ng-click="cancel()">Cancel</button>
+        <input type="submit" class="mdl-button mdl-js-button" value="Save" />
+      </div>
+    </form>
 
-    <div class="mdl-card__actions">
-      <button type="button" ng-click="cancel()" class="mdl-button mdl-js-button">
-        Cancel
-      </button>
-      <input type="submit" class="mdl-button mdl-js-button" value="Save">
-    </div>
+  </div> <!-- end of main form grid -->
 
-  </form>
+
+  </main>
 </div>
-</main>

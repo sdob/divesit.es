@@ -4,6 +4,8 @@
   angular.module('divesitesApp')
   .controller('FilterMenuController', function ($auth, $location, $rootScope, $scope, localStorageService, filterPreferenceRetrievalService, LoopBackAuth, User) {
 
+    var rendered = false;
+
     var MAX_DEPTH = 100;
 
     function isAuthenticated() {
@@ -82,6 +84,7 @@
     $scope.storeFilterPreferences = storeFilterPreferences;
     $scope.toggleMenu = toggleMenu;
     $scope.updateAndSendFilterPreferences = updateAndSendFilterPreferences;
+
 
     $scope.retrieveFilterPreferences();
 
