@@ -4,7 +4,6 @@
   angular.module('divesitesApp').
     controller('InfoBoxController', function InfoBoxController($modal, $scope, $rootScope, LoopBackAuth, User) {
 
-
     function dismiss() {
       // Ask MainController to hide the infobox
       //$rootScope.$broadcast('event:info-box-dismissed');
@@ -53,8 +52,6 @@
       }
       if ($scope.site.imgSrc) {
         // We can't triply nest quotes in CSS/HTML so we need to build the CSS url() here
-        $scope.site.background = 'url("' + $scope.site.imgSrc + '") center / cover';
-        console.log($scope.site.background);
       }
       console.log($scope.site.imgSrc);
     }
@@ -79,7 +76,6 @@
     // Initialization
     /////////////////////////////////////////////////////////////////////////////
 
-    console.info('InfoBoxController:initializing');
 
     $scope.dismiss = dismiss;
     $scope.events = {
@@ -91,21 +87,11 @@
     };
     $scope.isAuthenticated = isAuthenticated
     $scope.isOwner = isOwner;
-    $scope.summonEditBox = summonEditBox;
-    $scope.summonLogDiveDialog = summonLogDiveDialog;
+    //$scope.summonEditBox = summonEditBox;
+    //$scope.summonLogDiveDialog = summonLogDiveDialog;
 
-  })
-  .directive('infoBox', function () {
-    return {
-      templateUrl: 'views/partials/info-box.html',
-      restrict: 'E',
-      controller: 'InfoBoxController',
-      link: function (scope, elem, attrs, ctrl) {
-        angular.element(elem).ready(function () {
-          // Upgrade MDL components
-          componentHandler.upgradeAllRegistered();
-        });
-      }
-    }
+    $scope.isAuthenticated = isAuthenticated;
+    console.info('InfoBoxController:initializing');
+
   });
 }());

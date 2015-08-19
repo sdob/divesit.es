@@ -1,12 +1,12 @@
 (function () {
   'use strict';
   angular.module('divesitesApp')
-  .controller('AddSiteController', function ($rootScope, $scope, cfg, localStorageService, uploadUtilities, Divesite, FileUploader, LoopBackAuth) {
+  .controller('AddSiteController', function ($location, $rootScope, $scope, cfg, localStorageService, uploadUtilities, Divesite, FileUploader, LoopBackAuth) {
 
     function cancel(e) {
       // FIXME: I've dummied out the confirm for development
       if (true || confirm('Are you sure you want to cancel adding this site?')) {
-        $rootScope.$broadcast('event:adding-finished', null);
+        $location.path('/');
       }
     }
 

@@ -11,7 +11,7 @@
   <div class="mdl-layout__drawer" filter-menu></div>
   <main class="mdl-layout__content">
 
-  <div ng-controller="MapController">
+  <div ng-controller="MapController as map">
     <ui-gmap-google-map
     id="gmap-mapper"
     control="mapControl"
@@ -25,14 +25,12 @@
     events="map.markerEvents"
     options="'options'"
     coords="'loc'"
-    icon="'icon'"
-    >
+    icon="'icon'">
     </ui-gmap-markers>
     </ui-gmap-google-map>
 
 
-    <info-box class="info-box mdl-card mdl-shadow--2dp" ng-if="infoBoxIsVisible" ng-controller="InfoBoxController">
-    </info-box>
+    <info-box class="info-box mdl-card mdl-shadow--2dp" ng-if="infoBoxIsVisible"></info-box>
   </div>
 
   <add-site-button></add-site-button>

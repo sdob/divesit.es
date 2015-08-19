@@ -53,6 +53,7 @@ angular.module('divesitesApp').controller('MapController', function ($document, 
   }
 
   function markerClickEventHandler(marker, event, model, args) {
+    console.info('MapController.markerClickEventHandler()');
     //$rootScope.$broadcast("event:marker-clicked");
     var id = model.id;
     Divesite.findById(
@@ -62,10 +63,11 @@ angular.module('divesitesApp').controller('MapController', function ($document, 
         if (site.images && site.images[0]) {
           site.imgSrc = site.images[0].url;
         }
+        console.info('imgSrc: ' + site.imgSrc);
         // Put the site data into scope
         $scope.site = site;
+        // Reveal the infobox if it was previously hidden
         $scope.infoBoxIsVisible = true;
-        //$rootScope.$broadcast("event:site-loaded", site);
       },
       function findError(error) {
       });
@@ -205,7 +207,6 @@ angular.module('divesitesApp').controller('MapController', function ($document, 
     siteEdited: $scope.retrieveDivesites,
     siteDeleted: $scope.retrieveDivesites
   };
-
 
   // Listen for filter events
   $scope.$on('event:filter-preferences', $scope.events.filterPreferences);

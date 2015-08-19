@@ -13,9 +13,10 @@
           $('#filter-boat-entry').prop('checked', scope.filterPreferences.boatEntry);
           $('#filter-shore-entry').prop('checked', scope.filterPreferences.shoreEntry);
           $('#filter-experience-' + scope.filterPreferences.maximumLevel).prop('checked', true);
-          // TODO: sort out the slider behaviour as well.
           // Apply MDL behaviours
           componentHandler.upgradeAllRegistered();
+          // Put the slider in the correct position
+          document.querySelector('#filter-maxDepth').MaterialSlider.change(scope.filterPreferences.depthRange[1]);
         });
       }
     }
