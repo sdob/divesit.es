@@ -1,15 +1,21 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" material-component>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer" material-component>
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <div class="mdl-layout-spacer">
+      <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation mdl-layout--large-screen-only" ng-controller="AuthController">
           <a ng-show="!isAuthenticated()" class="mdl-navigation__link" ng-click="summonAuthenticationDialog()" href>Sign in</a>
           <a ng-show="isAuthenticated()" class="mdl-navigation__link" ng-click="signOut()" href>Sign out</a>
         </nav>
-      </div>
     </div>
   </header>
 
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title ds-branding">
+      <a href="#/">
+        <span class="ds-branding">Divesit<span class="ds-branding--dot">.</span>es</span>
+      </a>
+    </span>
+  </div>
   <main class="mdl-layout__content">
   <div class="add-site" add-site>
     <form name="siteForm" novalidate ng-submit="siteForm.$valid && save()">
@@ -29,7 +35,7 @@
             <div class="mdl-textfield__error"
               style="position: relative"
               >
-              Site needs a name.
+              Give this site a name.
             </div>
           </div>
 
@@ -123,7 +129,7 @@
             </label>
             <div class="mdl-textfield__error" style="position: relative"
               ng-style="{'visibility': siteForm.entry.$error.required && (siteForm.$submitted || siteForm.entry.$dirty) ? 'visible': 'hidden'}">
-              At least one of these must be checked.
+              Choose at least one access type.
             </div>
           </div>
 

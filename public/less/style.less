@@ -6,6 +6,7 @@
 @import 'boxes';
 @import 'dives';
 @import 'effects';
+@import 'info-card';
 @import 'inputs';
 @import 'map';
 @import 'menus';
@@ -19,11 +20,17 @@
   display: table;
 }
 /* Tweak MDL */
+html, body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
 .mdl-grid--no-padding {
   padding: 0;
 }
 .mdl-cell--no-margin {
   margin: 0;
+}
+.mdl-layout__drawer {
+  border-right: none;
 }
 /* We have to nest these because we don't get to control the DOM elements
  * added by MDL */

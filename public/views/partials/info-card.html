@@ -2,22 +2,27 @@
   <div class="mdl-card__title"
     style="height: 150px; background-color: rgb(63, 81, 181)"
     ng-if="site.imgSrc === undefined">
-    <h2 class="mdl-card__title-text">{{ site.name }}</h2>
+    <h2 class="mdl-card__title-text info-card__site-name">{{ site.name }}</h2>
   </div>
   <div class="mdl-card__title floor-fade"
     style="height: 150px; position: relative"
     ng-if="site.imgSrc !== undefined"
     ng-style="{'background': 'url(\'' + site.imgSrc + '\') center / cover'}">
     <div class="floor-fade" style="position: absolute; top: 0; bottom: 0; right: 0; left: 0"></div>
-    <h2 class="mdl-card__title-text"
+    <h2 class="mdl-card__title-text info-card__site-name"
       style="z-index: 1"
       ng-style="{'color': site.imgSrc === undefined ? 'inherit' : '#fff'}"
       >
       {{ site.name }}
     </h2>
   </div>
+  <div class="mdl-card__actions info-card__actions" ng-show="isOwner()">
+    <button type="button" class="mdl-button mdl-js-button">
+      Edit
+    </button>
+  </div>
   <div class="mdl-card__menu">
-    <button type="button" ng-click="dismiss()" class="mdl-button mdl-js-button mdl-button--icon">
+    <button type="button" ng-click="dismiss()" class="mdl-button mdl-js-button mdl-button--icon info-card__dismiss-button">
       <i class="material-icons">close</i>
     </button>
   </div>
@@ -40,30 +45,27 @@
         Depth: {{ site.depth }} m
       </div>
     </div>
-    <div class="site-description" ng-if="site.description">
-      <h6 class="site-description-title">Description</h6>
+    <div class="info-card__site-description" ng-if="site.description">
+      <h6 class="info-card__site-description__title">Description</h6>
       <p>{{ site.description }}</p>
       <div style="text-align: right" ng-if="map.site.user">
         – {{ site.user.displayName }}
       </div>
     </div>
-    <div class="site-dives" ng-if="map.site.dives">
-      <h6 class="site-dives-title">Dives</h6>
-      <div>
-        Divesit.es users have dived here {{ site.dives.length }} times.
-      </div>
+    <div class="info-card__site-dives" ng-if="site.dives">
+      <h6 class="info-card__site-dives__title">Dives logged here ({{site.dives.length}})</h6>
       <button
-        id="infobox-log-dive"
-        class="mdl-button mdl-js-button mdl-button--icon"
+        id="info-card__log-dive"
+        class="mdl-button mdl-js-button mdl-button--icon info-card__log-dive-button"
         type="button"
         ng-click="summonLogDiveDialog()"
         ng-show="isAuthenticated()">
         <i class="material-icons">rate_review</i>
       </button>
-      <div class="mdl-tooltip" for="infobox-log-dive">
+      <div class="mdl-tooltip" for="info-card__log-dive">
         Log
       </div>
-      <div class="dive-grid" ng-repeat="dive in site.dives" style="border-top: solid 1px rgba(0, 0, 0, 0.12)">
+      <div class="dive-grid" ng-repeat="dive in site.dives">
         <div class="clearfix">
           <div class="dive-grid-image">
             <img ng-src="{{dive.user.picture}}"

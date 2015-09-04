@@ -17,8 +17,8 @@ angular.module('divesitesApp').controller('MapController', function ($document, 
   // Function defs
   /////////////////////////////////////////////////////////////////////////////
 
-  function dismissInfoBox() {
-    $scope.infoBoxIsVisible = false;
+  function dismissInfoCard() {
+    $scope.infoCardIsVisible = false;
   }
 
   function mapIdleEventHandler(map) {
@@ -66,8 +66,8 @@ angular.module('divesitesApp').controller('MapController', function ($document, 
         console.info('imgSrc: ' + site.imgSrc);
         // Put the site data into scope
         $scope.site = site;
-        // Reveal the infobox if it was previously hidden
-        $scope.infoBoxIsVisible = true;
+        // Reveal the info card if it was previously hidden
+        $scope.infoCardIsVisible = true;
       },
       function findError(error) {
       });
@@ -173,8 +173,8 @@ angular.module('divesitesApp').controller('MapController', function ($document, 
   /////////////////////////////////////////////////////////////////////////////
 
   console.info('MapController.initialize()');
-  $scope.dismissInfoBox = dismissInfoBox;
-  $scope.infoBoxIsVisible = false;
+  $scope.dismissInfoCard = dismissInfoCard;
+  $scope.infoCardIsVisible = false;
   $scope.map = {
     events: {
       idle: mapIdleEventHandler,

@@ -2,12 +2,13 @@
   'use strict';
 
   angular.module('divesitesApp').
-    controller('InfoBoxController', function InfoBoxController($modal, $scope, $rootScope, LoopBackAuth, User) {
+    controller('InfoCardController', function InfoCardController($modal, $scope, $rootScope, LoopBackAuth, User) {
 
     function dismiss() {
       // Ask MainController to hide the infobox
       //$rootScope.$broadcast('event:info-box-dismissed');
-      $scope.$parent.dismissInfoBox();
+      // TODO: This seems like a terrible idea, frankly
+      $scope.$parent.dismissInfoCard();
     }
 
     function isAuthenticated() {
@@ -23,7 +24,7 @@
       if ($scope.site && data.siteId === $scope.site.id) {
         // The dive has been logged for the site that the info box is
         // currently showing. This should *usually* be the case, since
-        // the link to log a dive comes from the info box.
+        // the link to log a dive comes from the info card.
         // 
         // TODO: re-load the dive site info
       }
@@ -41,28 +42,19 @@
     }
 
     function onSiteLoaded(event, data) {
-      // Only handle the infobox's responsiblities here. Visibility
+      // Only handle the info card's responsiblities here. Visibility
       // is controlled by MainController.
-      //$scope.site = data;
-      console.info("InfoBoxController.onSiteLoaded");
+      console.info("InfoCardController.onSiteLoaded");
       console.info($scope.site);
       if ($scope.site.dives !== undefined) {
         var numDives = $scope.site.dives.length;
         $scope.site.numDivesString = numDives + " dive" + (numDives === 1 ? "" : "s");
       }
-      if ($scope.site.imgSrc) {
-        // We can't triply nest quotes in CSS/HTML so we need to build the CSS url() here
-      }
-      console.log($scope.site.imgSrc);
-    }
-
-    function summonEditBox() {
-      console.info('InfoBoxController.summonEditBox()');
-      //$rootScope.$broadcast('event:edit-box-summoned', $scope.site);
+      console.info($scope.site.imgSrc);
     }
 
     function summonLogDiveDialog() {
-      console.info('InfoBoxController.summonLogDiveDialog()');
+      console.info('InfoCardController.summonLogDiveDialog()');
       $modal.open({
         templateUrl: 'views/partials/log-dive-dialog.html',
         controller: 'LogDiveDialogController',
@@ -87,11 +79,9 @@
     };
     $scope.isAuthenticated = isAuthenticated
     $scope.isOwner = isOwner;
-    //$scope.summonEditBox = summonEditBox;
-    //$scope.summonLogDiveDialog = summonLogDiveDialog;
 
     $scope.isAuthenticated = isAuthenticated;
-    console.info('InfoBoxController:initializing');
+    console.info('InfoCardController:initializing');
 
   });
 }());
